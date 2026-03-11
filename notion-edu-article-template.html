@@ -3,22 +3,28 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title><!-- ✏️ 文章標題 --></title>
+<title>教育資訊文章 · Notion Template</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500;700&family=JetBrains+Mono:wght@400;600&display=swap');
 
   :root {
-    --bg:      #F7F6F3;
-    --surface: #FFFFFF;
-    --border:  #E8E5DE;
-    --text:    #1A1A1A;
-    --muted:   #6B6860;
-    --accent:  #C75B3A;
-    --accent2: #3A7CC7;
-    --tag-bg:  #EDE9E0;
-    --mono:    'JetBrains Mono', monospace;
-    --serif:   'Noto Serif SC', serif;
-    --sans:    'Noto Sans SC', sans-serif;
+    --bg:        #F7F6F3;
+    --surface:   #FFFFFF;
+    --border:    #E8E5DE;
+    --text:      #1A1A1A;
+    --muted:     #6B6860;
+    --accent:    #C75B3A;
+    --accent2:   #3A7CC7;
+    --tag-bg:    #EDE9E0;
+    --callout:   #FDF3EC;
+    --callout-b: #C75B3A;
+    --warn:      #FEF9EC;
+    --warn-b:    #C7A13A;
+    --tip:       #EFF7F2;
+    --tip-b:     #3AC777;
+    --mono:      'JetBrains Mono', monospace;
+    --serif:     'Noto Serif SC', serif;
+    --sans:      'Noto Sans SC', sans-serif;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -31,6 +37,7 @@
     font-size: 15px;
   }
 
+  /* ── Layout ── */
   .page {
     max-width: 760px;
     margin: 0 auto;
@@ -44,7 +51,12 @@
     padding-bottom: 36px;
   }
 
-  .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 18px; }
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 18px;
+  }
 
   .tag {
     font-family: var(--mono);
@@ -58,13 +70,17 @@
     color: var(--muted);
   }
 
-  .tag.highlight { background: var(--accent); color: #fff; }
+  .tag.highlight {
+    background: var(--accent);
+    color: #fff;
+  }
 
   h1.article-title {
     font-family: var(--serif);
     font-size: 28px;
     font-weight: 700;
     line-height: 1.4;
+    color: var(--text);
     margin-bottom: 14px;
   }
 
@@ -88,7 +104,7 @@
 
   .meta-dot { color: var(--border); }
 
-  /* ── TL;DR ── */
+  /* ── TL;DR Summary Box ── */
   .tldr {
     background: var(--surface);
     border: 1.5px solid var(--border);
@@ -108,10 +124,16 @@
     margin-bottom: 10px;
   }
 
-  .tldr p { font-size: 14.5px; line-height: 1.75; }
+  .tldr p {
+    font-size: 14.5px;
+    color: var(--text);
+    line-height: 1.75;
+  }
 
   /* ── Sections ── */
-  .section { margin-bottom: 52px; }
+  .section {
+    margin-bottom: 52px;
+  }
 
   .section-number {
     font-family: var(--mono);
@@ -128,6 +150,7 @@
     font-family: var(--serif);
     font-size: 20px;
     font-weight: 700;
+    color: var(--text);
     margin-bottom: 18px;
     padding-bottom: 10px;
     border-bottom: 1px solid var(--border);
@@ -137,6 +160,7 @@
     font-family: var(--sans);
     font-size: 15px;
     font-weight: 700;
+    color: var(--text);
     margin: 28px 0 12px;
     display: flex;
     align-items: center;
@@ -153,7 +177,11 @@
     flex-shrink: 0;
   }
 
-  p { color: #2C2C2C; line-height: 1.85; margin-bottom: 14px; }
+  p {
+    color: #2C2C2C;
+    line-height: 1.85;
+    margin-bottom: 14px;
+  }
 
   /* ── Callout Boxes ── */
   .callout {
@@ -167,14 +195,39 @@
     line-height: 1.75;
   }
 
-  .callout-icon { font-size: 18px; flex-shrink: 0; margin-top: 2px; }
-  .callout.orange { background: #FDF3EC; border: 1px solid #F0C8AD; }
-  .callout.yellow { background: #FEF9EC; border: 1px solid #F0D98D; }
-  .callout.green  { background: #EFF7F2; border: 1px solid #A0D9B4; }
-  .callout.blue   { background: #EEF4FD; border: 1px solid #ACCAEF; }
+  .callout-icon {
+    font-size: 18px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .callout.orange {
+    background: var(--callout);
+    border: 1px solid #F0C8AD;
+  }
+
+  .callout.yellow {
+    background: var(--warn);
+    border: 1px solid #F0D98D;
+  }
+
+  .callout.green {
+    background: var(--tip);
+    border: 1px solid #A0D9B4;
+  }
+
+  .callout.blue {
+    background: #EEF4FD;
+    border: 1px solid #ACCAEF;
+  }
 
   /* ── Two-col pros/cons ── */
-  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 22px 0; }
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 22px 0;
+  }
 
   .col-card {
     background: var(--surface);
@@ -197,7 +250,10 @@
   .col-card.pro .col-card-title { color: #3AC777; }
   .col-card.con .col-card-title { color: var(--accent); }
 
-  .col-card ul { list-style: none; padding: 0; }
+  .col-card ul {
+    list-style: none;
+    padding: 0;
+  }
 
   .col-card ul li {
     font-size: 13.5px;
@@ -212,7 +268,12 @@
   .col-card.con ul li::before { content: '✗'; color: var(--accent); position: absolute; left: 0; }
 
   /* ── Numbered list ── */
-  .numbered-list { counter-reset: steps; list-style: none; padding: 0; margin: 18px 0; }
+  .numbered-list {
+    counter-reset: steps;
+    list-style: none;
+    padding: 0;
+    margin: 18px 0;
+  }
 
   .numbered-list li {
     counter-increment: steps;
@@ -239,9 +300,12 @@
     margin-top: 3px;
   }
 
-  .numbered-list li span { font-size: 14.5px; line-height: 1.75; }
+  .numbered-list li span {
+    font-size: 14.5px;
+    line-height: 1.75;
+  }
 
-  /* ── Checklist ── */
+  /* ── Checklist (Decision Table) ── */
   .checklist {
     background: var(--surface);
     border: 1.5px solid var(--border);
@@ -282,6 +346,7 @@
     margin-top: 3px;
   }
 
+  /* ── Inline code / highlight ── */
   code {
     font-family: var(--mono);
     font-size: 12.5px;
@@ -291,7 +356,12 @@
     border-radius: 3px;
   }
 
-  hr.soft { border: none; border-top: 1px solid var(--border); margin: 40px 0; }
+  /* ── Divider ── */
+  hr.soft {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 40px 0;
+  }
 
   /* ── Footer ── */
   .article-footer {
@@ -301,13 +371,18 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: gap;
     font-family: var(--mono);
     font-size: 11px;
     color: var(--muted);
   }
 
-  .footer-tags { display: flex; gap: 6px; }
+  .footer-tags {
+    display: flex;
+    gap: 6px;
+  }
 
+  /* ── Responsive ── */
   @media (max-width: 600px) {
     .page { padding: 36px 20px 80px; }
     .two-col { grid-template-columns: 1fr; }
@@ -318,188 +393,181 @@
 <body>
 <div class="page">
 
-  <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-       HEADER — 每篇文章必改的部分
-  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+  <!-- ━━━ HEADER ━━━ -->
   <header class="article-header">
-
-    <!-- ✏️ 標籤：第一個用 highlight（主標籤），後面隨意加 -->
     <div class="tags">
-      <span class="tag highlight">主標籤</span>
-      <span class="tag">標籤二</span>
-      <span class="tag">標籤三</span>
-      <span class="tag">年份</span>
+      <span class="tag highlight">陸本視角</span>
+      <span class="tag">留學申請</span>
+      <span class="tag">美國碩士</span>
+      <span class="tag">2026</span>
     </div>
 
-    <!-- ✏️ 文章主標題 -->
-    <h1 class="article-title">在這裡寫主標題<br/>可以換行</h1>
+    <h1 class="article-title">脆友們現在該不該 all in 美國？<br/>UMich Applied Statistics offer 分析</h1>
 
-    <!-- ✏️ 副標題／一句話概述 -->
-    <p class="subtitle">在這裡寫一兩句話，說明這篇文章幫讀者解決什麼問題。</p>
+    <p class="subtitle">
+      拿到 UMich Applied Statistics 1.5 年制 offer，但成本高讓人猶豫——這篇從資金、就業、簽證三個維度幫你想清楚。
+    </p>
 
-    <!-- ✏️ 年份・閱讀時間・作者 -->
     <div class="meta">
-      <span>2026 · 主題分類</span>
+      <span>2026 · 申請季</span>
       <span class="meta-dot">·</span>
-      <span>閱讀時間約 X 分鐘</span>
+      <span>閱讀時間約 6 分鐘</span>
       <span class="meta-dot">·</span>
-      <span>作者：OTCoffice</span>
+      <span>作者：脆脆編輯部</span>
     </div>
-
   </header>
 
 
-  <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-       TL;DR — 先看結論
-  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+  <!-- ━━━ TL;DR ━━━ -->
   <div class="tldr">
     <div class="tldr-label">先看結論 · TL;DR</div>
-    <!-- ✏️ 1-3 句話的核心結論，可以用 <strong> 加粗關鍵詞 -->
-    <p>在這裡寫文章最核心的結論。讀者如果只看這一段，也能帶走最重要的信息。<strong>重點詞可以加粗。</strong></p>
+    <p>
+      要不要「all in 美國」，不是看美國值不值得，而是看你這張牌——<strong>專業、資金結構、家庭現金流、畢業後落點</strong>——能不能把美國的高波動「吃下來」。UMich Applied Statistics 是很強的 offer，但回報高度依賴你能否順利進入對口崗位並留在美國工作。
+    </p>
   </div>
 
 
-  <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-       SECTION 01
-       可用組件：p / numbered-list / callout / two-col / checklist / subsection-title
-  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+  <!-- ━━━ SECTION 1 ━━━ -->
   <section class="section">
     <span class="section-number">Section 01</span>
-    <!-- ✏️ 這一節的標題 -->
-    <h2 class="section-title">第一節標題</h2>
+    <h2 class="section-title">你其實在糾結三件事</h2>
 
-    <!-- ✏️ 正文段落 -->
-    <p>正文內容寫在這裡。可以寫多個段落，每個 &lt;p&gt; 標籤是一段。</p>
-
-    <!-- 【組件 A】橙色警示框 ⚠️ -->
-    <div class="callout orange">
-      <span class="callout-icon">⚠️</span>
-      <div>警示內容寫在這裡，適合寫「注意事項」或「風險提醒」。</div>
-    </div>
-
-  </section>
-
-
-  <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-       SECTION 02
-  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
-  <section class="section">
-    <span class="section-number">Section 02</span>
-    <h2 class="section-title">第二節標題</h2>
-
-    <!-- ✏️ 小標題 + 段落 -->
-    <h3 class="subsection-title">小標題 A</h3>
-    <p>這個小節的內容。</p>
-
-    <h3 class="subsection-title">小標題 B</h3>
-    <p>這個小節的內容。</p>
-
-    <!-- 【組件 B】藍色提示框 💡 -->
-    <div class="callout blue">
-      <span class="callout-icon">💡</span>
-      <div>提示內容寫在這裡，適合寫「重要補充」或「核心洞察」。</div>
-    </div>
-
-  </section>
-
-
-  <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-       SECTION 03
-  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
-  <section class="section">
-    <span class="section-number">Section 03</span>
-    <h2 class="section-title">第三節標題（適合放編號步驟）</h2>
-
-    <!-- 【組件 C】編號清單 -->
     <ol class="numbered-list">
-      <li><span><strong>步驟一標題</strong>——步驟一的說明文字。</span></li>
-      <li><span><strong>步驟二標題</strong>——步驟二的說明文字。</span></li>
-      <li><span><strong>步驟三標題</strong>——步驟三的說明文字。</span></li>
+      <li><span>這 1.5 年的投入，能不能換到更高的職業起點（崗位 + 薪資 + 平台）？</span></li>
+      <li><span>你能不能在美國完成「工作落地」，並吃下簽證不確定性？</span></li>
+      <li><span>這筆錢對你家庭來說，是「可承受投資」，還是「會傷筋動骨的押注」？</span></li>
     </ol>
 
-    <!-- 【組件 D】綠色提示框 ✅ -->
-    <div class="callout green">
-      <span class="callout-icon">✅</span>
-      <div>正面結論或行動建議寫在這裡。</div>
+    <div class="callout orange">
+      <span class="callout-icon">⚠️</span>
+      <div>如果第 3 條是押注型（需要賣房 / 高槓桿 / 家裡現金流會被掏空），那就不要用「all in」方式做美國。</div>
     </div>
-
   </section>
 
 
-  <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-       SECTION 04
-  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+  <!-- ━━━ SECTION 2 ━━━ -->
+  <section class="section">
+    <span class="section-number">Section 02</span>
+    <h2 class="section-title">先算一筆「現實帳」：成本 vs 回報</h2>
+
+    <h3 class="subsection-title">A. 總成本（Cost of Attendance）</h3>
+    <p>學費 + 學雜費、生活費（Ann Arbor 區域）、保險、機票 / 簽證、機會成本（你原本可以工作的收入）。</p>
+
+    <h3 class="subsection-title">B. 可回收的部分（Recovery）</h3>
+    <p>奬學金 / 助研助教（若有）、實習收入（能否覆蓋部分生活費）、畢業後薪資增長（相對於不去美國的 baseline）。</p>
+
+    <div class="callout blue">
+      <span class="callout-icon">💡</span>
+      <div>
+        你需要的不是「美國平均回報」，而是<strong>你自己這條路徑的回報</strong>。Applied Statistics 的回報，強依賴你是否能轉進數據 / 統計 / ML 相關崗位，以及能否把項目 / 實習打到可面試水平。
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ━━━ SECTION 3 ━━━ -->
+  <section class="section">
+    <span class="section-number">Section 03</span>
+    <h2 class="section-title">美國這兩年的關鍵變量：不是學校，是簽證 + 就業</h2>
+
+    <h3 class="subsection-title">OPT 能不能用上、用多久</h3>
+    <p>
+      統計 / 數據類通常有機會走 <code>STEM OPT</code>（以學校與項目官方認定為準），核心是：你能不能拿到對口工作並在 OPT 時間窗內轉正。
+    </p>
+
+    <h3 class="subsection-title">H-1B 抽籤的不確定性</h3>
+    <p>就算學校很強、你也努力，最終留不留得下仍帶隨機性。你要評估自己能否接受：可能需要多輪抽籤，可能最後必須回國 / 轉第三國。</p>
+
+    <div class="callout yellow">
+      <span class="callout-icon">🎲</span>
+      <div>如果你心理上無法承受這種不確定性，「all in 美國」會變成長期焦慮源，而不是職涯加速器。</div>
+    </div>
+  </section>
+
+
+  <!-- ━━━ SECTION 4 ━━━ -->
   <section class="section">
     <span class="section-number">Section 04</span>
-    <h2 class="section-title">第四節標題（適合放優劣對比）</h2>
+    <h2 class="section-title">UMich Applied Statistics 這張牌，適合哪類人</h2>
 
-    <!-- 【組件 E】左右對比卡片 -->
     <div class="two-col">
       <div class="col-card pro">
-        <div class="col-card-title">✓ 優點 / 適合</div>
+        <div class="col-card-title">✓ 更適合</div>
         <ul>
-          <li>優點一</li>
-          <li>優點二</li>
-          <li>優點三</li>
+          <li>目標明確：數據科學 / 統計建模 / 因果推斷 / 實驗設計</li>
+          <li>能盡快補齊 Python / R / SQL 與統計基礎</li>
+          <li>資金結構可控，或有明確減壓方案（奬學金 / 分期 / 備案）</li>
+          <li>能接受簽證不確定性，並有備選落點</li>
         </ul>
       </div>
       <div class="col-card con">
-        <div class="col-card-title">✗ 缺點 / 不適合</div>
+        <div class="col-card-title">✗ 不太適合</div>
         <ul>
-          <li>缺點一</li>
-          <li>缺點二</li>
-          <li>缺點三</li>
+          <li>只是「想去美國看看」，職業目標不清晰</li>
+          <li>明顯資金壓力大且沒有 Plan B</li>
+          <li>對不確定性極度敏感、需要穩定路徑</li>
+          <li>家庭因此進入高風險財務狀態</li>
         </ul>
       </div>
     </div>
-
   </section>
 
 
-  <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-       SECTION 05（可選）
-  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+  <!-- ━━━ SECTION 5 ━━━ -->
   <section class="section">
     <span class="section-number">Section 05</span>
-    <h2 class="section-title">第五節標題（適合放自測清單）</h2>
+    <h2 class="section-title">覺得太貴？四個可操作的「降壓方案」</h2>
 
-    <!-- 【組件 F】可打勾清單 -->
-    <div class="checklist">
-      <div class="checklist-header">自測清單標題寫在這裡</div>
-      <div class="checklist-item">
-        <div class="check-box"></div>
-        <div>清單項目一</div>
-      </div>
-      <div class="checklist-item">
-        <div class="check-box"></div>
-        <div>清單項目二</div>
-      </div>
-      <div class="checklist-item">
-        <div class="check-box"></div>
-        <div>清單項目三</div>
-      </div>
+    <ol class="numbered-list">
+      <li><span><strong>先把奬學金 / 助研助教可能性問清楚</strong>——問項目是否有 GSI / GRA、departmental funding、校內奬學金，哪些教授更可能給 RA。</span></li>
+      <li><span><strong>把「就業落地」提前到入學前開始</strong>——8–12 週準備：統計 / ML 項目、簡歷與 LinkedIn、刷題與面試。</span></li>
+      <li><span><strong>把「美國」從 all in 變成「可撤退的投資」</strong>——提前寫好撤退條件（第 1 學期結束前無任何 research / 實習線索；現金流超壓力閾值）。</span></li>
+      <li><span><strong>對比替代路徑</strong>——英國 1 年制 MSc（成本更可控）、加拿大（移民路徑相對清晰）、港新（成本與地緣策略不同）。</span></li>
+    </ol>
+
+    <div class="callout green">
+      <span class="callout-icon">✅</span>
+      <div>有撤退條件，比口頭安慰更能降低焦慮。寫下來，比說說而已更有效。</div>
     </div>
-
-    <!-- 【組件 G】黃色注意框 -->
-    <div class="callout yellow">
-      <span class="callout-icon">📌</span>
-      <div>總結性提醒或行動號召寫在這裡。</div>
-    </div>
-
   </section>
 
 
-  <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-       FOOTER
-  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
-  <footer class="article-footer">
-    <!-- ✏️ 頁腳標籤（和頂部標籤對應） -->
-    <div class="footer-tags">
-      <span class="tag">標籤一</span>
-      <span class="tag">標籤二</span>
+  <!-- ━━━ SECTION 6 ━━━ -->
+  <section class="section">
+    <span class="section-number">Section 06</span>
+    <h2 class="section-title">快速決策自測：同時打勾才建議 all in</h2>
+
+    <div class="checklist">
+      <div class="checklist-header">自測清單 · 能同時打勾 3 條，這筆錢更值得</div>
+      <div class="checklist-item">
+        <div class="check-box"></div>
+        <div>我確定要走<strong>數據 / 統計相關崗位</strong>，並願意高強度準備實習與面試</div>
+      </div>
+      <div class="checklist-item">
+        <div class="check-box"></div>
+        <div>家庭資金不會因此進入高風險狀態（或我有明確減壓方案）</div>
+      </div>
+      <div class="checklist-item">
+        <div class="check-box"></div>
+        <div>我能接受簽證不確定性，並準備了第三國 / 回國的備選落點</div>
+      </div>
     </div>
-    <!-- ✏️ 版權聲明 -->
-    <span>© 2026 OTCoffice · overseasuk.com</span>
+
+    <div class="callout orange">
+      <span class="callout-icon">📌</span>
+      <div>如果只能打勾 0–1 條：更建議把美國從「all in」降級成「可控試錯」，或優先考慮更穩的替代路徑。</div>
+    </div>
+  </section>
+
+
+  <!-- ━━━ FOOTER ━━━ -->
+  <footer class="article-footer">
+    <div class="footer-tags">
+      <span class="tag">UMich</span>
+      <span class="tag">申請決策</span>
+      <span class="tag">陸本</span>
+    </div>
+    <span>© 2026 脆脆編輯部 · 僅供參考，不構成財務建議</span>
   </footer>
 
 </div>
