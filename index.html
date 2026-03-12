@@ -441,14 +441,44 @@
 </head>
 <body>
 
+<!-- ═══════════════════════════════════════════════════
+  ✏️  新增文章只需在這裡加一行！
+  格式：{ title, file, cat, color, year, desc }
+  color 選項：red / blue / green / gold
+════════════════════════════════════════════════════ -->
+<script>
+const ARTICLES = [
+  {
+    title: "巴斯大學 × 學習集團正式合作——全球排名132本科預科開放招生",
+    file:  "bath-university-study-group.html",
+    cat:   "英國名校", color: "gold", year: "2025",
+    desc:  "QS #132、就業前景全英第5、雇主聲譽全球前100，四國政府獎學金支持，Study Group 預科通道正式開啟。"
+  },
+  {
+    title: "蘇格蘭教師要罷工了——這不只是勞資糾紛，是制度設計的根本失敗",
+    file:  "scotland-teachers-strike.html",
+    cat:   "教育政策", color: "red", year: "2025",
+    desc:  "SNP 政府五年承諾落空，工會 EIS 最快16號停課。英國教師年授課900小時，芬蘭僅需18小時——深層矛盾一次爆發。"
+  },
+  {
+    title: "好想好想去澳洲——零基礎怎麼把移民夢變成路線圖",
+    file:  "australia-immigration-article.html",
+    cat:   "移民規劃", color: "green", year: "2025",
+    desc:  "沒讀書沒工作，WHV + 189 + Remote 三條線怎麼同步跑。四張簽證對比、189積分可視化。"
+  },
+  {
+    title: "脆友們現在該不該 All In 美國？UMich Applied Statistics offer 分析（陸本視角）",
+    file:  "notion-edu-article-template.html",
+    cat:   "留學申請", color: "blue", year: "2026",
+    desc:  "從資金結構、OPT可用性、H-1B三個維度，幫你算清楚這筆帳。"
+  },
+];
+</script>
+
 <!-- TOP BAR -->
 <div class="top-bar">
   <div class="top-bar-inner">
-    <div class="top-bar-ticker">
-      <span>蘇格蘭教師工會發出罷工通知</span>
-      <span>巴斯大學 × 學習集團預科合作正式開放</span>
-      <span>澳洲 189 技術移民邀請分持續走高</span>
-    </div>
+    <div class="top-bar-ticker" id="ticker"></div>
     <div class="top-bar-date" id="today-date"></div>
   </div>
 </div>
@@ -470,117 +500,12 @@
     <div class="nav-item">留學申請</div>
     <div class="nav-item">移民規劃</div>
     <div class="nav-item">教育政策</div>
-    <div class="nav-item">制度分析</div>
-    <div class="nav-item">北歐視角</div>
+    <div class="nav-item">英國名校</div>
   </div>
 </nav>
 
-<!-- CONTENT -->
-<div class="content">
-
-  <span class="featured-label">頭版精選</span>
-
-  <div class="featured-grid">
-    <div class="featured-main">
-      <span class="cat-tag red">教育政策</span>
-      <a class="art-title-lg" href="scotland-teachers-strike.html">蘇格蘭教師要罷工了——這不只是勞資糾紛，是制度設計的根本失敗</a>
-      <p class="art-desc">SNP 政府五年前的承諾至今落空，工會 EIS 最快16號罷工停課。英國教師年授課 900 小時，芬蘭教師每週僅需 18 小時——這場爭議暴露的是整個英式教育體制的深層矛盾。</p>
-      <div class="art-meta">
-        <span>2025</span>
-        <span class="art-meta-dot">·</span>
-        <span>蘇格蘭 · EIS · 芬蘭模式</span>
-        <span class="art-meta-dot">·</span>
-        <span>閱讀約 6 分鐘</span>
-      </div>
-      <a class="read-link" href="scotland-teachers-strike.html">閱讀全文</a>
-    </div>
-
-    <div class="featured-side">
-      <a class="featured-side-item" href="australia-immigration-article.html">
-        <span class="cat-tag green">移民規劃</span>
-        <span class="art-title-md">好想好想去澳洲——零基礎移民路線圖</span>
-        <p class="art-desc">沒讀書沒工作，WHV + 189 + Remote 三條線怎麼同步跑。</p>
-        <span class="read-link">閱讀全文</span>
-      </a>
-      <a class="featured-side-item" href="notion-edu-article-template.html">
-        <span class="cat-tag blue">留學申請</span>
-        <span class="art-title-md">該不該 All In 美國？UMich 申請分析</span>
-        <p class="art-desc">資金、OPT、H-1B 三個維度幫你算清楚這筆帳。</p>
-        <span class="read-link">閱讀全文</span>
-      </a>
-      <a class="featured-side-item" href="bath-university-study-group.html">
-        <span class="cat-tag gold">英國名校</span>
-        <span class="art-title-md">巴斯大學 × 學習集團正式合作——全球排名132本科預科開放招生</span>
-        <p class="art-desc">QS 全球前150、就業前景全英第5，Study Group 預科通道正式開啟。</p>
-        <span class="read-link">閱讀全文</span>
-      </a>
-    </div>
-  </div>
-
-  <!-- ALL ARTICLES GRID -->
-  <div class="section-head">
-    <span class="section-head-label">所有文章</span>
-    <div class="section-head-line"></div>
-  </div>
-
-  <div class="article-grid">
-    <a class="article-cell" href="scotland-teachers-strike.html">
-      <span class="cat-tag red">教育政策</span>
-      <span class="art-title-sm">蘇格蘭教師罷工：制度設計的根本失敗</span>
-      <p class="art-desc">EIS 罷工通知、芬蘭 vs 英國授課時數對比、為何政客算的是選票不是孩子的未來。</p>
-      <div class="art-meta"><span>2025</span><span class="art-meta-dot">·</span><span>教育政策</span></div>
-    </a>
-    <a class="article-cell" href="australia-immigration-article.html">
-      <span class="cat-tag green">移民規劃</span>
-      <span class="art-title-sm">好想去澳洲——WHV + 189 技術移民完整路徑</span>
-      <p class="art-desc">四張簽證對比、189 積分可視化、語言／ACS／Remote 三線並行策略。</p>
-      <div class="art-meta"><span>2025</span><span class="art-meta-dot">·</span><span>澳洲移民</span></div>
-    </a>
-    <a class="article-cell" href="notion-edu-article-template.html">
-      <span class="cat-tag blue">留學申請</span>
-      <span class="art-title-sm">該不該 All In 美國？UMich Applied Statistics 分析</span>
-      <p class="art-desc">從資金結構、OPT 可用性、H-1B 三個維度，幫你算清楚這筆帳。</p>
-      <div class="art-meta"><span>2026</span><span class="art-meta-dot">·</span><span>美國碩士</span></div>
-    </a>
-    <a class="article-cell" href="bath-university-study-group.html">
-      <span class="cat-tag gold">英國名校</span>
-      <span class="art-title-sm">巴斯大學 × 學習集團——本科預科正式開放招生</span>
-      <p class="art-desc">QS #132、就業前景全英第5、雇主聲譽全球前100，四國政府獎學金支持。</p>
-      <div class="art-meta"><span>2025</span><span class="art-meta-dot">·</span><span>英國留學</span></div>
-    </a>
-  </div>
-
-  <!-- BRIEF LIST -->
-  <div class="section-head">
-    <span class="section-head-label">快速導覽</span>
-    <div class="section-head-line"></div>
-  </div>
-
-  <div class="brief-section">
-    <div class="brief-header">本站所有文章 · All Articles</div>
-    <a class="brief-item" href="scotland-teachers-strike.html">
-      <span class="brief-num">01</span>
-      <span class="brief-title">蘇格蘭教師要罷工了——這不只是勞資糾紛，是制度設計的根本失敗</span>
-      <span class="brief-cat">教育政策</span>
-    </a>
-    <a class="brief-item" href="australia-immigration-article.html">
-      <span class="brief-num">02</span>
-      <span class="brief-title">好想好想去澳洲——零基礎怎麼把移民夢變成路線圖</span>
-      <span class="brief-cat">移民規劃</span>
-    </a>
-    <a class="brief-item" href="notion-edu-article-template.html">
-      <span class="brief-num">03</span>
-      <span class="brief-title">脆友們現在該不該 All In 美國？UMich Applied Statistics offer 分析（陸本視角）</span>
-      <span class="brief-cat">留學申請</span>
-    </a>
-    <a class="brief-item" href="bath-university-study-group.html">
-      <span class="brief-num">04</span>
-      <span class="brief-title">巴斯大學 × 學習集團正式合作——全球排名132本科預科開放招生</span>
-      <span class="brief-cat">英國名校</span>
-    </a>
-  </div>
-
-</div>
+<!-- CONTENT (auto-generated) -->
+<div class="content" id="main-content"></div>
 
 <!-- FOOTER -->
 <footer class="site-footer">
@@ -594,9 +519,88 @@
 </footer>
 
 <script>
+  // ── 日期 ──
   const d = new Date();
   const mo = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
   document.getElementById('today-date').textContent = `${d.getFullYear()} · ${mo[d.getMonth()]} ${d.getDate()}`;
+
+  // ── Ticker (最新3篇標題) ──
+  const ticker = document.getElementById('ticker');
+  ARTICLES.slice(0, 3).forEach(a => {
+    const s = document.createElement('span');
+    s.textContent = a.title.length > 22 ? a.title.slice(0, 22) + '…' : a.title;
+    ticker.appendChild(s);
+  });
+
+  // ── 生成首頁內容 ──
+  const main = document.getElementById('main-content');
+
+  // 頭版精選
+  const featured = ARTICLES[0];
+  const sideItems = ARTICLES.slice(1, 4);
+
+  main.innerHTML = `
+    <span class="featured-label">頭版精選</span>
+    <div class="featured-grid">
+      <div class="featured-main">
+        <span class="cat-tag ${featured.color}">${featured.cat}</span>
+        <a class="art-title-lg" href="${featured.file}">${featured.title}</a>
+        <p class="art-desc">${featured.desc}</p>
+        <div class="art-meta">
+          <span>${featured.year}</span>
+          <span class="art-meta-dot">·</span>
+          <span>${featured.cat}</span>
+        </div>
+        <a class="read-link" href="${featured.file}">閱讀全文</a>
+      </div>
+      <div class="featured-side">
+        ${sideItems.map(a => `
+          <a class="featured-side-item" href="${a.file}">
+            <span class="cat-tag ${a.color}">${a.cat}</span>
+            <span class="art-title-md">${a.title}</span>
+            <p class="art-desc">${a.desc}</p>
+            <span class="read-link">閱讀全文</span>
+          </a>
+        `).join('')}
+      </div>
+    </div>
+
+    <div class="section-head">
+      <span class="section-head-label">所有文章</span>
+      <div class="section-head-line"></div>
+    </div>
+
+    <div class="article-grid">
+      ${ARTICLES.map(a => `
+        <a class="article-cell" href="${a.file}">
+          <span class="cat-tag ${a.color}">${a.cat}</span>
+          <span class="art-title-sm">${a.title}</span>
+          <p class="art-desc">${a.desc}</p>
+          <div class="art-meta">
+            <span>${a.year}</span>
+            <span class="art-meta-dot">·</span>
+            <span>${a.cat}</span>
+          </div>
+        </a>
+      `).join('')}
+    </div>
+
+    <div class="section-head">
+      <span class="section-head-label">快速導覽</span>
+      <div class="section-head-line"></div>
+    </div>
+
+    <div class="brief-section">
+      <div class="brief-header">本站所有文章 · All Articles</div>
+      ${ARTICLES.map((a, i) => `
+        <a class="brief-item" href="${a.file}">
+          <span class="brief-num">${String(i+1).padStart(2,'0')}</span>
+          <span class="brief-title">${a.title}</span>
+          <span class="brief-cat">${a.cat}</span>
+        </a>
+      `).join('')}
+    </div>
+  `;
 </script>
 
 </body>
