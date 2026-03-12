@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8"/>
+<title>Sitemap · 海外留學導報</title>
+<!-- 
+  這個頁面會自動從 articles.js 讀取所有文章，
+  生成 Google 可以理解的 sitemap 格式。
+  不需要手動編輯這個文件。
+-->
+<script src="articles.js"></script>
+<script>
+  // 網站根網址（改成你的 Vercel 網址）
+  const BASE_URL = "https://otcoffice-articles.vercel.app";
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const urls = [
+      // 首頁
+      `<url><loc>${BASE_URL}/</loc><changefreq>daily</changefreq><priority>1.0</priority></url>`,
+      // 所有文章
+      ...ARTICLES.map(a =>
+        `<url><loc>${BASE_URL}/${a.file}</loc><lastmod>${a.date}</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>`
+      )
+    ].join('\n  ');
+
+    const xml = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  ${urls}
+</urlset>`;
+
+    document.getElementById('output').textContent = xml;
+  });
+</script>
+<style>
+  body { background: #1a1a1a; color: #e0e0e0; font-family: 'JetBrains Mono', monospace; padding: 40px; font-size: 13px; line-height: 1.7; }
+  h2 { color: #fff; margin-bottom: 8px; font-size: 16px; }
+  p { color: #888; margin-bottom: 20px; font-size: 12px; }
+  pre { background: #111; border: 1px solid #333; border-radius: 8px; padding: 24px; overflow-x: auto; white-space: pre-wrap; }
+  .copy-btn { background: #8B2020; color: #fff; border: none; padding: 8px 18px; border-radius: 4px; cursor: pointer; font-size: 12px; letter-spacing: 0.06em; margin-bottom: 16px; }
+  .copy-btn:hover { background: #a02828; }
+</style>
+</head>
+<body>
+<h2>Sitemap · 海外留學導報</h2>
+<p>這是自動生成的 sitemap。複製以下內容，儲存為 sitemap.xml 上傳到 GitHub，然後在 Google Search Console 提交。</p>
+<button class="copy-btn" onclick="navigator.clipboard.writeText(document.getElementById('output').textContent).then(()=>this.textContent='已複製 ✓')">複製 XML</button>
+<pre id="output"></pre>
+</body>
+</html>
