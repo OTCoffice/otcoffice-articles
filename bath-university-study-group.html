@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>巴斯大学 × 学习集团 · 海外留学导报</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500;700&family=JetBrains+Mono:wght@400;600&display=swap');
+
+  :root {
+    --bg:       #F6F5F0;
+    --surface:  #FFFFFF;
+    --border:   #E2DDD4;
+    --text:     #1A1A1A;
+    --muted:    #6B6860;
+    --accent:   #1B3A6B;
+    --accent2:  #C7873A;
+    --accent3:  #2E6B4F;
+    --tag-bg:   #EAE7DE;
+    --mono:     'JetBrains Mono', monospace;
+    --serif:    'Noto Serif SC', serif;
+    --sans:     'Noto Sans SC', sans-serif;
+    --serif-en: 'Playfair Display', Georgia, serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    font-family: var(--sans);
+    color: var(--text);
+    line-height: 1.85;
+    font-size: 15px;
+  }
+
+  /* ── Top nav bar ── */
+  .site-bar {
+    background: #0F0E0B;
+    padding: 10px 0;
+  }
+
+  .site-bar-inner {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .site-name {
+    font-family: var(--serif-en);
+    font-size: 14px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.85);
+    letter-spacing: 0.02em;
+  }
+
+  .site-back {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: rgba(255,255,255,0.45);
+    letter-spacing: 0.08em;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .site-back:hover { color: rgba(255,255,255,0.85); }
+
+  .page {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 60px 40px 120px;
+  }
+
+  /* ── Header ── */
+  .article-header {
+    margin-bottom: 40px;
+    border-bottom: 2px solid var(--border);
+    padding-bottom: 36px;
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 18px;
+  }
+
+  .tag {
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    padding: 3px 10px;
+    border-radius: 3px;
+    background: var(--tag-bg);
+    color: var(--muted);
+  }
+
+  .tag.navy  { background: #E0E8F5; color: var(--accent); }
+  .tag.gold  { background: #FDF0E0; color: var(--accent2); }
+  .tag.green { background: #E0F0E8; color: var(--accent3); }
+
+  h1.article-title {
+    font-family: var(--serif);
+    font-size: 27px;
+    font-weight: 700;
+    line-height: 1.45;
+    color: var(--text);
+    margin-bottom: 14px;
+  }
+
+  .subtitle {
+    font-size: 15px;
+    color: var(--muted);
+    font-weight: 300;
+    line-height: 1.75;
+  }
+
+  .meta {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-top: 20px;
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--muted);
+    flex-wrap: wrap;
+  }
+
+  .meta-dot { color: var(--border); }
+
+  /* ── Announcement Banner ── */
+  .announce-banner {
+    background: var(--accent);
+    color: #fff;
+    border-radius: 8px;
+    padding: 20px 26px;
+    margin-bottom: 40px;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+
+  .announce-icon { font-size: 22px; flex-shrink: 0; }
+
+  .announce-text { font-size: 14.5px; line-height: 1.72; }
+  .announce-text strong { font-weight: 700; }
+
+  /* ── TL;DR ── */
+  .tldr {
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-left: 4px solid var(--accent);
+    border-radius: 8px;
+    padding: 22px 26px;
+    margin-bottom: 48px;
+  }
+
+  .tldr-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .tldr p { font-size: 14.5px; line-height: 1.78; }
+
+  /* ── Section ── */
+  .section { margin-bottom: 52px; }
+
+  .section-number {
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    display: block;
+  }
+
+  h2.section-title {
+    font-family: var(--serif);
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  h3.sub {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text);
+    margin: 28px 0 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  h3.sub::before {
+    content: '';
+    display: inline-block;
+    width: 4px;
+    height: 14px;
+    background: var(--accent2);
+    border-radius: 2px;
+    flex-shrink: 0;
+  }
+
+  p { color: #2C2C2C; line-height: 1.9; margin-bottom: 16px; }
+
+  /* ── Stat Grid ── */
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin: 24px 0;
+  }
+
+  .stat-card {
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    padding: 18px 16px;
+    text-align: center;
+  }
+
+  .stat-number {
+    font-family: var(--serif-en);
+    font-size: 26px;
+    font-weight: 900;
+    color: var(--accent);
+    line-height: 1.1;
+    margin-bottom: 6px;
+    display: block;
+  }
+
+  .stat-label {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  /* ── Ranking List ── */
+  .ranking-list {
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 22px 0;
+  }
+
+  .ranking-header {
+    background: var(--accent);
+    color: #fff;
+    padding: 10px 20px;
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .ranking-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 13px 20px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .ranking-item:last-child { border-bottom: none; }
+
+  .ranking-badge {
+    font-family: var(--serif-en);
+    font-size: 20px;
+    font-weight: 900;
+    color: var(--accent2);
+    width: 48px;
+    flex-shrink: 0;
+    text-align: center;
+    line-height: 1;
+  }
+
+  .ranking-text { font-size: 13.5px; line-height: 1.65; color: #2C2C2C; }
+  .ranking-text strong { color: var(--text); }
+  .ranking-source {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--muted);
+    margin-top: 2px;
+    display: block;
+  }
+
+  /* ── Callout ── */
+  .callout {
+    border-radius: 8px;
+    padding: 18px 22px;
+    margin: 22px 0;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    font-size: 14.5px;
+    line-height: 1.78;
+  }
+
+  .callout-icon { font-size: 18px; flex-shrink: 0; margin-top: 2px; }
+  .callout.blue   { background: #EEF4FD; border: 1px solid #ACCAEF; }
+  .callout.green  { background: #EDF7F1; border: 1px solid #A8D4B8; }
+  .callout.gold   { background: #FDF6EC; border: 1px solid #F0D08D; }
+
+  /* ── Scholarship Table ── */
+  .schol-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin: 22px 0;
+  }
+
+  .schol-card {
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    padding: 16px 18px;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .schol-flag { font-size: 22px; flex-shrink: 0; }
+
+  .schol-country {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 3px;
+  }
+
+  .schol-type {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--accent3);
+    font-weight: 600;
+    letter-spacing: 0.05em;
+  }
+
+  /* ── CTA ── */
+  .cta-box {
+    background: var(--accent);
+    border-radius: 10px;
+    padding: 28px 32px;
+    text-align: center;
+    margin: 40px 0 0;
+  }
+
+  .cta-box h3 {
+    font-family: var(--serif);
+    font-size: 18px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 8px;
+  }
+
+  .cta-box p {
+    color: rgba(255,255,255,0.75);
+    font-size: 13.5px;
+    margin-bottom: 0;
+  }
+
+  code {
+    font-family: var(--mono);
+    font-size: 12.5px;
+    background: var(--tag-bg);
+    color: var(--accent);
+    padding: 2px 6px;
+    border-radius: 3px;
+  }
+
+  /* ── Footer ── */
+  .article-footer {
+    margin-top: 64px;
+    padding-top: 24px;
+    border-top: 2px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+  }
+
+  .footer-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+
+  @media (max-width: 600px) {
+    .page { padding: 36px 20px 80px; }
+    h1.article-title { font-size: 22px; }
+    .stat-grid { grid-template-columns: repeat(2, 1fr); }
+    .schol-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- SITE BAR -->
+<div class="site-bar">
+  <div class="site-bar-inner">
+    <span class="site-name">Overseas Education Herald · 海外留學導報</span>
+    <a class="site-back" href="index.html">← 返回首頁</a>
+  </div>
+</div>
+
+<div class="page">
+
+  <!-- HEADER -->
+  <header class="article-header">
+    <div class="tags">
+      <span class="tag navy">合作公告</span>
+      <span class="tag gold">英國名校</span>
+      <span class="tag green">本科预科</span>
+      <span class="tag">Study Group</span>
+      <span class="tag">2025</span>
+    </div>
+
+    <h1 class="article-title">巴斯大学 × 学习集团正式合作——<br/>全球排名 132 的英国名校现已开放国际预科招生</h1>
+
+    <p class="subtitle">
+      University of Bath 与 Study Group 达成全新合作伙伴关系，国际学生本科预科通道正式开启。QS 全球前 150、英国雇主声誉前 100，这所以就业见长的大学值得认真了解。
+    </p>
+
+    <div class="meta">
+      <span>2025</span>
+      <span class="meta-dot">·</span>
+      <span>英国留学 · 本科预科</span>
+      <span class="meta-dot">·</span>
+      <span>来源：Study Group 官方公告</span>
+    </div>
+  </header>
+
+  <!-- BANNER -->
+  <div class="announce-banner">
+    <span class="announce-icon">🚀</span>
+    <div class="announce-text">
+      <strong>学习集团（Study Group）宣布</strong>与英国顶尖大学 <strong>巴斯大学（University of Bath）</strong>达成全新合作，现已正式开放国际学生本科预科招生。课程信息、入学要求及最新入学时间即将发布。
+    </div>
+  </div>
+
+  <!-- TL;DR -->
+  <div class="tldr">
+    <div class="tldr-label">核心亮点 · TL;DR</div>
+    <p>
+      巴斯大学以<strong>就业导向</strong>闻名英国——《卫报》就业前景排名全国第5，雇主声誉进入 QS 全球前100。30% 国际学生比例、来自147个国家，校园氛围国际化程度高。通过 Study Group 预科通道，为语言或学术条件尚未达到直接入学要求的国际学生提供了一条清晰的升学路径。
+    </p>
+  </div>
+
+  <!-- SECTION 1 -->
+  <section class="section">
+    <span class="section-number">Section 01</span>
+    <h2 class="section-title">巴斯大学排名一览：数字说明一切</h2>
+
+    <div class="stat-grid">
+      <div class="stat-card">
+        <span class="stat-number">#132</span>
+        <span class="stat-label">QS 世界大学排名<br/>全球</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-number">#7</span>
+        <span class="stat-label">《星期日泰晤士报》<br/>英国大学排名</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-number">#5</span>
+        <span class="stat-label">《卫报大学指南 2026》<br/>就业前景</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-number">85.2%</span>
+        <span class="stat-label">学生整体<br/>满意度</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-number">88.4%</span>
+        <span class="stat-label">毕业生获得一等<br/>或二等一荣誉学位</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-number">30%</span>
+        <span class="stat-label">国际学生比例<br/>来自 147 个国家</span>
+      </div>
+    </div>
+
+    <div class="ranking-list">
+      <div class="ranking-header">主要排名详情</div>
+      <div class="ranking-item">
+        <div class="ranking-badge">#132</div>
+        <div class="ranking-text">
+          <strong>QS 世界大学排名</strong> — 全球综合排名
+          <span class="ranking-source">QS World University Rankings</span>
+        </div>
+      </div>
+      <div class="ranking-item">
+        <div class="ranking-badge">#7</div>
+        <div class="ranking-text">
+          <strong>英国大学综合排名</strong> — 全英第七
+          <span class="ranking-source">The Sunday Times Good University Guide</span>
+        </div>
+      </div>
+      <div class="ranking-item">
+        <div class="ranking-badge">Top 100</div>
+        <div class="ranking-text">
+          <strong>雇主声誉</strong> — QS 2026 全球前100
+          <span class="ranking-source">QS Graduate Employability Rankings 2026</span>
+        </div>
+      </div>
+      <div class="ranking-item">
+        <div class="ranking-badge">#5</div>
+        <div class="ranking-text">
+          <strong>就业前景</strong> — 全英第五，毕业生就业竞争力突出
+          <span class="ranking-source">The Guardian University Guide 2026</span>
+        </div>
+      </div>
+      <div class="ranking-item">
+        <div class="ranking-badge">#3</div>
+        <div class="ranking-text">
+          <strong>城市安全</strong> — 英格兰和威尔士第3安全城市
+          <span class="ranking-source">Complete University Guide 2024</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout gold">
+      <span class="callout-icon">🏆</span>
+      <div>巴斯大学还荣获 <strong>2026年度英国体育大学</strong>称号，校园体育设施与运动文化在全英名列前茅，对重视课外生活质量的学生来说是额外加分项。</div>
+    </div>
+  </section>
+
+  <!-- SECTION 2 -->
+  <section class="section">
+    <span class="section-number">Section 02</span>
+    <h2 class="section-title">为什么「就业前景第5」比综合排名更值得关注</h2>
+
+    <p>很多学生和家长选校时习惯只看综合排名，但对于国际学生来说，<strong>毕业后能否找到好工作</strong>才是留学投资回报的核心指标。</p>
+
+    <p>巴斯大学在就业导向方面有两个突出特点：其一，大量专业提供带薪实习年（Placement Year），学生在毕业前已积累真实的企业工作经验；其二，学校与英国及跨国企业的合作关系成熟，雇主认可度高。</p>
+
+    <div class="callout blue">
+      <span class="callout-icon">💼</span>
+      <div>
+        <strong>88.4% 毕业生获得一等或二等一荣誉学位</strong>，配合全英第5的就业前景排名，说明巴斯不仅教学质量高，也真正帮助学生将学历转化为职场竞争力。
+      </div>
+    </div>
+
+    <h3 class="sub">巴斯的地理位置优势</h3>
+    <p>巴斯（Bath）是英国著名的历史文化城市，距伦敦约90分钟车程，生活成本低于伦敦，城市安全排名英格兰和威尔士第3。对于首次出国的国际学生，这是一个既有文化底蕴又相对安全宜居的留学目的地。</p>
+  </section>
+
+  <!-- SECTION 3 -->
+  <section class="section">
+    <span class="section-number">Section 03</span>
+    <h2 class="section-title">政府奖学金支持国家：中东学生的重要机会</h2>
+
+    <p>此次合作特别适合来自以下国家、持有或正在申请政府奖学金的学生：</p>
+
+    <div class="schol-grid">
+      <div class="schol-card">
+        <span class="schol-flag">🇴🇲</span>
+        <div>
+          <div class="schol-country">阿曼</div>
+          <div class="schol-type">政府奖学金支持</div>
+        </div>
+      </div>
+      <div class="schol-card">
+        <span class="schol-flag">🇶🇦</span>
+        <div>
+          <div class="schol-country">卡塔尔</div>
+          <div class="schol-type">政府奖学金支持</div>
+        </div>
+      </div>
+      <div class="schol-card">
+        <span class="schol-flag">🇸🇦</span>
+        <div>
+          <div class="schol-country">沙特阿拉伯</div>
+          <div class="schol-type">教育部奖学金支持</div>
+        </div>
+      </div>
+      <div class="schol-card">
+        <span class="schol-flag">🇰🇼</span>
+        <div>
+          <div class="schol-country">科威特</div>
+          <div class="schol-type">政府奖学金支持</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout green">
+      <span class="callout-icon">📋</span>
+      <div>持有政府奖学金的学生在选择合作院校时，需确认目标大学和预科项目是否在奖学金认可名单内。建议在正式申请前与奖学金主管机构确认巴斯大学的认可状态。</div>
+    </div>
+  </section>
+
+  <!-- SECTION 4 -->
+  <section class="section">
+    <span class="section-number">Section 04</span>
+    <h2 class="section-title">什么是预科（Foundation Year）？适合哪些学生</h2>
+
+    <p>本科预科（Foundation Programme）是为学术或语言条件尚未达到直接入读本科要求的国际学生设计的衔接课程，通常为期一年，成功完成后可直接升入巴斯大学本科一年级。</p>
+
+    <div class="callout blue">
+      <span class="callout-icon">🎓</span>
+      <div>
+        <strong>适合人群：</strong>高中毕业但英语成绩暂未达到直接入学要求；或学术背景与英国大学课程体系存在差距、需要过渡适应的国际学生。预科并非降级，而是为了让学生以更扎实的基础进入大学。
+      </div>
+    </div>
+
+    <p>通过 Study Group 的预科项目进入巴斯大学，学生在预科阶段即开始适应英国学术文化，建立人脉，为正式本科学习做好全面准备。</p>
+  </section>
+
+  <!-- CTA -->
+  <div class="cta-box">
+    <h3>课程信息即将发布</h3>
+    <p>Study Group 将尽快公布巴斯大学预科的课程详情、入学要求及最新入学时间。如有意向，建议提前联系顾问了解申请准备事项。</p>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="article-footer">
+    <div class="footer-tags">
+      <span class="tag">巴斯大学</span>
+      <span class="tag">Study Group</span>
+      <span class="tag">本科预科</span>
+      <span class="tag">英国留学</span>
+    </div>
+    <span>内容来源：Study Group 官方公告 · 仅供参考</span>
+  </footer>
+
+</div>
+</body>
+</html>
