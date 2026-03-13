@@ -1,0 +1,174 @@
+<style>
+  .page { max-width: 820px; margin: 0 auto; padding: 2rem 1.5rem; font-family: var(--font-sans); }
+  .hero { border-left: 3px solid #185FA5; padding: 0.75rem 0 0.75rem 1.25rem; margin-bottom: 2rem; }
+  .hero h1 { font-size: 22px; font-weight: 500; color: var(--color-text-primary); margin: 0 0 4px; }
+  .hero p { font-size: 15px; color: var(--color-text-secondary); margin: 0; line-height: 1.6; }
+  .section-title { font-size: 13px; font-weight: 500; color: var(--color-text-secondary); letter-spacing: 0.06em; text-transform: uppercase; margin: 0 0 12px; }
+  .card { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 1.25rem; margin-bottom: 1rem; }
+  .req-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-bottom: 2rem; }
+  .req-card { background: var(--color-background-secondary); border-radius: var(--border-radius-md); padding: 1rem 1.1rem; }
+  .req-label { font-size: 12px; color: var(--color-text-secondary); margin: 0 0 4px; }
+  .req-value { font-size: 20px; font-weight: 500; color: var(--color-text-primary); margin: 0 0 2px; }
+  .req-note { font-size: 12px; color: var(--color-text-secondary); margin: 0; }
+  .badge { display: inline-block; font-size: 11px; font-weight: 500; padding: 3px 10px; border-radius: var(--border-radius-md); }
+  .badge-warn { background: #FAEEDA; color: #633806; }
+  .badge-ok { background: #EAF3DE; color: #27500A; }
+  .badge-no { background: #FCEBEB; color: #791F1F; }
+  .step-row { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 1rem; }
+  .step-num { width: 28px; height: 28px; border-radius: 50%; background: #E6F1FB; color: #0C447C; font-size: 13px; font-weight: 500; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+  .step-text { font-size: 14px; color: var(--color-text-primary); line-height: 1.6; }
+  .step-sub { font-size: 13px; color: var(--color-text-secondary); margin-top: 2px; }
+  .divider { border: none; border-top: 0.5px solid var(--color-border-tertiary); margin: 1.5rem 0; }
+  .notice { background: #FAEEDA; border-left: 3px solid #BA7517; border-radius: 0 var(--border-radius-md) var(--border-radius-md) 0; padding: 0.9rem 1.1rem; margin-bottom: 1.5rem; }
+  .notice p { font-size: 14px; color: #412402; margin: 0; line-height: 1.6; }
+  .notice strong { color: #412402; }
+  .compare-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 0.5px solid var(--color-border-tertiary); font-size: 14px; }
+  .compare-row:last-child { border-bottom: none; }
+  .compare-label { color: var(--color-text-primary); }
+  .compare-level { color: var(--color-text-secondary); font-size: 13px; }
+  .faq-item { margin-bottom: 1.25rem; }
+  .faq-q { font-size: 14px; font-weight: 500; color: var(--color-text-primary); margin: 0 0 4px; }
+  .faq-a { font-size: 14px; color: var(--color-text-secondary); margin: 0; line-height: 1.6; }
+  .footer-note { font-size: 12px; color: var(--color-text-secondary); margin-top: 2rem; padding-top: 1rem; border-top: 0.5px solid var(--color-border-tertiary); line-height: 1.7; }
+</style>
+
+<div class="page">
+
+  <div class="hero">
+    <h1>English language entry requirements</h1>
+    <p>OTC Centre — OTHM-approved qualifications · Updated 2025</p>
+  </div>
+
+  <p class="section-title">Minimum accepted standard</p>
+  <div class="req-grid">
+    <div class="req-card">
+      <p class="req-label">IELTS Academic</p>
+      <p class="req-value">5.5</p>
+      <p class="req-note">Reading & writing must each be 5.5</p>
+    </div>
+    <div class="req-card">
+      <p class="req-label">PTE Academic</p>
+      <p class="req-value">51</p>
+      <p class="req-note">Pearson Test of English</p>
+    </div>
+    <div class="req-card">
+      <p class="req-label">CEFR level</p>
+      <p class="req-value">B2</p>
+      <p class="req-note">Equivalent qualifications considered</p>
+    </div>
+  </div>
+
+  <div class="notice">
+    <p>These requirements must be met <strong>before enrolment</strong>, as required by OTHM Qualifications. Proof of English proficiency is a mandatory condition of registration — not a post-enrolment target.</p>
+  </div>
+
+  <p class="section-title">Who must meet this requirement?</p>
+  <div class="card" style="margin-bottom: 1.5rem;">
+    <p style="font-size: 14px; color: var(--color-text-primary); margin: 0 0 10px; line-height: 1.6;">This requirement applies to all applicants who are <strong>non-native English speakers</strong> and who have <strong>not</strong> completed their final two years of secondary schooling taught entirely in English.</p>
+    <hr class="divider" style="margin: 10px 0;">
+    <div class="compare-row">
+      <span class="compare-label">Native English speakers</span>
+      <span class="badge badge-ok">Exempt</span>
+    </div>
+    <div class="compare-row">
+      <span class="compare-label">Final two years of school taught in English</span>
+      <span class="badge badge-ok">Exempt</span>
+    </div>
+    <div class="compare-row">
+      <span class="compare-label">WAEC learners — schooled in English</span>
+      <span class="badge badge-ok">Exempt</span>
+    </div>
+    <div class="compare-row">
+      <span class="compare-label">Non-native, schooled in another language</span>
+      <span class="badge badge-no">Must demonstrate B2</span>
+    </div>
+  </div>
+
+  <p class="section-title">Accepted evidence</p>
+  <div class="card" style="margin-bottom: 1.5rem;">
+    <div class="compare-row">
+      <div><div class="compare-label">IELTS Academic</div><div class="compare-level">5.5 overall, reading & writing each 5.5</div></div>
+      <span class="badge badge-ok">Accepted</span>
+    </div>
+    <div class="compare-row">
+      <div><div class="compare-label">PTE Academic</div><div class="compare-level">Score 51 or above</div></div>
+      <span class="badge badge-ok">Accepted</span>
+    </div>
+    <div class="compare-row">
+      <div><div class="compare-label">Cambridge B2 First (FCE) or above</div><div class="compare-level">Grade C or above</div></div>
+      <span class="badge badge-ok">Accepted</span>
+    </div>
+    <div class="compare-row">
+      <div><div class="compare-label">Other accredited English tests</div><div class="compare-level">Must be verifiably equivalent to IELTS 5.5 / B2</div></div>
+      <span class="badge badge-warn">Case by case</span>
+    </div>
+    <div class="compare-row">
+      <div><div class="compare-label">Cambridge A2 Key (KET)</div><div class="compare-level">CEFR A2 — two levels below the minimum</div></div>
+      <span class="badge badge-no">Not accepted</span>
+    </div>
+    <div class="compare-row">
+      <div><div class="compare-label">Cambridge B1 Preliminary (PET)</div><div class="compare-level">CEFR B1 — one level below the minimum</div></div>
+      <span class="badge badge-no">Not accepted</span>
+    </div>
+  </div>
+
+  <p class="section-title">Recommended pathway for applicants below B2</p>
+  <div class="card" style="margin-bottom: 1.5rem;">
+    <div class="step-row">
+      <div class="step-num">1</div>
+      <div>
+        <div class="step-text">Complete an accredited English language programme</div>
+        <div class="step-sub">Aim to reach CEFR B2 level before applying</div>
+      </div>
+    </div>
+    <div class="step-row">
+      <div class="step-num">2</div>
+      <div>
+        <div class="step-text">Sit an accepted English proficiency test</div>
+        <div class="step-sub">IELTS 5.5 / PTE 51 / Cambridge B2 First or equivalent</div>
+      </div>
+    </div>
+    <div class="step-row">
+      <div class="step-num">3</div>
+      <div>
+        <div class="step-text">Submit your certificate with your application</div>
+        <div class="step-sub">OTC will verify equivalency before confirming your place</div>
+      </div>
+    </div>
+    <div class="step-row" style="margin-bottom: 0;">
+      <div class="step-num">4</div>
+      <div>
+        <div class="step-text">Enrol on your chosen OTHM qualification</div>
+        <div class="step-sub">Begin your programme with the language skills needed to succeed</div>
+      </div>
+    </div>
+  </div>
+
+  <p class="section-title">Frequently asked questions</p>
+  <div class="card" style="margin-bottom: 1.5rem;">
+    <div class="faq-item">
+      <p class="faq-q">Can I enrol first and then improve my English alongside my studies?</p>
+      <p class="faq-a">No. OTHM requires that all non-native English speakers demonstrate the required level before being accepted onto any programme. English proficiency is a pre-enrolment condition, not a concurrent target.</p>
+    </div>
+    <hr class="divider">
+    <div class="faq-item">
+      <p class="faq-q">I completed a diploma taught in English. Am I exempt?</p>
+      <p class="faq-a">Not automatically. Exemption applies only to those who completed the final two years of secondary school taught in English. A diploma delivered in English does not fulfil this condition unless the subject was English language itself.</p>
+    </div>
+    <hr class="divider">
+    <div class="faq-item">
+      <p class="faq-q">Will the university I progress to accept my English certificate?</p>
+      <p class="faq-a">It is your responsibility to confirm this with your receiving university or HEI. Some institutions do not accept alternative tests, so we recommend obtaining an IELTS or PTE certificate wherever possible.</p>
+    </div>
+    <hr class="divider">
+    <div class="faq-item" style="margin-bottom: 0;">
+      <p class="faq-q">How is compliance verified?</p>
+      <p class="faq-a">OTHM monitors compliance through its External Quality Assurance (EQA) process. Centres that do not meet these requirements risk sanctions under their terms and conditions with OTHM.</p>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    This policy reflects the official OTHM English Language Entry Requirements applicable to all regulated qualifications. OTC Centre operates in accordance with these requirements as an OTHM-approved delivery centre. For queries, please contact our admissions team.
+  </div>
+
+</div>
