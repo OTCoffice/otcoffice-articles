@@ -1,4 +1,9 @@
-/**
+{
+  title: "OTHM 英語入學要求——A2 Key 不符合標準，正確門檻是 IELTS 5.5 / B2",
+  file:  "othm_english_entry_requirements.html",
+  cat:   "教育政策", color: "blue", year: "2026", date: "2026-03-13",
+  desc:  "OTHM 官方規定非英語母語學生須在入學前達到 IELTS 5.5 / PTE 51 / CEFR B2，A2 Key 遠低於標準，不獲接受。"
+},/**
  * ═══════════════════════════════════════════════════════════
  *  海外留學導報 · 文章資料庫
  *  Overseas Education Herald · Article Database
