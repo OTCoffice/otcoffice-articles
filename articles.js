@@ -1,4 +1,10 @@
-const ARTICLES = [
+{
+  id: 'vu-dermal-sciences-2026',
+  title: '墨爾本VU｜皮膚科學學士2026年7月仍有國際生名額',
+  category: '澳大利亞',
+  date: '2026-03',
+  file: 'vu-dermal-sciences-2026.html'
+}const ARTICLES = [
   {
     title: "OTHM 英語入學要求——A2 Key 不符合標準，正確門檻是 IELTS 5.5 / B2",
     file:  "othm_english_entry_requirements.html",
