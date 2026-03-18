@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>墨爾本VU｜皮膚科學學士2026年7月仍有國際生名額 — 海外留學導報</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ink: #1a1208;
+      --ink-light: #4a3f2f;
+      --paper: #faf7f2;
+      --paper-warm: #f3ede3;
+      --accent: #b5401a;
+      --accent-light: #e8c4b4;
+      --gold: #c9922a;
+      --rule: #d4c5b0;
+      --serif: 'Noto Serif SC', 'Playfair Display', Georgia, serif;
+      --sans: 'Noto Sans SC', sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { font-size: 16px; scroll-behavior: smooth; }
+
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-weight: 300;
+      line-height: 1.9;
+      min-height: 100vh;
+    }
+
+    /* ── MASTHEAD ── */
+    .masthead {
+      background: var(--ink);
+      color: var(--paper);
+      text-align: center;
+      padding: 2rem 1rem 1.6rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .masthead::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 60px,
+        rgba(255,255,255,0.02) 60px,
+        rgba(255,255,255,0.02) 61px
+      );
+    }
+    .masthead-pub {
+      font-family: var(--serif);
+      font-size: clamp(1.5rem, 4vw, 2.4rem);
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      position: relative;
+    }
+    .masthead-pub span {
+      color: var(--gold);
+    }
+    .masthead-sub {
+      font-size: 0.72rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--rule);
+      margin-top: 0.4rem;
+      font-weight: 400;
+      position: relative;
+    }
+    .masthead-rule {
+      width: 80px;
+      height: 1px;
+      background: var(--gold);
+      margin: 1rem auto 0;
+      position: relative;
+    }
+
+    /* ── NAV BAR ── */
+    .nav-bar {
+      border-bottom: 1px solid var(--rule);
+      background: var(--paper-warm);
+      padding: 0.6rem 2rem;
+      font-size: 0.75rem;
+      letter-spacing: 0.05em;
+      color: var(--ink-light);
+      display: flex;
+      gap: 0.4rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .nav-bar a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    .nav-bar a:hover { text-decoration: underline; }
+    .nav-sep { color: var(--rule); }
+
+    /* ── LAYOUT ── */
+    .page-wrap {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 3rem 2rem 5rem;
+    }
+
+    /* ── ARTICLE HEADER ── */
+    .article-kicker {
+      font-size: 0.7rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 500;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .article-kicker::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--accent-light);
+    }
+
+    .article-headline {
+      font-family: var(--serif);
+      font-size: clamp(1.6rem, 4vw, 2.6rem);
+      font-weight: 700;
+      line-height: 1.3;
+      color: var(--ink);
+      margin-bottom: 1rem;
+      animation: fadeUp 0.7s ease both;
+    }
+
+    .article-deck {
+      font-size: 1.05rem;
+      color: var(--ink-light);
+      font-weight: 400;
+      line-height: 1.7;
+      border-left: 3px solid var(--gold);
+      padding-left: 1rem;
+      margin-bottom: 1.8rem;
+      animation: fadeUp 0.7s 0.1s ease both;
+    }
+
+    .article-meta {
+      font-size: 0.72rem;
+      color: var(--ink-light);
+      letter-spacing: 0.05em;
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--rule);
+      margin-bottom: 2.5rem;
+      animation: fadeUp 0.7s 0.2s ease both;
+    }
+    .article-meta span { display: flex; align-items: center; gap: 0.3rem; }
+
+    /* ── URGENCY BANNER ── */
+    .urgency-banner {
+      background: var(--accent);
+      color: white;
+      padding: 0.9rem 1.4rem;
+      border-radius: 2px;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      margin-bottom: 2.5rem;
+      font-size: 0.9rem;
+      font-weight: 500;
+      animation: fadeUp 0.7s 0.3s ease both;
+    }
+    .urgency-banner .dot {
+      width: 8px; height: 8px;
+      background: #ffcc80;
+      border-radius: 50%;
+      flex-shrink: 0;
+      animation: pulse 1.5s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    /* ── BODY COPY ── */
+    .article-body {
+      animation: fadeUp 0.7s 0.35s ease both;
+    }
+
+    .article-body p {
+      margin-bottom: 1.4rem;
+      font-size: 0.97rem;
+      color: var(--ink);
+      font-weight: 300;
+    }
+
+    .article-body h2 {
+      font-family: var(--serif);
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--ink);
+      margin: 2.5rem 0 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--rule);
+      display: flex;
+      align-items: baseline;
+      gap: 0.6rem;
+    }
+    .article-body h2::before {
+      content: '◆';
+      font-size: 0.6rem;
+      color: var(--gold);
+      flex-shrink: 0;
+    }
+
+    /* ── INFO CARDS ── */
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1px;
+      background: var(--rule);
+      border: 1px solid var(--rule);
+      margin: 1.5rem 0 2rem;
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    .info-card {
+      background: var(--paper-warm);
+      padding: 1.2rem 1rem;
+      text-align: center;
+    }
+    .info-card .label {
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--ink-light);
+      margin-bottom: 0.4rem;
+    }
+    .info-card .value {
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--ink);
+      line-height: 1.3;
+    }
+    .info-card .value.accent { color: var(--accent); }
+
+    /* ── HIGHLIGHTS LIST ── */
+    .highlight-list {
+      list-style: none;
+      margin: 1rem 0 1.5rem;
+    }
+    .highlight-list li {
+      padding: 0.7rem 0 0.7rem 1.6rem;
+      border-bottom: 1px solid var(--rule);
+      font-size: 0.95rem;
+      position: relative;
+      color: var(--ink);
+    }
+    .highlight-list li:last-child { border-bottom: none; }
+    .highlight-list li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--gold);
+      font-size: 0.85rem;
+    }
+    .highlight-list li strong {
+      color: var(--ink);
+      font-weight: 500;
+    }
+
+    /* ── SCHOLARSHIP TABLE ── */
+    .scholarship-block {
+      background: var(--paper-warm);
+      border: 1px solid var(--rule);
+      border-radius: 2px;
+      overflow: hidden;
+      margin: 1.5rem 0 2rem;
+    }
+    .scholarship-block table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+    }
+    .scholarship-block th {
+      background: var(--ink);
+      color: var(--paper);
+      padding: 0.7rem 1rem;
+      text-align: left;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      font-size: 0.75rem;
+    }
+    .scholarship-block td {
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid var(--rule);
+      vertical-align: top;
+      line-height: 1.5;
+    }
+    .scholarship-block tr:last-child td { border-bottom: none; }
+    .scholarship-block tr:nth-child(even) td { background: rgba(0,0,0,0.02); }
+    .pct {
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    /* ── PULLQUOTE ── */
+    .pullquote {
+      margin: 2.5rem 0;
+      padding: 1.5rem 2rem;
+      background: var(--ink);
+      color: var(--paper);
+      position: relative;
+    }
+    .pullquote::before {
+      content: '"';
+      font-family: var(--serif);
+      font-size: 5rem;
+      line-height: 1;
+      color: var(--gold);
+      position: absolute;
+      top: -0.5rem;
+      left: 1rem;
+      opacity: 0.4;
+    }
+    .pullquote p {
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      font-style: italic;
+      line-height: 1.6;
+      position: relative;
+      color: var(--paper) !important;
+      margin-bottom: 0 !important;
+    }
+
+    /* ── CTA ── */
+    .cta-block {
+      margin-top: 3rem;
+      padding: 2rem;
+      border: 1px solid var(--gold);
+      background: linear-gradient(135deg, var(--paper-warm) 0%, var(--paper) 100%);
+      text-align: center;
+      border-radius: 2px;
+    }
+    .cta-block h3 {
+      font-family: var(--serif);
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 0.6rem;
+      color: var(--ink);
+    }
+    .cta-block p {
+      font-size: 0.88rem;
+      color: var(--ink-light);
+      margin-bottom: 1.2rem;
+    }
+    .cta-btn {
+      display: inline-block;
+      background: var(--accent);
+      color: white;
+      text-decoration: none;
+      padding: 0.7rem 2rem;
+      font-size: 0.85rem;
+      letter-spacing: 0.1em;
+      font-weight: 500;
+      border-radius: 1px;
+      transition: background 0.2s;
+    }
+    .cta-btn:hover { background: #8f2e10; }
+
+    /* ── FOOTER ── */
+    .article-footer {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--rule);
+      font-size: 0.72rem;
+      color: var(--ink-light);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      .page-wrap { padding: 2rem 1.2rem 4rem; }
+      .nav-bar { padding: 0.5rem 1.2rem; }
+      .info-grid { grid-template-columns: 1fr 1fr; }
+      .pullquote { padding: 1.2rem 1.2rem 1.2rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- MASTHEAD -->
+  <header class="masthead">
+    <div class="masthead-pub">海外<span>留學</span>導報</div>
+    <div class="masthead-sub">Overseas Education Review &nbsp;·&nbsp; 國際升學資訊平台</div>
+    <div class="masthead-rule"></div>
+  </header>
+
+  <!-- NAV -->
+  <nav class="nav-bar">
+    <a href="/">首頁</a>
+    <span class="nav-sep">›</span>
+    <a href="/articles">院校資訊</a>
+    <span class="nav-sep">›</span>
+    <a href="/articles">澳大利亞</a>
+    <span class="nav-sep">›</span>
+    <span>VU 皮膚科學學士</span>
+  </nav>
+
+  <!-- ARTICLE -->
+  <main class="page-wrap">
+
+    <div class="article-kicker">澳大利亞 · 院校資訊 · 醫療健康類</div>
+
+    <h1 class="article-headline">
+      墨爾本VU｜皮膚科學學士<br>2026年7月仍有國際生名額，錯過要等一年
+    </h1>
+
+    <p class="article-deck">
+      維多利亞州唯一向國際學生開放此課程的大學，注重臨床實操，直通快速擴張的醫美與皮膚治療行業。現2026年7月入學尚有少量名額，有意向的同學需要盡快行動。
+    </p>
+
+    <div class="article-meta">
+      <span>📅 發佈日期：2026年3月</span>
+      <span>🏫 院校：Victoria University（VU）</span>
+      <span>📍 校區：City Tower，墨爾本市中心</span>
+    </div>
+
+    <div class="urgency-banner">
+      <div class="dot"></div>
+      2026年7月入學國際生名額有限，建議盡早提交申請
+    </div>
+
+    <article class="article-body">
+
+      <p>如果你對醫美、皮膚治療行業有明確的職業方向，這條資訊值得認真看一下。維多利亞大學（Victoria University）開設的<strong>皮膚科學學士（Bachelor of Dermal Sciences）</strong>，長期在本土學生中供不應求。而目前，2026年7月入學仍有少量國際生名額開放中。</p>
+
+      <h2>課程基本資訊</h2>
+
+      <div class="info-grid">
+        <div class="info-card">
+          <div class="label">學制</div>
+          <div class="value">4年全日制</div>
+        </div>
+        <div class="info-card">
+          <div class="label">開學時間</div>
+          <div class="value accent">2026年7月</div>
+        </div>
+        <div class="info-card">
+          <div class="label">英語要求</div>
+          <div class="value">雅思 6.0<br><small style="font-size:0.7rem;font-weight:300">單項不低於6.0</small></div>
+        </div>
+        <div class="info-card">
+          <div class="label">入學學歷</div>
+          <div class="value">12年級或同等</div>
+        </div>
+        <div class="info-card">
+          <div class="label">校區</div>
+          <div class="value">City Tower<br><small style="font-size:0.7rem;font-weight:300">墨爾本市中心</small></div>
+        </div>
+      </div>
+
+      <h2>為什麼值得考慮這個課程</h2>
+
+      <p>皮膚科學不是美容，也不是護膚品銷售。這個專業培養的是能在皮膚科診所、醫美機構及醫療體系中獨立執業的臨床從業者。VU這個課程有幾個關鍵優勢：</p>
+
+      <ul class="highlight-list">
+        <li><strong>維州唯一：</strong>這是維多利亞州唯一向國際學生開放皮膚科學學士課程的大學，稀缺性本身即是競爭優勢。</li>
+        <li><strong>真實臨床訓練：</strong>學生在校期間即可在大學附屬皮膚科診所（City校區）進行實操，接觸真實案例與真實客戶。</li>
+        <li><strong>工作整合式學習：</strong>課程設計貼近行業實際，畢業生進入就業市場時已具備執業經驗，而不是從零開始。</li>
+        <li><strong>一流設備：</strong>可使用最先進的皮膚治療儀器與設施，為日後進入高端醫美機構打下基礎。</li>
+        <li><strong>就業前景廣闊：</strong>皮膚科診所、醫美機構及醫療行業均有持續用人需求，行業整體仍在快速擴張中。</li>
+      </ul>
+
+      <div class="pullquote">
+        <p>課程直通一個正在快速擴張的行業，而VU的臨床實操模式讓畢業生在就業市場上具備真實的執業起點。</p>
+      </div>
+
+      <h2>獎學金：最高減免首年30%學費</h2>
+
+      <p>VU為國際生提供入學獎學金，具體幅度如下。對於自費留學的家庭，這個減免力度相當實際，建議在申請時提前規劃。</p>
+
+      <div class="scholarship-block">
+        <table>
+          <thead>
+            <tr>
+              <th>申請類型</th>
+              <th>首年學費減免</th>
+              <th>後續學年</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>經VTAC申請，或加權均分80%以上</td>
+              <td><span class="pct">30%</span></td>
+              <td>按在讀均分 10%–30%</td>
+            </tr>
+            <tr>
+              <td>非VTAC申請者</td>
+              <td><span class="pct">20%</span></td>
+              <td>按在讀均分 10%–30%</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>適合哪些學生</h2>
+
+      <ul class="highlight-list">
+        <li>對皮膚健康、醫美治療有明確興趣，希望從事臨床而非商業方向</li>
+        <li>希望在澳洲取得具執業資質的專業學歷</li>
+        <li>雅思已達6.0或正在備考中</li>
+        <li>希望畢業後留澳就業，或回國在醫美行業發展</li>
+      </ul>
+
+      <p>值得注意的是，由於課程在本土學生中長期供不應求，國際生名額本身具有相當的稀缺性。2026年7月是下一個入學視窗，錯過即需等待一年。</p>
+
+    </article>
+
+    <!-- CTA -->
+    <div class="cta-block">
+      <h3>了解申請詳情與材料準備</h3>
+      <p>如需諮詢申請流程、雅思要求或獎學金申請細節，歡迎聯繫我們的顧問團隊。</p>
+      <a href="/contact" class="cta-btn">立即諮詢 →</a>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="article-footer">
+      <span>© 2026 海外留學導報 · 本文資訊以院校官方公佈為準</span>
+      <span>資訊來源：Victoria University 官方課程頁面</span>
+    </footer>
+
+  </main>
+
+</body>
+</html>
