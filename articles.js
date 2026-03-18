@@ -1,10 +1,10 @@
-{
-  id: 'vu-dermal-sciences-2026',
-  title: '墨爾本VU｜皮膚科學學士2026年7月仍有國際生名額',
-  category: '澳大利亞',
-  date: '2026-03',
-  file: 'vu-dermal-sciences-2026.html'
-}const ARTICLES = [
+const ARTICLES = [
+  {
+    title: "墨爾本VU｜皮膚科學學士2026年7月仍有國際生名額",
+    file:  "vu-dermal-sciences-2026.html",
+    cat:   "澳大利亞", color: "green", year: "2026", date: "2026-03-18",
+    desc:  "維州唯一向國際學生開放的皮膚科學學士，2026年7月入學仍有少量名額，提供最高30%學費獎學金。"
+  },
   {
     title: "OTHM 英語入學要求——A2 Key 不符合標準，正確門檻是 IELTS 5.5 / B2",
     file:  "othm_english_entry_requirements.html",
