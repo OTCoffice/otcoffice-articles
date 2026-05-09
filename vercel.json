@@ -1,0 +1,15 @@
+{
+  "rewrites": [
+    { "source": "/belt", "destination": "/ucbelt-app.html" },
+    { "source": "/belt/", "destination": "/ucbelt-app.html" }
+  ],
+  "headers": [
+    {
+      "source": "/ucbelt-app.html",
+      "headers": [
+        { "key": "X-Frame-Options", "value": "SAMEORIGIN" },
+        { "key": "Cache-Control", "value": "no-store" }
+      ]
+    }
+  ]
+}
