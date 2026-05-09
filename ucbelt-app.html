@@ -1,0 +1,1662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UCBELT Speaking Test Practice</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0f0e0c;
+    --paper: #faf7f2;
+    --cream: #f3ede3;
+    --gold: #c9943a;
+    --gold-light: #e8c97a;
+    --green: #2d6a4f;
+    --green-light: #52b788;
+    --red: #b5451b;
+    --blue: #1a4a6b;
+    --blue-light: #4a90c4;
+    --muted: #8a8070;
+    --border: #d9d0c3;
+    --shadow: rgba(15,14,12,0.12);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Texture overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* HEADER */
+  header {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  header::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--gold), var(--gold-light), var(--gold));
+  }
+
+  .header-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 32px 24px 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .header-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--gold);
+    color: var(--ink);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 2px;
+    width: fit-content;
+    margin-bottom: 4px;
+  }
+
+  header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(22px, 4vw, 36px);
+    font-weight: 900;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+  }
+
+  header h1 span { color: var(--gold-light); }
+
+  .header-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-top: 8px;
+  }
+
+  .meta-pill {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: #b0a898;
+    font-weight: 400;
+  }
+
+  .meta-pill strong { color: var(--paper); font-weight: 600; }
+
+  /* COUNTDOWN */
+  .countdown-bar {
+    background: linear-gradient(135deg, #1a1208, #2a1e0c);
+    border-bottom: 1px solid #3a2e18;
+    padding: 10px 24px;
+    text-align: center;
+    font-size: 13px;
+    color: var(--gold-light);
+    font-weight: 500;
+    letter-spacing: 0.04em;
+  }
+
+  #countdown-display { font-family: 'DM Mono', monospace; font-weight: 500; }
+
+  /* MAIN LAYOUT */
+  main {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 24px 16px 60px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* TABS */
+  .tabs {
+    display: flex;
+    gap: 0;
+    border-bottom: 2px solid var(--border);
+    margin-bottom: 28px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .tabs::-webkit-scrollbar { display: none; }
+
+  .tab-btn {
+    flex-shrink: 0;
+    padding: 10px 18px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--muted);
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -2px;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+
+  .tab-btn:hover { color: var(--ink); }
+  .tab-btn.active { color: var(--gold); border-bottom-color: var(--gold); font-weight: 600; }
+
+  /* SET SELECTOR */
+  .set-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 10px;
+    margin-bottom: 28px;
+  }
+
+  .set-card {
+    background: var(--cream);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px 16px;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: left;
+  }
+
+  .set-card:hover { border-color: var(--gold); background: #fdf6e8; transform: translateY(-1px); box-shadow: 0 4px 12px var(--shadow); }
+  .set-card.active { border-color: var(--gold); background: #fdf6e8; box-shadow: 0 4px 12px var(--shadow); }
+
+  .set-card-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    font-weight: 900;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .set-card-title {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--ink);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    line-height: 1.3;
+  }
+
+  .set-card-theme {
+    font-size: 10px;
+    color: var(--muted);
+    margin-top: 3px;
+  }
+
+  /* PRACTICE PANEL */
+  .practice-panel { display: none !important; }
+  .practice-panel.active { display: block !important; }
+
+  /* PART SECTION */
+  .part-section {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    margin-bottom: 20px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px var(--shadow);
+  }
+
+  .part-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    background: var(--cream);
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .part-header-left { display: flex; align-items: center; gap: 12px; }
+
+  .part-badge {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 13px;
+    flex-shrink: 0;
+  }
+
+  .part-badge.p1 { background: var(--blue); color: white; }
+  .part-badge.p2 { background: var(--gold); color: var(--ink); }
+  .part-badge.p3 { background: var(--green); color: white; }
+
+  .part-title { font-size: 14px; font-weight: 700; }
+  .part-subtitle { font-size: 11px; color: var(--muted); margin-top: 1px; }
+  .part-chevron { font-size: 12px; color: var(--muted); transition: transform 0.2s; }
+  .part-header.open .part-chevron { transform: rotate(180deg); }
+
+  .part-body { padding: 20px; display: none; }
+  .part-body.open { display: block; }
+
+  /* QUESTIONS */
+  .questions-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+
+  .question-item {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    padding: 12px 14px;
+    background: var(--paper);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    transition: all 0.15s;
+  }
+
+  .question-item:hover { border-color: var(--blue-light); background: #f0f6fc; }
+
+  .q-num {
+    flex-shrink: 0;
+    width: 22px;
+    height: 22px;
+    background: var(--blue);
+    color: white;
+    border-radius: 50%;
+    font-size: 11px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1px;
+  }
+
+  .q-text { font-size: 14px; line-height: 1.5; flex: 1; }
+
+  .q-actions {
+    display: flex;
+    gap: 6px;
+    margin-top: 8px;
+    flex-wrap: wrap;
+  }
+
+  /* PART 2 CARD */
+  .p2-card {
+    background: linear-gradient(135deg, #fdf6e3, #fef9ed);
+    border: 1px solid #e8d5a0;
+    border-radius: 10px;
+    padding: 18px;
+  }
+
+  .p2-topic {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 14px;
+    line-height: 1.4;
+  }
+
+  .p2-cues { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+
+  .p2-cues li {
+    display: flex;
+    gap: 8px;
+    font-size: 13px;
+    color: #4a3f2a;
+    align-items: flex-start;
+  }
+
+  .p2-cues li::before {
+    content: '◆';
+    color: var(--gold);
+    font-size: 8px;
+    margin-top: 4px;
+    flex-shrink: 0;
+  }
+
+  /* TIMER */
+  .timer-row {
+    display: flex;
+    gap: 8px;
+    margin-top: 14px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .timer-display {
+    font-family: 'DM Mono', monospace;
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--ink);
+    background: var(--ink);
+    color: var(--gold-light);
+    padding: 6px 14px;
+    border-radius: 6px;
+    min-width: 80px;
+    text-align: center;
+  }
+
+  /* BUTTONS */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    border-radius: 6px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    transition: all 0.15s;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+  }
+
+  .btn-gold {
+    background: var(--gold);
+    color: var(--ink);
+  }
+  .btn-gold:hover { background: var(--gold-light); transform: translateY(-1px); }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--ink);
+    border: 1.5px solid var(--border);
+  }
+  .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+
+  .btn-green {
+    background: var(--green);
+    color: white;
+  }
+  .btn-green:hover { background: var(--green-light); }
+
+  .btn-red {
+    background: var(--red);
+    color: white;
+  }
+  .btn-red:hover { opacity: 0.85; }
+
+  .btn-blue {
+    background: var(--blue);
+    color: white;
+  }
+  .btn-blue:hover { background: var(--blue-light); }
+
+  .btn:disabled { opacity: 0.45; cursor: not-allowed; transform: none; }
+
+  /* AI FEEDBACK */
+  .ai-feedback-area {
+    margin-top: 16px;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+
+  .ai-feedback-header {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 10px 16px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .ai-dot {
+    width: 8px;
+    height: 8px;
+    background: var(--green-light);
+    border-radius: 50%;
+    animation: pulse 1.5s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.8); }
+  }
+
+  .ai-feedback-body {
+    padding: 16px;
+    background: #f9f6f1;
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--ink);
+    min-height: 60px;
+  }
+
+  .ai-feedback-body.loading {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--muted);
+  }
+
+  .spinner {
+    width: 16px;
+    height: 16px;
+    border: 2px solid var(--border);
+    border-top-color: var(--gold);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* TEXTAREA */
+  textarea.answer-input {
+    width: 100%;
+    min-height: 100px;
+    padding: 12px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    line-height: 1.6;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    background: white;
+    resize: vertical;
+    margin-top: 10px;
+    color: var(--ink);
+    transition: border-color 0.15s;
+  }
+
+  textarea.answer-input:focus {
+    outline: none;
+    border-color: var(--gold);
+  }
+
+  /* SCORE BADGES */
+  .score-row {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 10px;
+  }
+
+  .score-badge {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+  }
+
+  .score-badge.fluency { background: #e8f4fd; color: var(--blue); }
+  .score-badge.vocab { background: #e8f8ef; color: var(--green); }
+  .score-badge.grammar { background: #fef6e4; color: #9a6c00; }
+  .score-badge.coherence { background: #fde8e4; color: var(--red); }
+
+  /* TIPS */
+  .tips-box {
+    background: linear-gradient(135deg, #f0f7ff, #e8f4fd);
+    border: 1px solid #bdd7ee;
+    border-radius: 10px;
+    padding: 16px 18px;
+    margin-top: 16px;
+  }
+
+  .tips-box h4 {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--blue);
+    margin-bottom: 10px;
+  }
+
+  .tips-box ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .tips-box li {
+    font-size: 12px;
+    color: #2a3f52;
+    display: flex;
+    gap: 6px;
+    align-items: flex-start;
+  }
+
+  .tips-box li::before {
+    content: '→';
+    color: var(--blue-light);
+    flex-shrink: 0;
+    font-weight: 700;
+  }
+
+  /* MODEL ANSWER */
+  .model-answer {
+    background: #f0faf4;
+    border: 1px solid #a8d5b8;
+    border-radius: 8px;
+    padding: 14px 16px;
+    margin-top: 10px;
+    font-size: 13px;
+    line-height: 1.7;
+    color: #1a3a28;
+    display: none;
+  }
+
+  .model-answer.show { display: block; }
+
+  .model-answer strong { color: var(--green); }
+
+  /* PROGRESS */
+  .progress-bar-wrap {
+    background: var(--border);
+    border-radius: 99px;
+    height: 4px;
+    overflow: hidden;
+    margin-top: 6px;
+  }
+
+  .progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--gold), var(--gold-light));
+    border-radius: 99px;
+    transition: width 0.5s ease;
+  }
+
+  /* VOCAB TAB */
+  .vocab-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 14px;
+  }
+
+  .vocab-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px;
+    box-shadow: 0 2px 6px var(--shadow);
+  }
+
+  .vocab-card-topic {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .vocab-item {
+    margin-bottom: 8px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed var(--border);
+  }
+
+  .vocab-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+  .vocab-word { font-weight: 600; font-size: 13px; color: var(--blue); }
+  .vocab-def { font-size: 12px; color: var(--muted); margin-top: 2px; }
+  .vocab-example { font-size: 12px; color: var(--ink); font-style: italic; margin-top: 3px; }
+
+  /* TIPS TAB */
+  .tips-grid { display: flex; flex-direction: column; gap: 16px; }
+
+  .tip-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 18px 20px;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    box-shadow: 0 2px 6px var(--shadow);
+  }
+
+  .tip-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+
+  .tip-card h4 { font-size: 14px; font-weight: 700; margin-bottom: 6px; }
+  .tip-card p { font-size: 13px; color: #4a4035; line-height: 1.6; }
+  .tip-card ul { list-style: disc; padding-left: 16px; margin-top: 6px; }
+  .tip-card li { font-size: 12px; color: #4a4035; margin-bottom: 4px; }
+
+  /* SECTION DIVIDER */
+  .section-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 600px) {
+    .set-grid { grid-template-columns: repeat(2, 1fr); }
+    .header-inner { padding: 24px 16px 20px; }
+    .tabs { gap: 0; }
+    .tab-btn { padding: 8px 12px; font-size: 12px; }
+  }
+
+  /* Animations */
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .part-section { animation: fadeIn 0.3s ease both; }
+  .part-section:nth-child(2) { animation-delay: 0.05s; }
+  .part-section:nth-child(3) { animation-delay: 0.1s; }
+
+  .toggle-answer-btn { font-size: 11px; }
+
+  /* ====== LOCK SCREEN ====== */
+  #lockscreen {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: #0f0e0c;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    font-family: 'DM Sans', sans-serif;
+  }
+  #lockscreen .lock-box {
+    background: #1a1810;
+    border: 1px solid #3a3020;
+    border-radius: 16px;
+    padding: 40px 36px;
+    width: 90%;
+    max-width: 380px;
+    text-align: center;
+    box-shadow: 0 24px 60px rgba(0,0,0,0.6);
+  }
+  #lockscreen .lock-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 900;
+    color: #faf7f2;
+    margin-bottom: 4px;
+  }
+  #lockscreen .lock-logo span { color: #e8c97a; }
+  #lockscreen .lock-subtitle {
+    font-size: 12px;
+    color: #8a8070;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 32px;
+  }
+  #lockscreen .lock-icon {
+    font-size: 36px;
+    margin-bottom: 20px;
+  }
+  #lockscreen .lock-label {
+    font-size: 12px;
+    color: #b0a898;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    text-align: left;
+  }
+  #lockscreen input {
+    width: 100%;
+    padding: 13px 16px;
+    font-family: 'DM Mono', monospace;
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-align: center;
+    background: #0f0e0c;
+    border: 1.5px solid #3a3020;
+    border-radius: 8px;
+    color: #faf7f2;
+    outline: none;
+    transition: border-color 0.2s;
+    text-transform: uppercase;
+  }
+  #lockscreen input:focus { border-color: #c9943a; }
+  #lockscreen input.shake {
+    animation: shake 0.4s ease;
+    border-color: #b5451b !important;
+  }
+  @keyframes shake {
+    0%,100%{transform:translateX(0)}
+    20%{transform:translateX(-8px)}
+    40%{transform:translateX(8px)}
+    60%{transform:translateX(-6px)}
+    80%{transform:translateX(6px)}
+  }
+  #lockscreen .lock-btn {
+    width: 100%;
+    margin-top: 14px;
+    padding: 13px;
+    background: #c9943a;
+    color: #0f0e0c;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  #lockscreen .lock-btn:hover { background: #e8c97a; transform: translateY(-1px); }
+  #lockscreen .lock-error {
+    margin-top: 10px;
+    font-size: 12px;
+    color: #b5451b;
+    min-height: 18px;
+  }
+  #lockscreen .lock-footer {
+    margin-top: 28px;
+    font-size: 11px;
+    color: #4a4035;
+    line-height: 1.6;
+  }
+  #lockscreen .lock-footer a { color: #8a8070; }
+  #app-wrapper { display: none; }
+  #app-wrapper.unlocked { display: block; }
+
+</style>
+</head>
+
+<body>
+
+<div id="lockscreen">
+  <div class="lock-box">
+    <div class="lock-icon">🔐</div>
+    <div class="lock-logo">UCBELT <span>Practice</span></div>
+    <div class="lock-subtitle">Speaking Test App · OTC</div>
+    <div class="lock-label">輸入存取密碼</div>
+    <input type="password" id="pw-input" placeholder="••••••••••" maxlength="20"
+      onkeydown="if(event.key==='Enter')checkPw()" autocomplete="off" />
+    <button class="lock-btn" onclick="checkPw()">▶ 進入練習 App</button>
+    <div class="lock-error" id="pw-error"></div>
+    <div class="lock-footer">
+      購買後密碼會在確認郵件中發送<br>
+      如有問題請聯絡 <a href="mailto:info@otc.ac.uk">info@otc.ac.uk</a>
+    </div>
+  </div>
+</div>
+
+<div id="app-wrapper">
+
+
+
+<header>
+  <div class="header-inner">
+    <div class="header-badge">🎓 Official Test Prep</div>
+    <h1>UCBELT <span>Speaking Test</span><br>Practice Suite</h1>
+    <div class="header-meta">
+      <div class="meta-pill">📅 Test date: <strong>13 May 2026</strong></div>
+      <div class="meta-pill">⏰ <strong>11:00–11:30 AM UK</strong></div>
+      <div class="meta-pill">🌐 <strong>Online · One-to-one</strong></div>
+      <div class="meta-pill">📋 <strong>10 Practice Sets</strong></div>
+    </div>
+  </div>
+</header>
+
+<div class="countdown-bar">
+  ⏳ Time until your test: <span id="countdown-display">calculating…</span>
+</div>
+
+<main>
+  <!-- TABS -->
+  <div class="tabs" role="tablist">
+    <button class="tab-btn active" onclick="switchTab('practice')" id="tab-practice">Practice Sets</button>
+    <button class="tab-btn" onclick="switchTab('vocab')" id="tab-vocab">Vocabulary</button>
+    <button class="tab-btn" onclick="switchTab('tips')" id="tab-tips">Exam Tips</button>
+  </div>
+
+  <!-- PRACTICE TAB -->
+  <div id="panel-practice">
+    <div class="section-label">Select a Practice Set</div>
+    <div class="set-grid" id="set-grid"></div>
+    <div id="set-panels"></div>
+  </div>
+
+  <!-- VOCAB TAB -->
+  <div id="panel-vocab" style="display:none">
+    <div class="section-label">Key Vocabulary by Topic</div>
+    <div class="vocab-grid" id="vocab-grid"></div>
+  </div>
+
+  <!-- TIPS TAB -->
+  <div id="panel-tips" style="display:none">
+    <div class="section-label">Strategies for Test Day</div>
+    <div class="tips-grid" id="tips-grid"></div>
+  </div>
+
+</main>
+
+<script>
+// ============================================================
+// DATA: 10 PRACTICE SETS
+// ============================================================
+const SETS = [
+  {
+    id: 1,
+    title: "Everyday Life & Studies",
+    theme: "personal · academic",
+    part1: [
+      "What is your full name?",
+      "Where are you from? Can you describe your hometown?",
+      "Do you work or study at the moment? What are you studying?",
+      "What do you like most about your studies?",
+      "How do you usually spend your free time?",
+      "Do you prefer living in a city or in the countryside? Why?"
+    ],
+    part2: {
+      topic: "Describe a person who has influenced you in your life or studies.",
+      cues: ["Who this person is", "How you know them", "What they have done that influenced you", "Why this influence is important to you"]
+    },
+    part3: [
+      "Do you think young people today are influenced more by family or by friends/social media?",
+      "How important is it for students to have good role models?",
+      "In your country, what kinds of people are usually seen as successful?",
+      "Should schools do more to help students develop soft skills like communication?"
+    ]
+  },
+  {
+    id: 2,
+    title: "Health & Technology",
+    theme: "wellbeing · digital life",
+    part1: [
+      "Where do you currently live?",
+      "Do you do anything to stay healthy?",
+      "What kinds of food do you think are good for health?",
+      "How often do you use technology in your daily life?",
+      "Do you think young people spend too much time on their phones?"
+    ],
+    part2: {
+      topic: "Describe a useful piece of technology or gadget you use regularly.",
+      cues: ["What it is", "How you use it", "What you like about it", "How it has changed your life or studies"]
+    },
+    part3: [
+      "Do you think technology has improved education? In what ways?",
+      "Are there any disadvantages to relying too much on technology?",
+      "How do you think technology will change healthcare in the future?",
+      "Should governments control how much personal data companies can collect?"
+    ]
+  },
+  {
+    id: 3,
+    title: "Future Plans & Environment",
+    theme: "career · climate",
+    part1: [
+      "Why do you want to study at University College Birmingham?",
+      "What subject or course are you planning to study?",
+      "What are your future career plans?",
+      "Tell me about your family.",
+      "What is your favourite season and why?"
+    ],
+    part2: {
+      topic: "Describe an environmental problem in your country or hometown.",
+      cues: ["What the problem is", "What causes it", "What effect it has on people's lives", "What can be done to solve it"]
+    },
+    part3: [
+      "Do you think individuals or governments should take more responsibility for protecting the environment?",
+      "How can education help solve environmental issues?",
+      "Will climate change affect your future career plans? How?",
+      "What changes have you noticed in the environment in recent years?"
+    ]
+  },
+  {
+    id: 4,
+    title: "Travel & Culture",
+    theme: "places · diversity",
+    part1: [
+      "Have you ever travelled to another country?",
+      "What is the most interesting place you have visited?",
+      "Do you enjoy trying food from other cultures?",
+      "Are there many tourists in your hometown?",
+      "Do you think travelling is important for young people? Why?"
+    ],
+    part2: {
+      topic: "Describe a journey or trip that was memorable for you.",
+      cues: ["Where you went", "Who you went with", "What happened during the trip", "Why it was memorable"]
+    },
+    part3: [
+      "How does tourism affect local communities?",
+      "Do you think it is better to travel alone or with others?",
+      "How has travel changed in the last twenty years?",
+      "Should international travel be limited to protect the environment?"
+    ]
+  },
+  {
+    id: 5,
+    title: "Work & Career",
+    theme: "employment · ambition",
+    part1: [
+      "Do you have any part-time work experience?",
+      "What qualities do you think are important in a good employee?",
+      "Would you prefer to work for a company or start your own business?",
+      "How do you handle stress or pressure?",
+      "What job do you dream of having in the future?"
+    ],
+    part2: {
+      topic: "Describe a skill you have learned that you think will be useful in your future career.",
+      cues: ["What the skill is", "How you learned it", "How long it took to develop", "Why it will help you in the future"]
+    },
+    part3: [
+      "Do you think a university degree is necessary to have a successful career?",
+      "How has the job market changed because of technology?",
+      "Should companies offer more flexible working arrangements?",
+      "What do you think is the most important quality a leader should have?"
+    ]
+  },
+  {
+    id: 6,
+    title: "Education & Learning",
+    theme: "schools · knowledge",
+    part1: [
+      "Tell me about the school or college you currently attend.",
+      "What subjects do you enjoy the most?",
+      "Do you prefer studying alone or with others?",
+      "How do you prepare for important exams?",
+      "What is the most difficult part of studying for you?"
+    ],
+    part2: {
+      topic: "Describe a teacher or tutor who has made a positive impact on your education.",
+      cues: ["Who the teacher is", "What subject they taught", "What made them different from other teachers", "How they influenced your attitude to learning"]
+    },
+    part3: [
+      "Do you think the education system in your country is effective?",
+      "Should students have more say in what they study at school?",
+      "How important is it to learn a foreign language?",
+      "Do you think exams are the best way to measure a student's ability?"
+    ]
+  },
+  {
+    id: 7,
+    title: "Media & Communication",
+    theme: "news · social media",
+    part1: [
+      "How do you usually get your news?",
+      "Do you use social media? Which platforms do you prefer?",
+      "Do you prefer reading books or watching films?",
+      "Do you think the media is always honest?",
+      "How much time do you spend watching television each week?"
+    ],
+    part2: {
+      topic: "Describe a book, film, or TV programme that you found interesting or inspiring.",
+      cues: ["What it was about", "When you read or watched it", "What you found most interesting about it", "What you learned or how it made you feel"]
+    },
+    part3: [
+      "How has social media changed the way people communicate?",
+      "Do you think fake news is a serious problem today?",
+      "Should there be stricter controls on what is published online?",
+      "How might the media look different in twenty years?"
+    ]
+  },
+  {
+    id: 8,
+    title: "Sport & Leisure",
+    theme: "hobbies · wellness",
+    part1: [
+      "Do you play any sports or do regular exercise?",
+      "What hobbies or interests do you have outside of studying?",
+      "Did you play sport as a child?",
+      "Is there a new hobby you would like to try?",
+      "Do you think it is important for children to play sport at school?"
+    ],
+    part2: {
+      topic: "Describe a leisure activity or hobby that you particularly enjoy.",
+      cues: ["What it is", "How often you do it", "Who you do it with", "Why it is important to you"]
+    },
+    part3: [
+      "Do you think professional athletes are paid too much?",
+      "How does exercise benefit mental health?",
+      "Should governments invest more in sports facilities?",
+      "Is competitive sport good or bad for young children?"
+    ]
+  },
+  {
+    id: 9,
+    title: "City Life & Housing",
+    theme: "urban · community",
+    part1: [
+      "How long have you been living where you are now?",
+      "What do you like and dislike about your neighbourhood?",
+      "Do you think cities are getting better or worse to live in?",
+      "How important is public transport in your daily life?",
+      "Is your area safe? Do you feel comfortable walking at night?"
+    ],
+    part2: {
+      topic: "Describe a place in your city or town that you particularly like.",
+      cues: ["What the place is", "Where it is located", "What you do there", "Why you enjoy going there"]
+    },
+    part3: [
+      "Should governments build more affordable housing?",
+      "How can cities become more sustainable?",
+      "Do you think people will continue to move to cities in the future?",
+      "What is the biggest challenge facing modern cities?"
+    ]
+  },
+  {
+    id: 10,
+    title: "Global Issues & Society",
+    theme: "world · values",
+    part1: [
+      "What languages do you speak?",
+      "Have you experienced living in a different culture?",
+      "Do you follow international news?",
+      "What do you think is the most important global problem today?",
+      "Do you consider yourself a global citizen? Why or why not?"
+    ],
+    part2: {
+      topic: "Describe a global issue that you feel strongly about.",
+      cues: ["What the issue is", "Why it is important to you personally", "What causes this issue", "What solutions you think would help"]
+    },
+    part3: [
+      "Should wealthier nations do more to help poorer countries?",
+      "How does migration affect both the country people leave and the country they go to?",
+      "Do you think the world is becoming more or less equal?",
+      "What role can young people play in solving global problems?"
+    ]
+  }
+];
+
+// ============================================================
+// MODEL ANSWERS (short samples for Part 1 Qs)
+// ============================================================
+const MODEL_ANSWERS = {
+  "What is your full name?": "My full name is [Your Name]. I come originally from [City/Country], and I have been based in the UK for about [X] months now.",
+  "Where are you from? Can you describe your hometown?": "I'm originally from [City], which is located in [Country]. It's a fairly large city known for [feature — e.g. its historical architecture / its food scene]. I'd say the atmosphere is quite busy and vibrant, though the pace of life is a bit different from London.",
+  "Have you ever travelled to another country?": "Yes, I have. I've visited [country] a couple of times — once for tourism and once to see family. I found the experience really eye-opening because the culture and daily routines were quite different from what I was used to.",
+  "Do you work or study at the moment? What are you studying?": "At the moment I'm studying [subject] at Overseas Tutorial College, which is based in central London. I'm focusing on building a strong academic foundation before progressing to university, and I'm finding the course quite challenging but very rewarding."
+};
+
+// ============================================================
+// VOCABULARY DATA
+// ============================================================
+const VOCAB = [
+  {
+    topic: "📚 Education",
+    emoji: "📚",
+    items: [
+      { word: "curriculum", def: "(n) the subjects forming a course of study", example: "The curriculum at my college covers both theory and practice." },
+      { word: "pedagogy", def: "(n) the method and practice of teaching", example: "Modern pedagogy increasingly involves collaborative learning." },
+      { word: "assessment", def: "(n) the evaluation of student performance", example: "Continuous assessment helps reduce exam pressure." },
+      { word: "facilitate", def: "(v) to make something easier or possible", example: "Technology facilitates independent learning outside the classroom." },
+      { word: "aspiration", def: "(n) a hope or ambition", example: "My aspiration is to work in international business." }
+    ]
+  },
+  {
+    topic: "🌿 Environment",
+    emoji: "🌿",
+    items: [
+      { word: "sustainability", def: "(n) using resources without depleting them for the future", example: "Urban sustainability requires changes in both policy and behaviour." },
+      { word: "carbon footprint", def: "(n) the amount of CO₂ one produces", example: "Switching to public transport reduces your carbon footprint significantly." },
+      { word: "biodiversity", def: "(n) variety of plant and animal life", example: "Deforestation threatens the biodiversity of tropical regions." },
+      { word: "renewable energy", def: "(n) energy from sources that are replenished naturally", example: "The government is investing heavily in renewable energy." },
+      { word: "mitigate", def: "(v) to make something less severe", example: "We need international cooperation to mitigate climate change." }
+    ]
+  },
+  {
+    topic: "💻 Technology",
+    emoji: "💻",
+    items: [
+      { word: "artificial intelligence", def: "(n) computer systems performing human-like tasks", example: "Artificial intelligence is revolutionising the healthcare sector." },
+      { word: "automation", def: "(n) the use of machines to replace human labour", example: "Automation has transformed manufacturing industries worldwide." },
+      { word: "data privacy", def: "(n) the right to control one's personal information", example: "Data privacy has become a major concern for internet users." },
+      { word: "digital literacy", def: "(n) the ability to use digital tools effectively", example: "Digital literacy is now as essential as reading and writing." },
+      { word: "cybersecurity", def: "(n) protection against digital attacks", example: "Companies are investing more in cybersecurity each year." }
+    ]
+  },
+  {
+    topic: "🏥 Health",
+    emoji: "🏥",
+    items: [
+      { word: "well-being", def: "(n) general health and happiness", example: "Exercise contributes greatly to both physical and mental well-being." },
+      { word: "sedentary", def: "(adj) involving a lot of sitting; inactive", example: "A sedentary lifestyle increases the risk of chronic illness." },
+      { word: "preventive care", def: "(n) medical care focused on preventing illness", example: "Preventive care is more cost-effective than treating diseases." },
+      { word: "mental health", def: "(n) psychological and emotional well-being", example: "Awareness of mental health issues has grown significantly." },
+      { word: "obesity", def: "(n) condition of being significantly overweight", example: "Obesity rates are rising in many developed countries." }
+    ]
+  },
+  {
+    topic: "🌍 Global Issues",
+    emoji: "🌍",
+    items: [
+      { word: "inequality", def: "(n) difference in wealth, opportunity, or treatment", example: "Economic inequality remains a persistent global challenge." },
+      { word: "migration", def: "(n) movement of people from one place to another", example: "Migration has shaped the cultural landscape of many cities." },
+      { word: "diplomacy", def: "(n) management of international relations", example: "Effective diplomacy is essential for resolving conflicts peacefully." },
+      { word: "humanitarian", def: "(adj) concerned with improving people's welfare", example: "Several NGOs provide humanitarian aid in conflict zones." },
+      { word: "globalisation", def: "(n) the process of worldwide economic integration", example: "Globalisation has created both opportunities and challenges." }
+    ]
+  },
+  {
+    topic: "💼 Work & Career",
+    emoji: "💼",
+    items: [
+      { word: "entrepreneurship", def: "(n) starting and running a business", example: "Entrepreneurship requires both creativity and resilience." },
+      { word: "employability", def: "(n) having the skills needed to get a job", example: "Universities focus on developing students' employability skills." },
+      { word: "work-life balance", def: "(n) balancing professional and personal time", example: "Many employees prioritise work-life balance when choosing jobs." },
+      { word: "internship", def: "(n) a temporary work placement", example: "An internship gave me valuable experience in the finance sector." },
+      { word: "remote working", def: "(n) working from a location other than the office", example: "Remote working has become normalised since the pandemic." }
+    ]
+  }
+];
+
+// ============================================================
+// TIPS DATA
+// ============================================================
+const TIPS = [
+  {
+    icon: "🎯",
+    bg: "#fff3e0",
+    title: "Part 2: Structure Your Long Turn",
+    body: "Use a clear 4-part structure: Introduction → Point 1 → Point 2/Example → Conclusion. Opening phrases like 'I'd like to talk about…' and closing with 'Overall, I believe…' show the examiner you can organise ideas coherently.",
+    list: ["'First of all, I should mention that…'", "'What I particularly like about this is…'", "'For instance, when I was…'", "'To sum up, I think this is important because…'"]
+  },
+  {
+    icon: "🗣️",
+    bg: "#e8f5e9",
+    title: "Fluency Over Perfection",
+    body: "Examiners reward natural, flowing speech more than perfect grammar. If you make a mistake, keep going — don't stop to correct every error. Use fillers naturally:",
+    list: ["'Well, to be honest…'", "'That's an interesting question…'", "'Let me think about that for a moment…'", "'What I mean to say is…'"]
+  },
+  {
+    icon: "📖",
+    bg: "#e3f2fd",
+    title: "Expand Every Answer",
+    body: "Never give one-word answers. Use the PEEL technique: Point → Explain → Example → Link back. Even for simple Part 1 questions, add one sentence of context or personal detail.",
+    list: ["'Yes, I do. In fact, I…'", "'Not really, although I used to…'", "'It depends, but generally I find that…'"]
+  },
+  {
+    icon: "🧠",
+    bg: "#f3e5f5",
+    title: "Part 3: Show Critical Thinking",
+    body: "Part 3 is where you demonstrate higher-level thinking. Give balanced opinions and acknowledge different perspectives. Avoid saying only 'I think it's good' — go deeper.",
+    list: ["'On the one hand… however, on the other hand…'", "'While some people believe… I would argue that…'", "'It's a complex issue, but I feel that…'"]
+  },
+  {
+    icon: "⏱️",
+    bg: "#fff8e1",
+    title: "Timing Matters",
+    body: "Part 2 requires 1–2 minutes of speaking. Aim for about 200–250 words. If you finish early, extend with 'what I found most interesting was…' or 'another aspect worth mentioning is…'. Don't stop before 60 seconds.",
+    list: ["Prep time (1 min): make bullet notes, NOT full sentences", "Speak in paragraphs, not lists", "Watch the examiner — they will signal you to stop"]
+  },
+  {
+    icon: "🔤",
+    bg: "#e0f7fa",
+    title: "Vocabulary Range",
+    body: "Use synonyms and avoid repeating the same words. The examiner listens for lexical resource — your range and accuracy of vocabulary. Prepare 5–10 key words per topic before the test.",
+    list: ["good → beneficial, advantageous, invaluable", "bad → detrimental, harmful, problematic", "important → crucial, significant, vital", "think → believe, argue, consider, maintain"]
+  }
+];
+
+// ============================================================
+// BUILD UI
+// ============================================================
+let activeSet = null;
+let timers = {};
+
+function buildSetGrid() {
+  const grid = document.getElementById('set-grid');
+  const panels = document.getElementById('set-panels');
+
+  SETS.forEach((set, i) => {
+    // Card
+    const card = document.createElement('div');
+    card.className = 'set-card';
+    card.id = `set-card-${set.id}`;
+    card.innerHTML = `
+      <div class="set-card-num">${String(set.id).padStart(2,'0')}</div>
+      <div class="set-card-title">${set.title}</div>
+      <div class="set-card-theme">${set.theme}</div>
+    `;
+    card.onclick = () => selectSet(set.id);
+    grid.appendChild(card);
+
+    // Panel
+    const panel = document.createElement('div');
+    panel.className = 'practice-panel';
+    panel.id = `set-panel-${set.id}`;
+    panel.innerHTML = buildSetPanel(set);
+    panels.appendChild(panel);
+  });
+
+  // Auto-select first
+  selectSet(1);
+}
+
+function buildSetPanel(set) {
+  return `
+    <div class="part-section">
+      <div class="part-header" onclick="togglePart(this)">
+        <div class="part-header-left">
+          <div class="part-badge p1">1</div>
+          <div>
+            <div class="part-title">Part 1 — Personal Questions</div>
+            <div class="part-subtitle">3–4 minutes · Answer naturally and briefly</div>
+          </div>
+        </div>
+        <div class="part-chevron">▼</div>
+      </div>
+      <div class="part-body open">
+        <ul class="questions-list">
+          ${set.part1.map((q, i) => buildQuestion(q, i+1, 'p1', set.id)).join('')}
+        </ul>
+        <div class="tips-box" style="margin-top:14px">
+          <h4>💡 Part 1 Strategy</h4>
+          <ul>
+            <li>Keep answers to 2–4 sentences — don't over-elaborate</li>
+            <li>Add one personal detail to make it memorable</li>
+            <li>Smile and make eye contact with the camera</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="part-section">
+      <div class="part-header" onclick="togglePart(this)">
+        <div class="part-header-left">
+          <div class="part-badge p2">2</div>
+          <div>
+            <div class="part-title">Part 2 — Long Turn</div>
+            <div class="part-subtitle">1 min prep + 1–2 min speaking</div>
+          </div>
+        </div>
+        <div class="part-chevron">▼</div>
+      </div>
+      <div class="part-body open">
+        <div class="p2-card">
+          <div class="p2-topic">📌 ${set.part2.topic}</div>
+          <ul class="p2-cues">
+            ${set.part2.cues.map(c => `<li>${c}</li>`).join('')}
+          </ul>
+        </div>
+        <div class="timer-row">
+          <div class="timer-display" id="timer-prep-${set.id}">1:00</div>
+          <button class="btn btn-gold" onclick="startTimer('prep', ${set.id}, 60)">▶ Prep Timer</button>
+          <div class="timer-display" id="timer-speak-${set.id}">2:00</div>
+          <button class="btn btn-green" onclick="startTimer('speak', ${set.id}, 120)">▶ Speaking Timer</button>
+          <button class="btn btn-outline" onclick="resetTimers(${set.id})">↺ Reset</button>
+        </div>
+        ${buildAISection('part2', set.id, `Give me feedback on a student who is practising the UC BELT speaking test Part 2. The topic is: "${set.part2.topic}". The student should address: ${set.part2.cues.join(', ')}. Evaluate a typical student answer and give specific advice on: fluency, vocabulary, grammar, and coherence. Score each out of 5. Keep feedback encouraging but specific. Use about 150 words.`)}
+      </div>
+    </div>
+
+    <div class="part-section">
+      <div class="part-header" onclick="togglePart(this)">
+        <div class="part-header-left">
+          <div class="part-badge p3">3</div>
+          <div>
+            <div class="part-title">Part 3 — Discussion</div>
+            <div class="part-subtitle">4–5 minutes · Give extended, reasoned answers</div>
+          </div>
+        </div>
+        <div class="part-chevron">▼</div>
+      </div>
+      <div class="part-body open">
+        <ul class="questions-list">
+          ${set.part3.map((q, i) => buildQuestion(q, i+1, 'p3', set.id)).join('')}
+        </ul>
+        <div class="tips-box" style="margin-top:14px">
+          <h4>💡 Part 3 Strategy</h4>
+          <ul>
+            <li>Give opinions AND reasons — "I think X because Y"</li>
+            <li>Use "On the one hand… On the other hand…" to show balance</li>
+            <li>Refer back to Part 2 topic to show coherence</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function buildQuestion(q, num, part, setId) {
+  const hasModel = MODEL_ANSWERS[q];
+  const qId = `q-${setId}-${part}-${num}`;
+  return `
+    <li class="question-item">
+      <div class="q-num">${num}</div>
+      <div style="flex:1">
+        <div class="q-text">${q}</div>
+        <div class="q-actions">
+          <button class="btn btn-blue" onclick="getAIFeedbackForQ('${qId}', \`${q.replace(/`/g,"'")}\`)">🤖 AI Tip</button>
+          ${hasModel ? `<button class="btn btn-outline toggle-answer-btn" onclick="toggleModel('model-${qId}')">💬 Sample Answer</button>` : ''}
+        </div>
+        <div class="model-answer" id="model-${qId}">${hasModel || ''}</div>
+        <div id="ai-q-${qId}"></div>
+      </div>
+    </li>
+  `;
+}
+
+function buildAISection(part, setId, prompt) {
+  const id = `ai-${part}-${setId}`;
+  return `
+    <div style="margin-top:16px">
+      <button class="btn btn-gold" onclick="getAIFeedback('${id}', \`${prompt.replace(/`/g,"'")}\`)">
+        🤖 Get AI Feedback on this Part 2 Topic
+      </button>
+      <div class="ai-feedback-area" id="${id}" style="display:none;margin-top:10px">
+        <div class="ai-feedback-header">
+          <div class="ai-dot"></div>
+          AI Examiner Feedback
+        </div>
+        <div class="ai-feedback-body" id="${id}-body">Generating feedback…</div>
+      </div>
+    </div>
+  `;
+}
+
+function selectSet(id) {
+  // Update cards
+  document.querySelectorAll('.set-card').forEach(c => c.classList.remove('active'));
+  const card = document.getElementById(`set-card-${id}`);
+  if (card) card.classList.add('active');
+
+  // Update panels
+  document.querySelectorAll('.practice-panel').forEach(p => p.classList.remove('active'));
+  const panel = document.getElementById(`set-panel-${id}`);
+  if (panel) panel.classList.add('active');
+
+  activeSet = id;
+}
+
+function togglePart(header) {
+  header.classList.toggle('open');
+  const body = header.nextElementSibling;
+  body.classList.toggle('open');
+}
+
+function toggleModel(id) {
+  const el = document.getElementById(id);
+  if (el) el.classList.toggle('show');
+}
+
+// ============================================================
+// TIMERS
+// ============================================================
+function startTimer(type, setId, seconds) {
+  const key = `${type}-${setId}`;
+  if (timers[key]) { clearInterval(timers[key]); }
+
+  const displayId = `timer-${type}-${setId}`;
+  let remaining = seconds;
+
+  const el = document.getElementById(displayId);
+
+  function update() {
+    const m = Math.floor(remaining / 60);
+    const s = remaining % 60;
+    el.textContent = `${m}:${String(s).padStart(2,'0')}`;
+
+    if (remaining === 0) {
+      clearInterval(timers[key]);
+      el.textContent = '⏰ Done!';
+      el.style.background = '#2d6a4f';
+    } else {
+      remaining--;
+    }
+  }
+
+  update();
+  timers[key] = setInterval(update, 1000);
+}
+
+function resetTimers(setId) {
+  ['prep','speak'].forEach(type => {
+    const key = `${type}-${setId}`;
+    if (timers[key]) clearInterval(timers[key]);
+    const el = document.getElementById(`timer-${type}-${setId}`);
+    if (el) {
+      el.textContent = type === 'prep' ? '1:00' : '2:00';
+      el.style.background = '';
+    }
+  });
+}
+
+// ============================================================
+// AI FEEDBACK
+// ============================================================
+async function getAIFeedback(containerId, prompt) {
+  const container = document.getElementById(containerId);
+  const body = document.getElementById(`${containerId}-body`);
+  if (!container || !body) return;
+
+  container.style.display = 'block';
+  body.className = 'ai-feedback-body loading';
+  body.innerHTML = '<div class="spinner"></div> Generating examiner feedback…';
+
+  try {
+    const response = await fetch("https://api.anthropic.com/v1/messages", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        model: "claude-sonnet-4-20250514",
+        max_tokens: 1000,
+        system: "You are an experienced IELTS and English proficiency speaking examiner helping a student prepare for the UC BELT (University College Birmingham English Language Test). Give specific, actionable, encouraging feedback. Use simple clear language. Format with brief sections.",
+        messages: [{ role: "user", content: prompt }]
+      })
+    });
+
+    const data = await response.json();
+    const text = data.content?.map(b => b.text || '').join('') || 'No response received.';
+
+    body.className = 'ai-feedback-body';
+    body.innerHTML = formatFeedback(text);
+  } catch (err) {
+    body.className = 'ai-feedback-body';
+    body.innerHTML = `<span style="color:var(--red)">⚠ Could not reach AI. Check your connection.</span>`;
+  }
+}
+
+async function getAIFeedbackForQ(qId, question) {
+  const containerId = `ai-q-${qId}`;
+  const container = document.getElementById(containerId);
+  if (!container) return;
+
+  container.innerHTML = `
+    <div class="ai-feedback-area" style="margin-top:8px">
+      <div class="ai-feedback-header"><div class="ai-dot"></div> AI Speaking Tip</div>
+      <div class="ai-feedback-body loading" id="${containerId}-body"><div class="spinner"></div> Generating tip…</div>
+    </div>`;
+
+  const prompt = `A student is preparing for the UC BELT speaking test. They need to answer this Part 1 or Part 3 question: "${question}". Give a 60-80 word speaking tip: suggest 2-3 key vocabulary words to use, one structural tip, and one example phrase or sentence starter they could use. Be encouraging and specific.`;
+
+  try {
+    const response = await fetch("https://api.anthropic.com/v1/messages", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        model: "claude-sonnet-4-20250514",
+        max_tokens: 1000,
+        system: "You are a friendly English speaking test coach. Give concise, practical speaking tips. Keep responses under 100 words.",
+        messages: [{ role: "user", content: prompt }]
+      })
+    });
+
+    const data = await response.json();
+    const text = data.content?.map(b => b.text || '').join('') || '';
+    const body = document.getElementById(`${containerId}-body`);
+    if (body) {
+      body.className = 'ai-feedback-body';
+      body.innerHTML = formatFeedback(text);
+    }
+  } catch (err) {
+    const body = document.getElementById(`${containerId}-body`);
+    if (body) {
+      body.className = 'ai-feedback-body';
+      body.innerHTML = `<span style="color:var(--red)">⚠ Connection error.</span>`;
+    }
+  }
+}
+
+function formatFeedback(text) {
+  return text
+    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\*(.*?)\*/g, '<em>$1</em>')
+    .replace(/\n\n/g, '<br><br>')
+    .replace(/\n/g, '<br>');
+}
+
+// ============================================================
+// VOCAB TAB
+// ============================================================
+function buildVocab() {
+  const grid = document.getElementById('vocab-grid');
+  VOCAB.forEach(topic => {
+    const card = document.createElement('div');
+    card.className = 'vocab-card';
+    card.innerHTML = `
+      <div class="vocab-card-topic">${topic.topic}</div>
+      ${topic.items.map(item => `
+        <div class="vocab-item">
+          <div class="vocab-word">${item.word}</div>
+          <div class="vocab-def">${item.def}</div>
+          <div class="vocab-example">"${item.example}"</div>
+        </div>
+      `).join('')}
+    `;
+    grid.appendChild(card);
+  });
+}
+
+// ============================================================
+// TIPS TAB
+// ============================================================
+function buildTips() {
+  const grid = document.getElementById('tips-grid');
+  TIPS.forEach(tip => {
+    const card = document.createElement('div');
+    card.className = 'tip-card';
+    card.innerHTML = `
+      <div class="tip-icon" style="background:${tip.bg}">${tip.icon}</div>
+      <div>
+        <h4>${tip.title}</h4>
+        <p>${tip.body}</p>
+        ${tip.list ? `<ul>${tip.list.map(l => `<li>${l}</li>`).join('')}</ul>` : ''}
+      </div>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+// ============================================================
+// TABS
+// ============================================================
+function switchTab(tab) {
+  ['practice','vocab','tips'].forEach(t => {
+    document.getElementById(`panel-${t}`).style.display = t === tab ? 'block' : 'none';
+    document.getElementById(`tab-${t}`).classList.toggle('active', t === tab);
+  });
+}
+
+// ============================================================
+// COUNTDOWN
+// ============================================================
+function updateCountdown() {
+  const testDate = new Date('2026-05-13T11:00:00+01:00'); // BST
+  const now = new Date();
+  const diff = testDate - now;
+
+  if (diff <= 0) {
+    document.getElementById('countdown-display').textContent = '🎓 Test is happening NOW — Good luck!';
+    return;
+  }
+
+  const days = Math.floor(diff / (1000*60*60*24));
+  const hrs  = Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
+  const mins = Math.floor((diff % (1000*60*60)) / (1000*60));
+  const secs = Math.floor((diff % (1000*60)) / 1000);
+
+  document.getElementById('countdown-display').textContent =
+    `${days}d ${String(hrs).padStart(2,'0')}h ${String(mins).padStart(2,'0')}m ${String(secs).padStart(2,'0')}s`;
+}
+
+// ============================================================
+// INIT
+// ============================================================
+buildSetGrid();
+buildVocab();
+buildTips();
+updateCountdown();
+setInterval(updateCountdown, 1000);
+
+// Open first parts by default
+document.querySelectorAll('.part-header').forEach(h => h.classList.add('open'));
+</script>
+</div><!-- /app-wrapper -->
+
+<script>
+const CORRECT_PW = "UCBELT2026";
+function checkPw() {
+  const input = document.getElementById('pw-input');
+  const val = input.value.trim().toUpperCase();
+  if (val === CORRECT_PW) {
+    document.getElementById('lockscreen').style.display = 'none';
+    document.getElementById('app-wrapper').classList.add('unlocked');
+    sessionStorage.setItem('belt_unlocked', '1');
+  } else {
+    input.classList.remove('shake');
+    void input.offsetWidth;
+    input.classList.add('shake');
+    document.getElementById('pw-error').textContent = '密碼不正確，請重試。';
+    input.value = '';
+    setTimeout(() => input.classList.remove('shake'), 400);
+  }
+}
+// Auto-unlock if already authenticated this session
+if (sessionStorage.getItem('belt_unlocked') === '1') {
+  document.getElementById('lockscreen').style.display = 'none';
+  document.getElementById('app-wrapper').classList.add('unlocked');
+}
+</script>
+
+</body>
+</html>
