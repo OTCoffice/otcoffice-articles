@@ -138,32 +138,31 @@
   /* TABS */
   .tabs {
     display: flex;
-    gap: 0;
-    border-bottom: 2px solid var(--border);
+    flex-wrap: wrap;
+    gap: 8px;
+    border-bottom: 1px solid var(--border);
     margin-bottom: 28px;
-    overflow-x: auto;
-    scrollbar-width: none;
+    padding-bottom: 10px;
   }
   .tabs::-webkit-scrollbar { display: none; }
 
   .tab-btn {
     flex-shrink: 0;
-    padding: 10px 18px;
+    padding: 9px 13px;
     font-family: 'DM Sans', sans-serif;
-    font-size: 13px;
-    font-weight: 500;
+    font-size: 12px;
+    font-weight: 600;
     color: var(--muted);
-    background: none;
-    border: none;
-    border-bottom: 2px solid transparent;
-    margin-bottom: -2px;
+    background: rgba(255,255,255,.62);
+    border: 1px solid var(--border);
+    border-radius: 999px;
     cursor: pointer;
     transition: all 0.2s;
     white-space: nowrap;
   }
 
-  .tab-btn:hover { color: var(--ink); }
-  .tab-btn.active { color: var(--gold); border-bottom-color: var(--gold); font-weight: 600; }
+  .tab-btn:hover { color: var(--ink); border-color: var(--gold); }
+  .tab-btn.active { color: var(--ink); background: #fdf6e8; border-color: var(--gold); box-shadow: 0 3px 10px var(--shadow); }
 
   /* SET SELECTOR */
   .set-grid {
@@ -622,9 +621,68 @@
 
   .vocab-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
 
-  .vocab-word { font-weight: 600; font-size: 13px; color: var(--blue); }
-  .vocab-def { font-size: 12px; color: var(--muted); margin-top: 2px; }
-  .vocab-example { font-size: 12px; color: var(--ink); font-style: italic; margin-top: 3px; }
+  .vocab-word { font-weight: 600; font-size: 13px; color: var(--blue); display:flex; align-items:center; justify-content:space-between; gap:8px; }
+  .vocab-def { font-size: 12px; color: var(--muted); margin-top: 2px; line-height:1.55; }
+  .vocab-zh { font-size: 12px; color: var(--green); margin-top: 2px; font-weight:600; }
+  .vocab-example { font-size: 12px; color: var(--ink); font-style: italic; margin-top: 3px; line-height:1.55; }
+  .bilingual-note { color: var(--green); font-size: 12px; line-height: 1.65; margin-top: 4px; font-weight: 500; }
+  .vocab-toolbar {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 14px;
+    display: grid;
+    grid-template-columns: 1fr 190px;
+    gap: 10px;
+    margin-bottom: 14px;
+    box-shadow: 0 2px 8px var(--shadow);
+  }
+  .vocab-toolbar input, .vocab-toolbar select {
+    width: 100%;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    background: #fffdf9;
+    color: var(--ink);
+  }
+  .vocab-actions { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:14px; }
+  .vocab-practice-box {
+    background: #fffdf9;
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--gold);
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 16px;
+    box-shadow: 0 2px 10px var(--shadow);
+  }
+  .flash-word { font-family:'Playfair Display', serif; font-size: 30px; font-weight:900; color:var(--ink); margin-bottom:6px; }
+  .flash-topic { color:var(--gold); font-size:11px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; margin-bottom:8px; }
+  .flash-answer { display:none; margin-top:12px; padding-top:12px; border-top:1px dashed var(--border); }
+  .flash-answer.show { display:block; }
+  .quiz-options { display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:8px; margin-top:12px; }
+  .quiz-option {
+    border: 1px solid var(--border);
+    background: white;
+    border-radius: 8px;
+    padding: 10px 12px;
+    text-align:left;
+    cursor:pointer;
+    font-family:'DM Sans', sans-serif;
+    font-size:12px;
+  }
+  .quiz-option.correct { border-color: var(--green); background:#eefaf2; color:var(--green); font-weight:700; }
+  .quiz-option.wrong { border-color: var(--red); background:#fff0ea; color:var(--red); font-weight:700; }
+  .vocab-stats { display:flex; flex-wrap:wrap; gap:8px; margin:10px 0 14px; }
+  .vocab-stat { background:var(--cream); border:1px solid var(--border); border-radius:999px; padding:6px 10px; font-size:12px; color:#4a4035; }
+  .mastery-tag { font-size:10px; color:var(--muted); background:var(--cream); border-radius:999px; padding:3px 7px; white-space:nowrap; }
+  .mastery-tag.strong { color:var(--green); background:#e8f8ef; }
+  .mastery-tag.weak { color:var(--red); background:#fff0ea; }
+  @media (max-width: 600px) {
+    .vocab-toolbar { grid-template-columns: 1fr; }
+    .flash-word { font-size: 24px; }
+  }
 
   /* TIPS TAB */
   .tips-grid { display: flex; flex-direction: column; gap: 16px; }
@@ -655,6 +713,60 @@
   .tip-card p { font-size: 13px; color: #4a4035; line-height: 1.6; }
   .tip-card ul { list-style: disc; padding-left: 16px; margin-top: 6px; }
   .tip-card li { font-size: 12px; color: #4a4035; margin-bottom: 4px; }
+  .score-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px 20px;
+    box-shadow: 0 8px 28px var(--shadow);
+    margin-bottom: 16px;
+  }
+  .score-row {
+    display: grid;
+    grid-template-columns: 180px 1fr 60px;
+    gap: 12px;
+    align-items: center;
+    margin: 12px 0;
+  }
+  .score-row label { font-size: 13px; font-weight: 700; color: var(--ink); }
+  .score-row input[type="range"] { width: 100%; accent-color: var(--gold); }
+  .score-val { font-family: 'DM Mono', monospace; color: var(--gold); font-weight: 700; }
+  .score-result {
+    background: #fdf6e8;
+    border-left: 4px solid var(--gold);
+    padding: 14px 16px;
+    border-radius: 8px;
+    font-size: 13px;
+    line-height: 1.6;
+  }
+  .phrase-bank {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 12px;
+    margin-top: 12px;
+  }
+  .phrase-bank div {
+    background: var(--cream);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px;
+  }
+  .phrase-bank b { display:block; margin-bottom:8px; color:var(--blue); }
+  .phrase-bank span { display:block; font-size:12px; color:#4a4035; line-height:1.65; }
+  .micro-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 12px;
+  }
+  .micro-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px;
+  }
+  .micro-card h4 { font-size: 13px; margin-bottom: 6px; color: var(--ink); }
+  .micro-card p { font-size: 12px; line-height: 1.55; color: #4a4035; }
+
 
   /* SECTION DIVIDER */
   .section-label {
@@ -681,7 +793,7 @@
     .set-grid { grid-template-columns: repeat(2, 1fr); }
     .header-inner { padding: 24px 16px 20px; }
     .tabs { gap: 0; }
-    .tab-btn { padding: 8px 12px; font-size: 12px; }
+    .tab-btn { padding: 8px 10px; font-size: 11px; }
   }
 
   /* Animations */
@@ -853,12 +965,16 @@
 <main>
   <!-- TABS -->
   <div class="tabs" role="tablist">
-    <button class="tab-btn active" onclick="switchTab('practice')" id="tab-practice">Practice Sets</button>
-    <button class="tab-btn" onclick="switchTab('guide')" id="tab-guide">UCB Test Guide</button>
-    <button class="tab-btn" onclick="switchTab('builder')" id="tab-builder">Answer Builder</button>
-    <button class="tab-btn" onclick="switchTab('vocab')" id="tab-vocab">Vocabulary</button>
-    <button class="tab-btn" onclick="switchTab('plan')" id="tab-plan">7-Day Plan</button>
-    <button class="tab-btn" onclick="switchTab('tips')" id="tab-tips">Exam Tips</button>
+    <button class="tab-btn active" onclick="switchTab('practice')" id="tab-practice">Practice Sets / 練習題</button>
+    <button class="tab-btn" onclick="switchTab('guide')" id="tab-guide">UCB Test Guide / 考試指南</button>
+    <button class="tab-btn" onclick="switchTab('builder')" id="tab-builder">Answer Builder / 答題框架</button>
+    <button class="tab-btn" onclick="switchTab('mock')" id="tab-mock">Mock Test / 模考</button>
+    <button class="tab-btn" onclick="switchTab('fluency')" id="tab-fluency">Fluency Drills / 流利度</button>
+    <button class="tab-btn" onclick="switchTab('score')" id="tab-score">Self Score / 自評</button>
+    <button class="tab-btn" onclick="switchTab('teacher')" id="tab-teacher">Teacher Mode / 教師模式</button>
+    <button class="tab-btn" onclick="switchTab('vocab')" id="tab-vocab">Vocabulary / 詞彙庫</button>
+    <button class="tab-btn" onclick="switchTab('plan')" id="tab-plan">7-Day Plan / 7日計劃</button>
+    <button class="tab-btn" onclick="switchTab('tips')" id="tab-tips">Exam Tips / 考試技巧</button>
   </div>
 
   <!-- PRACTICE TAB -->
@@ -866,9 +982,9 @@
     <div class="tips-box" style="margin-bottom:18px">
       <h4>How to use this app / 使用方法</h4>
       <ul>
-        <li>Choose one practice set, answer Part 1 briefly, then practise one Part 2 long turn with the timer.</li>
-        <li>Use the AI-style Tip buttons for vocabulary, structure and sentence starters; these are offline coaching prompts, not official test scoring.</li>
-        <li>For UCB preparation, focus on clear academic discussion, seminar-style answers, reasons, examples and follow-up development.</li>
+        <li>Choose one practice set, answer Part 1 briefly, then practise one Part 2 long turn with the timer.<div class="bilingual-note">選一套題，先簡短回答 Part 1，再用計時器練習 Part 2 長回答。</div></li>
+        <li>Use the AI-style Tip buttons for vocabulary, structure and sentence starters; these are offline coaching prompts, not official test scoring.<div class="bilingual-note">AI-style 提示是離線輔導語，不是官方評分，也不連接外部 AI API。</div></li>
+        <li>For UCB preparation, focus on clear academic discussion, seminar-style answers, reasons, examples and follow-up development.<div class="bilingual-note">備考重點：清楚討論、研討課式回答、理由、例子和追問拓展。</div></li>
       </ul>
     </div>
     <div class="section-label">Select a Practice Set</div>
@@ -926,9 +1042,116 @@
     </div>
   </div>
 
+  <!-- MOCK TEST TAB -->
+  <div id="panel-mock" style="display:none">
+    <div class="section-label">20-Minute Mock Test Mode</div>
+    <div class="tips-box">
+      <h4>Suggested mock test flow / 模考流程</h4>
+      <ul>
+        <li>Warm-up: 1 minute. Check microphone, sit upright, breathe slowly.</li>
+        <li>Part 1: 4 minutes. Answer personal questions naturally, 2-4 sentences each.</li>
+        <li>Part 2: 1 minute preparation + 2 minutes speaking. Use notes, not a full script.</li>
+        <li>Part 3: 5-7 minutes. Develop opinions, compare views, explain reasons and examples.</li>
+        <li>Review: 5 minutes. Score fluency, vocabulary, grammar, coherence and interaction.</li>
+      </ul>
+    </div>
+    <div class="tips-grid">
+      <div class="tip-card"><div class="tip-icon" style="background:#fff3e0">A</div><div><h4>Examiner opening script</h4><p>Hello. My name is your examiner today. Can you confirm your full name? I will ask you some questions about yourself, then you will speak about one topic, and finally we will discuss wider issues related to that topic.</p></div></div>
+      <div class="tip-card"><div class="tip-icon" style="background:#e8f5e9">B</div><div><h4>Candidate rules</h4><p>Answer in English only. Ask for clarification if needed. Do not read from a full script. Try to develop each answer with a reason and example.</p></div></div>
+      <div class="tip-card"><div class="tip-icon" style="background:#e3f2fd">C</div><div><h4>After-test reflection</h4><p>Write one strength, one repeated mistake, one pronunciation issue, one vocabulary goal and one target for the next mock test.</p></div></div>
+    </div>
+    <button class="btn btn-gold" onclick="chooseRandomSet()">🎲 Choose a Random Practice Set</button>
+    <div class="score-result" id="mock-result" style="margin-top:14px">Random set result will appear here.</div>
+  </div>
+
+  <!-- FLUENCY DRILLS TAB -->
+  <div id="panel-fluency" style="display:none">
+    <div class="section-label">Pronunciation, Fluency and Confidence Drills</div>
+    <div class="micro-grid">
+      <div class="micro-card"><h4>30-second expansion</h4><p>Choose any Part 1 question. Give a direct answer, then extend with because, for example and as a result.</p></div>
+      <div class="micro-card"><h4>Chunking practice</h4><p>Read answers in small meaning groups: I would say / the main reason is / in my experience / this helped me...</p></div>
+      <div class="micro-card"><h4>Stress practice</h4><p>Emphasise key content words: important, difficult, useful, responsible, sustainable, opportunity.</p></div>
+      <div class="micro-card"><h4>Pause control</h4><p>Use short pauses after linking phrases. Avoid filling every gap with um or er.</p></div>
+      <div class="micro-card"><h4>Repair drill</h4><p>Practise: Let me rephrase that. What I mean is... I cannot remember the exact word, but...</p></div>
+      <div class="micro-card"><h4>Seminar response</h4><p>Listen to one opinion, then respond with: I partly agree, but I would also add that...</p></div>
+    </div>
+    <div class="tips-box" style="margin-top:16px">
+      <h4>Common pronunciation targets / 常見發音目標</h4>
+      <ul>
+        <li>Final consonants: work, want, important, different, developed.</li>
+        <li>Word stress: education, technology, environment, communication, responsibility.</li>
+        <li>Connected speech: I would like to, one of the most, as a result of.</li>
+        <li>Clarity over accent: the goal is understandable speech, not a native-speaker accent.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- SELF SCORE TAB -->
+  <div id="panel-score" style="display:none">
+    <div class="section-label">Self-Assessment Scorecard</div>
+    <div class="score-card">
+      <div class="score-row"><label>Fluency / 流利度</label><input type="range" min="1" max="5" value="3" id="score-fluency" oninput="updateScore()"><div class="score-val" id="val-fluency">3</div></div>
+      <div class="score-row"><label>Vocabulary / 詞彙</label><input type="range" min="1" max="5" value="3" id="score-vocab" oninput="updateScore()"><div class="score-val" id="val-vocab">3</div></div>
+      <div class="score-row"><label>Grammar / 語法</label><input type="range" min="1" max="5" value="3" id="score-grammar" oninput="updateScore()"><div class="score-val" id="val-grammar">3</div></div>
+      <div class="score-row"><label>Coherence / 連貫性</label><input type="range" min="1" max="5" value="3" id="score-coherence" oninput="updateScore()"><div class="score-val" id="val-coherence">3</div></div>
+      <div class="score-row"><label>Interaction / 互動</label><input type="range" min="1" max="5" value="3" id="score-interaction" oninput="updateScore()"><div class="score-val" id="val-interaction">3</div></div>
+      <div class="score-result" id="score-result">Average: 3.0 / 5. Target: build longer answers with clearer examples.</div>
+    </div>
+    <div class="phrase-bank">
+      <div><b>Level 2 to 3</b><span>Move from short answers to reason + example. Avoid one-word answers.</span></div>
+      <div><b>Level 3 to 4</b><span>Add linking phrases, topic vocabulary and clearer Part 2 structure.</span></div>
+      <div><b>Level 4 to 5</b><span>Use balanced discussion, precise examples and natural repair language.</span></div>
+    </div>
+  </div>
+
+  <!-- TEACHER MODE TAB -->
+  <div id="panel-teacher" style="display:none">
+    <div class="section-label">Teacher Mode: 45-Minute Tutorial Plan</div>
+    <div class="tips-grid">
+      <div class="tip-card"><div class="tip-icon" style="background:#fff3e0">0-5</div><div><h4>Warm-up diagnostic</h4><p>Ask three Part 1 questions. Note fluency gaps, repeated grammar errors and pronunciation issues.</p></div></div>
+      <div class="tip-card"><div class="tip-icon" style="background:#e8f5e9">5-15</div><div><h4>Part 2 coaching</h4><p>Give one cue card. Student plans for 1 minute and speaks for 2 minutes. Teacher interrupts only after the answer finishes.</p></div></div>
+      <div class="tip-card"><div class="tip-icon" style="background:#e3f2fd">15-30</div><div><h4>Part 3 discussion</h4><p>Push for reasons, examples, alternative views and solutions. Use follow-up prompts: Why? Can you give an example? What about the opposite view?</p></div></div>
+      <div class="tip-card"><div class="tip-icon" style="background:#f3e5f5">30-40</div><div><h4>Micro-drill</h4><p>Choose one weakness: fluency, grammar, vocabulary, pronunciation or coherence. Drill it with 5 short repetitions.</p></div></div>
+      <div class="tip-card"><div class="tip-icon" style="background:#fff8e1">40-45</div><div><h4>Homework setting</h4><p>Assign one full set, one vocabulary topic and one recorded Part 2 answer before the next session.</p></div></div>
+    </div>
+    <div class="tips-box">
+      <h4>Teacher feedback sentence starters</h4>
+      <ul>
+        <li>Your strongest point today was...</li>
+        <li>The answer became clearer when you...</li>
+        <li>Next time, try to add one concrete example after your reason.</li>
+        <li>Your pronunciation is understandable, but watch the final sounds in...</li>
+        <li>For Part 3, I want you to show both sides before giving your final opinion.</li>
+      </ul>
+    </div>
+  </div>
+
   <!-- VOCAB TAB -->
   <div id="panel-vocab" style="display:none">
-    <div class="section-label">Key Vocabulary by Topic</div>
+    <div class="section-label">Vocabulary Practice / 詞彙反覆練習</div>
+    <div class="tips-box" style="margin-bottom:14px">
+      <h4>How to train vocabulary / 詞彙訓練方法</h4>
+      <ul>
+        <li>Use Flashcard mode first: say the meaning in Chinese, then produce one English sentence aloud.<div class="bilingual-note">先刷閃卡：看到英文詞，先說中文意思，再用英文造一個句子。</div></li>
+        <li>Use Quiz mode after learning a topic. Wrong answers are saved into Review Weak Words.<div class="bilingual-note">學完一個主題後做選擇題，答錯的詞會進入「弱詞復習」。</div></li>
+        <li>Repeat until the same word can be explained, pronounced and used in a spoken answer.<div class="bilingual-note">反覆練到能解釋、能讀清楚、能放入口語答案中使用。</div></li>
+      </ul>
+    </div>
+    <div class="vocab-toolbar">
+      <input id="vocab-search" placeholder="Search word, Chinese meaning, or example / 搜索英文、中文或例句" oninput="renderVocabCards()">
+      <select id="vocab-topic-filter" onchange="renderVocabCards()"></select>
+    </div>
+    <div class="vocab-actions">
+      <button class="btn btn-gold" onclick="startFlashcard()">🎴 Random Flashcard / 隨機閃卡</button>
+      <button class="btn btn-green" onclick="startQuiz()">✅ Quick Quiz / 選擇題</button>
+      <button class="btn btn-blue" onclick="reviewWeakWords()">🔁 Review Weak Words / 弱詞復習</button>
+      <button class="btn btn-outline" onclick="resetVocabProgress()">Reset Progress / 重置記錄</button>
+    </div>
+    <div class="vocab-stats" id="vocab-stats"></div>
+    <div class="vocab-practice-box" id="vocab-practice-box">
+      <strong>Ready / 準備好了</strong>
+      <div class="bilingual-note">Choose a topic or start random flashcards. This vocabulary bank now contains 340 bilingual speaking-test words and phrases.</div>
+    </div>
     <div class="vocab-grid" id="vocab-grid"></div>
   </div>
 
@@ -958,7 +1181,7 @@
 
   <!-- TIPS TAB -->
   <div id="panel-tips" style="display:none">
-    <div class="section-label">Strategies for Test Day</div>
+    <div class="section-label">Strategies for Test Day / 考試日策略</div>
     <div class="tips-grid" id="tips-grid"></div>
   </div>
 
@@ -1207,94 +1430,3328 @@ const MODEL_ANSWERS = {
 // ============================================================
 const VOCAB = [
   {
-    topic: "📚 Education",
-    emoji: "📚",
-    items: [
-      { word: "curriculum", def: "(n) the subjects forming a course of study", example: "The curriculum at my college covers both theory and practice." },
-      { word: "pedagogy", def: "(n) the method and practice of teaching", example: "Modern pedagogy increasingly involves collaborative learning." },
-      { word: "assessment", def: "(n) the evaluation of student performance", example: "Continuous assessment helps reduce exam pressure." },
-      { word: "facilitate", def: "(v) to make something easier or possible", example: "Technology facilitates independent learning outside the classroom." },
-      { word: "aspiration", def: "(n) a hope or ambition", example: "My aspiration is to work in international business." }
+    "topic": "📚 Education & Study Skills",
+    "emoji": "📚",
+    "items": [
+      {
+        "id": "-education-study-skills-0",
+        "word": "curriculum",
+        "def": "(n/phrase) the subjects and content in a course",
+        "zh": "課程內容、課程設置",
+        "example": "The curriculum combines theory with practice.",
+        "exampleZh": "這套課程把理論和實踐結合起來。"
+      },
+      {
+        "id": "-education-study-skills-1",
+        "word": "assessment",
+        "def": "(n/phrase) a way of judging performance",
+        "zh": "評估、考核",
+        "example": "Continuous assessment can reduce exam pressure.",
+        "exampleZh": "持續評估可以減少考試壓力。"
+      },
+      {
+        "id": "-education-study-skills-2",
+        "word": "independent learning",
+        "def": "(n/phrase) studying without constant teacher help",
+        "zh": "自主學習",
+        "example": "Independent learning is essential at university.",
+        "exampleZh": "自主學習在大學非常重要。"
+      },
+      {
+        "id": "-education-study-skills-3",
+        "word": "academic progress",
+        "def": "(n/phrase) improvement in study performance",
+        "zh": "學業進展",
+        "example": "Regular feedback helps students make academic progress.",
+        "exampleZh": "定期反饋能幫助學生取得學業進展。"
+      },
+      {
+        "id": "-education-study-skills-4",
+        "word": "learning outcome",
+        "def": "(n/phrase) what a learner should know or do after study",
+        "zh": "學習成果",
+        "example": "Each task should link to a clear learning outcome.",
+        "exampleZh": "每項任務都應對應明確的學習成果。"
+      },
+      {
+        "id": "-education-study-skills-5",
+        "word": "critical thinking",
+        "def": "(n/phrase) analysing ideas instead of accepting them directly",
+        "zh": "批判性思維",
+        "example": "Critical thinking is useful in seminars.",
+        "exampleZh": "批判性思維在研討課中很有用。"
+      },
+      {
+        "id": "-education-study-skills-6",
+        "word": "study routine",
+        "def": "(n/phrase) a regular study pattern",
+        "zh": "學習安排、學習習慣",
+        "example": "A stable study routine helps me stay organised.",
+        "exampleZh": "穩定的學習安排能幫我保持條理。"
+      },
+      {
+        "id": "-education-study-skills-7",
+        "word": "deadline",
+        "def": "(n/phrase) the final time for completing work",
+        "zh": "截止日期",
+        "example": "I try to finish assignments before the deadline.",
+        "exampleZh": "我會盡量在截止日期前完成作業。"
+      },
+      {
+        "id": "-education-study-skills-8",
+        "word": "tutorial",
+        "def": "(n/phrase) a small teaching session",
+        "zh": "輔導課、小班課",
+        "example": "Tutorials give students more chance to ask questions.",
+        "exampleZh": "輔導課給學生更多提問機會。"
+      },
+      {
+        "id": "-education-study-skills-9",
+        "word": "seminar",
+        "def": "(n/phrase) a discussion-based class",
+        "zh": "研討課",
+        "example": "In a seminar, students are expected to contribute ideas.",
+        "exampleZh": "在研討課中，學生需要主動貢獻觀點。"
+      },
+      {
+        "id": "-education-study-skills-10",
+        "word": "lecture",
+        "def": "(n/phrase) a formal teaching session",
+        "zh": "講座、講課",
+        "example": "The lecture introduced the main theory.",
+        "exampleZh": "講座介紹了主要理論。"
+      },
+      {
+        "id": "-education-study-skills-11",
+        "word": "feedback",
+        "def": "(n/phrase) comments used to improve work",
+        "zh": "反饋",
+        "example": "Teacher feedback helped me improve my speaking.",
+        "exampleZh": "老師的反饋幫我提升了口語。"
+      },
+      {
+        "id": "-education-study-skills-12",
+        "word": "revision",
+        "def": "(n/phrase) reviewing before a test",
+        "zh": "複習",
+        "example": "Revision is more effective when it is planned.",
+        "exampleZh": "有計劃的複習更有效。"
+      },
+      {
+        "id": "-education-study-skills-13",
+        "word": "motivation",
+        "def": "(n/phrase) the reason or energy to keep working",
+        "zh": "動力",
+        "example": "My motivation is to enter university successfully.",
+        "exampleZh": "我的動力是順利升入大學。"
+      },
+      {
+        "id": "-education-study-skills-14",
+        "word": "discipline",
+        "def": "(n/phrase) the ability to control your habits and effort",
+        "zh": "自律",
+        "example": "Online study requires strong discipline.",
+        "exampleZh": "線上學習需要很強的自律。"
+      },
+      {
+        "id": "-education-study-skills-15",
+        "word": "participation",
+        "def": "(n/phrase) taking part actively",
+        "zh": "參與",
+        "example": "Participation matters in discussion classes.",
+        "exampleZh": "參與度在討論課中很重要。"
+      },
+      {
+        "id": "-education-study-skills-16",
+        "word": "research skills",
+        "def": "(n/phrase) the ability to find and use information",
+        "zh": "研究能力",
+        "example": "Research skills help students write better essays.",
+        "exampleZh": "研究能力能幫學生寫出更好的論文。"
+      },
+      {
+        "id": "-education-study-skills-17",
+        "word": "plagiarism",
+        "def": "(n/phrase) using others’ work without proper acknowledgement",
+        "zh": "抄襲",
+        "example": "Students must avoid plagiarism in academic writing.",
+        "exampleZh": "學生必須避免學術寫作中的抄襲。"
+      },
+      {
+        "id": "-education-study-skills-18",
+        "word": "academic integrity",
+        "def": "(n/phrase) honest and responsible study practice",
+        "zh": "學術誠信",
+        "example": "Academic integrity is a basic university value.",
+        "exampleZh": "學術誠信是大學的基本價值。"
+      },
+      {
+        "id": "-education-study-skills-19",
+        "word": "progression",
+        "def": "(n/phrase) moving to the next stage of study",
+        "zh": "升學、進階",
+        "example": "English speaking skills support university progression.",
+        "exampleZh": "英語口語能力有助於升學。"
+      }
     ]
   },
   {
-    topic: "🌿 Environment",
-    emoji: "🌿",
-    items: [
-      { word: "sustainability", def: "(n) using resources without depleting them for the future", example: "Urban sustainability requires changes in both policy and behaviour." },
-      { word: "carbon footprint", def: "(n) the amount of CO₂ one produces", example: "Switching to public transport reduces your carbon footprint significantly." },
-      { word: "biodiversity", def: "(n) variety of plant and animal life", example: "Deforestation threatens the biodiversity of tropical regions." },
-      { word: "renewable energy", def: "(n) energy from sources that are replenished naturally", example: "The government is investing heavily in renewable energy." },
-      { word: "mitigate", def: "(v) to make something less severe", example: "We need international cooperation to mitigate climate change." }
+    "topic": "🗣️ Speaking Functions",
+    "emoji": "🗣️",
+    "items": [
+      {
+        "id": "-speaking-functions-0",
+        "word": "clarify",
+        "def": "(n/phrase) to make a question or idea clearer",
+        "zh": "澄清",
+        "example": "Could I clarify the question before I answer?",
+        "exampleZh": "我回答前可以先澄清一下問題嗎？"
+      },
+      {
+        "id": "-speaking-functions-1",
+        "word": "rephrase",
+        "def": "(n/phrase) to say something again in another way",
+        "zh": "換句話說",
+        "example": "Let me rephrase that more clearly.",
+        "exampleZh": "我換一種更清楚的說法。"
+      },
+      {
+        "id": "-speaking-functions-2",
+        "word": "elaborate",
+        "def": "(n/phrase) to give more detail",
+        "zh": "展開說明",
+        "example": "I can elaborate by giving an example.",
+        "exampleZh": "我可以通過舉例進一步說明。"
+      },
+      {
+        "id": "-speaking-functions-3",
+        "word": "summarise",
+        "def": "(n/phrase) to give the main points briefly",
+        "zh": "總結",
+        "example": "To summarise, the main issue is cost.",
+        "exampleZh": "總結來說，主要問題是成本。"
+      },
+      {
+        "id": "-speaking-functions-4",
+        "word": "justify",
+        "def": "(n/phrase) to give reasons for an opinion",
+        "zh": "證明、說明理由",
+        "example": "Students should justify their opinions with examples.",
+        "exampleZh": "學生應用例子說明自己觀點的理由。"
+      },
+      {
+        "id": "-speaking-functions-5",
+        "word": "compare",
+        "def": "(n/phrase) to discuss similarities and differences",
+        "zh": "比較",
+        "example": "We can compare online learning with classroom learning.",
+        "exampleZh": "我們可以比較線上學習和課堂學習。"
+      },
+      {
+        "id": "-speaking-functions-6",
+        "word": "contrast",
+        "def": "(n/phrase) to show differences",
+        "zh": "對比",
+        "example": "In contrast, rural life can be quieter.",
+        "exampleZh": "相比之下，鄉村生活可能更安靜。"
+      },
+      {
+        "id": "-speaking-functions-7",
+        "word": "evaluate",
+        "def": "(n/phrase) to judge strengths and weaknesses",
+        "zh": "評價",
+        "example": "It is useful to evaluate both advantages and disadvantages.",
+        "exampleZh": "評價優缺點很有用。"
+      },
+      {
+        "id": "-speaking-functions-8",
+        "word": "agree partially",
+        "def": "(n/phrase) to agree with only part of an idea",
+        "zh": "部分同意",
+        "example": "I agree partially, but there are also risks.",
+        "exampleZh": "我部分同意，但也有風險。"
+      },
+      {
+        "id": "-speaking-functions-9",
+        "word": "challenge a view",
+        "def": "(n/phrase) to question an opinion politely",
+        "zh": "質疑觀點",
+        "example": "I would challenge the view that technology is always positive.",
+        "exampleZh": "我會質疑技術總是積極的這一觀點。"
+      },
+      {
+        "id": "-speaking-functions-10",
+        "word": "build on a point",
+        "def": "(n/phrase) to add to another idea",
+        "zh": "接續補充觀點",
+        "example": "Building on that point, I would add that cost matters.",
+        "exampleZh": "接著這個觀點，我想補充成本也很重要。"
+      },
+      {
+        "id": "-speaking-functions-11",
+        "word": "give an example",
+        "def": "(n/phrase) to support an idea with a case",
+        "zh": "舉例",
+        "example": "For example, many students use apps to revise vocabulary.",
+        "exampleZh": "例如，很多學生用app複習詞彙。"
+      },
+      {
+        "id": "-speaking-functions-12",
+        "word": "state an opinion",
+        "def": "(n/phrase) to say what you think clearly",
+        "zh": "表達觀點",
+        "example": "In my opinion, education should be practical.",
+        "exampleZh": "在我看來，教育應該具有實用性。"
+      },
+      {
+        "id": "-speaking-functions-13",
+        "word": "acknowledge another side",
+        "def": "(n/phrase) to recognise an opposite argument",
+        "zh": "承認另一面",
+        "example": "I acknowledge another side: not everyone can afford it.",
+        "exampleZh": "我承認另一面：不是每個人都負擔得起。"
+      },
+      {
+        "id": "-speaking-functions-14",
+        "word": "draw a conclusion",
+        "def": "(n/phrase) to finish with a clear final idea",
+        "zh": "得出結論",
+        "example": "I would draw the conclusion that balance is necessary.",
+        "exampleZh": "我會得出結論：平衡是必要的。"
+      },
+      {
+        "id": "-speaking-functions-15",
+        "word": "repair language",
+        "def": "(n/phrase) phrases used when you lose your words",
+        "zh": "修正語言",
+        "example": "Repair language helps you continue speaking.",
+        "exampleZh": "修正語言能幫你繼續說下去。"
+      },
+      {
+        "id": "-speaking-functions-16",
+        "word": "follow-up question",
+        "def": "(n/phrase) an extra question after your answer",
+        "zh": "追問",
+        "example": "A follow-up question usually asks why or how.",
+        "exampleZh": "追問通常會問為什麼或如何。"
+      },
+      {
+        "id": "-speaking-functions-17",
+        "word": "interaction",
+        "def": "(n/phrase) natural communication with another person",
+        "zh": "互動",
+        "example": "Interaction is important in speaking tests.",
+        "exampleZh": "互動在口語考試中很重要。"
+      },
+      {
+        "id": "-speaking-functions-18",
+        "word": "turn-taking",
+        "def": "(n/phrase) knowing when to speak and listen",
+        "zh": "輪流發言",
+        "example": "Turn-taking is useful in seminar discussions.",
+        "exampleZh": "輪流發言在研討討論中很有用。"
+      },
+      {
+        "id": "-speaking-functions-19",
+        "word": "coherence",
+        "def": "(n/phrase) logical connection between ideas",
+        "zh": "連貫性",
+        "example": "Coherence makes an answer easier to follow.",
+        "exampleZh": "連貫性能讓回答更容易理解。"
+      }
     ]
   },
   {
-    topic: "💻 Technology",
-    emoji: "💻",
-    items: [
-      { word: "artificial intelligence", def: "(n) computer systems performing human-like tasks", example: "Artificial intelligence is revolutionising the healthcare sector." },
-      { word: "automation", def: "(n) the use of machines to replace human labour", example: "Automation has transformed manufacturing industries worldwide." },
-      { word: "data privacy", def: "(n) the right to control one's personal information", example: "Data privacy has become a major concern for internet users." },
-      { word: "digital literacy", def: "(n) the ability to use digital tools effectively", example: "Digital literacy is now as essential as reading and writing." },
-      { word: "cybersecurity", def: "(n) protection against digital attacks", example: "Companies are investing more in cybersecurity each year." }
+    "topic": "💻 Technology & Digital Life",
+    "emoji": "💻",
+    "items": [
+      {
+        "id": "-technology-digital-life-0",
+        "word": "artificial intelligence",
+        "def": "(n/phrase) computer systems that perform human-like tasks",
+        "zh": "人工智能",
+        "example": "Artificial intelligence is changing education and work.",
+        "exampleZh": "人工智能正在改變教育和工作。"
+      },
+      {
+        "id": "-technology-digital-life-1",
+        "word": "automation",
+        "def": "(n/phrase) using machines or software to do tasks",
+        "zh": "自動化",
+        "example": "Automation can improve efficiency but may reduce jobs.",
+        "exampleZh": "自動化能提高效率，但可能減少工作機會。"
+      },
+      {
+        "id": "-technology-digital-life-2",
+        "word": "digital literacy",
+        "def": "(n/phrase) the ability to use digital tools effectively",
+        "zh": "數字素養",
+        "example": "Digital literacy is necessary for modern students.",
+        "exampleZh": "數字素養對現代學生很必要。"
+      },
+      {
+        "id": "-technology-digital-life-3",
+        "word": "data privacy",
+        "def": "(n/phrase) control over personal information",
+        "zh": "數據隱私",
+        "example": "Data privacy is a serious concern online.",
+        "exampleZh": "數據隱私是網絡上的嚴重問題。"
+      },
+      {
+        "id": "-technology-digital-life-4",
+        "word": "cybersecurity",
+        "def": "(n/phrase) protection against online attacks",
+        "zh": "網絡安全",
+        "example": "Businesses invest heavily in cybersecurity.",
+        "exampleZh": "企業大量投資網絡安全。"
+      },
+      {
+        "id": "-technology-digital-life-5",
+        "word": "online platform",
+        "def": "(n/phrase) a digital place for services or communication",
+        "zh": "線上平台",
+        "example": "Online platforms make learning more flexible.",
+        "exampleZh": "線上平台讓學習更靈活。"
+      },
+      {
+        "id": "-technology-digital-life-6",
+        "word": "screen time",
+        "def": "(n/phrase) time spent using digital screens",
+        "zh": "屏幕時間",
+        "example": "Too much screen time may affect sleep.",
+        "exampleZh": "過多屏幕時間可能影響睡眠。"
+      },
+      {
+        "id": "-technology-digital-life-7",
+        "word": "digital distraction",
+        "def": "(n/phrase) loss of attention caused by devices",
+        "zh": "數字干擾",
+        "example": "Digital distraction is a common study problem.",
+        "exampleZh": "數字干擾是常見學習問題。"
+      },
+      {
+        "id": "-technology-digital-life-8",
+        "word": "innovation",
+        "def": "(n/phrase) a new idea, method or product",
+        "zh": "創新",
+        "example": "Innovation can create new opportunities.",
+        "exampleZh": "創新能創造新機會。"
+      },
+      {
+        "id": "-technology-digital-life-9",
+        "word": "virtual communication",
+        "def": "(n/phrase) communication through digital tools",
+        "zh": "虛擬溝通",
+        "example": "Virtual communication is convenient but less personal.",
+        "exampleZh": "虛擬溝通很方便，但不夠個人化。"
+      },
+      {
+        "id": "-technology-digital-life-10",
+        "word": "remote learning",
+        "def": "(n/phrase) studying from a distance using technology",
+        "zh": "遠程學習",
+        "example": "Remote learning requires self-discipline.",
+        "exampleZh": "遠程學習需要自律。"
+      },
+      {
+        "id": "-technology-digital-life-11",
+        "word": "e-commerce",
+        "def": "(n/phrase) buying and selling online",
+        "zh": "電子商務",
+        "example": "E-commerce has changed consumer habits.",
+        "exampleZh": "電子商務改變了消費習慣。"
+      },
+      {
+        "id": "-technology-digital-life-12",
+        "word": "algorithm",
+        "def": "(n/phrase) a set of rules used by a computer",
+        "zh": "算法",
+        "example": "Algorithms influence what people see online.",
+        "exampleZh": "算法影響人們在網上看到的內容。"
+      },
+      {
+        "id": "-technology-digital-life-13",
+        "word": "accessibility",
+        "def": "(n/phrase) how easy something is to use or reach",
+        "zh": "可及性",
+        "example": "Technology can improve accessibility for disabled users.",
+        "exampleZh": "技術能提高殘障用戶的可及性。"
+      },
+      {
+        "id": "-technology-digital-life-14",
+        "word": "user-friendly",
+        "def": "(n/phrase) easy to use",
+        "zh": "易用的",
+        "example": "A user-friendly app saves time.",
+        "exampleZh": "易用的app能節省時間。"
+      },
+      {
+        "id": "-technology-digital-life-15",
+        "word": "reliable connection",
+        "def": "(n/phrase) stable internet access",
+        "zh": "穩定連接",
+        "example": "Online exams need a reliable connection.",
+        "exampleZh": "線上考試需要穩定連接。"
+      },
+      {
+        "id": "-technology-digital-life-16",
+        "word": "technical issue",
+        "def": "(n/phrase) a problem with equipment or software",
+        "zh": "技術問題",
+        "example": "A technical issue delayed the online meeting.",
+        "exampleZh": "技術問題延誤了線上會議。"
+      },
+      {
+        "id": "-technology-digital-life-17",
+        "word": "productivity app",
+        "def": "(n/phrase) software that helps people work efficiently",
+        "zh": "效率工具app",
+        "example": "A productivity app helps me plan revision.",
+        "exampleZh": "效率工具app幫我安排複習。"
+      },
+      {
+        "id": "-technology-digital-life-18",
+        "word": "digital footprint",
+        "def": "(n/phrase) information left by online activity",
+        "zh": "數字足跡",
+        "example": "People should manage their digital footprint carefully.",
+        "exampleZh": "人們應謹慎管理自己的數字足跡。"
+      },
+      {
+        "id": "-technology-digital-life-19",
+        "word": "ethical concern",
+        "def": "(n/phrase) a worry about right and wrong behaviour",
+        "zh": "倫理問題",
+        "example": "AI creates ethical concerns in education.",
+        "exampleZh": "AI在教育中帶來倫理問題。"
+      }
     ]
   },
   {
-    topic: "🏥 Health",
-    emoji: "🏥",
-    items: [
-      { word: "well-being", def: "(n) general health and happiness", example: "Exercise contributes greatly to both physical and mental well-being." },
-      { word: "sedentary", def: "(adj) involving a lot of sitting; inactive", example: "A sedentary lifestyle increases the risk of chronic illness." },
-      { word: "preventive care", def: "(n) medical care focused on preventing illness", example: "Preventive care is more cost-effective than treating diseases." },
-      { word: "mental health", def: "(n) psychological and emotional well-being", example: "Awareness of mental health issues has grown significantly." },
-      { word: "obesity", def: "(n) condition of being significantly overweight", example: "Obesity rates are rising in many developed countries." }
+    "topic": "🌿 Environment & Sustainability",
+    "emoji": "🌿",
+    "items": [
+      {
+        "id": "-environment-sustainability-0",
+        "word": "sustainability",
+        "def": "(n/phrase) using resources without damaging the future",
+        "zh": "可持續性",
+        "example": "Sustainability requires long-term thinking.",
+        "exampleZh": "可持續性需要長期思維。"
+      },
+      {
+        "id": "-environment-sustainability-1",
+        "word": "carbon footprint",
+        "def": "(n/phrase) the amount of carbon emissions produced",
+        "zh": "碳足跡",
+        "example": "Public transport can reduce a person’s carbon footprint.",
+        "exampleZh": "公共交通能減少個人碳足跡。"
+      },
+      {
+        "id": "-environment-sustainability-2",
+        "word": "renewable energy",
+        "def": "(n/phrase) energy from natural sources that are replaced",
+        "zh": "可再生能源",
+        "example": "Solar power is a form of renewable energy.",
+        "exampleZh": "太陽能是一種可再生能源。"
+      },
+      {
+        "id": "-environment-sustainability-3",
+        "word": "biodiversity",
+        "def": "(n/phrase) variety of living things",
+        "zh": "生物多樣性",
+        "example": "Biodiversity is threatened by pollution.",
+        "exampleZh": "生物多樣性受到污染威脅。"
+      },
+      {
+        "id": "-environment-sustainability-4",
+        "word": "pollution",
+        "def": "(n/phrase) harmful substances in air, water or land",
+        "zh": "污染",
+        "example": "Air pollution affects public health.",
+        "exampleZh": "空氣污染影響公共健康。"
+      },
+      {
+        "id": "-environment-sustainability-5",
+        "word": "deforestation",
+        "def": "(n/phrase) cutting down forests",
+        "zh": "森林砍伐",
+        "example": "Deforestation can increase climate problems.",
+        "exampleZh": "森林砍伐可能加劇氣候問題。"
+      },
+      {
+        "id": "-environment-sustainability-6",
+        "word": "climate change",
+        "def": "(n/phrase) long-term change in global weather patterns",
+        "zh": "氣候變化",
+        "example": "Climate change affects farming and cities.",
+        "exampleZh": "氣候變化影響農業和城市。"
+      },
+      {
+        "id": "-environment-sustainability-7",
+        "word": "recycling",
+        "def": "(n/phrase) using waste materials again",
+        "zh": "回收",
+        "example": "Recycling should be part of everyday life.",
+        "exampleZh": "回收應成為日常生活的一部分。"
+      },
+      {
+        "id": "-environment-sustainability-8",
+        "word": "conservation",
+        "def": "(n/phrase) protecting nature and resources",
+        "zh": "保護、保育",
+        "example": "Conservation protects wildlife and habitats.",
+        "exampleZh": "保育能保護野生動物和棲息地。"
+      },
+      {
+        "id": "-environment-sustainability-9",
+        "word": "eco-friendly",
+        "def": "(n/phrase) not harmful to the environment",
+        "zh": "環保的",
+        "example": "Eco-friendly products are becoming more popular.",
+        "exampleZh": "環保產品越來越受歡迎。"
+      },
+      {
+        "id": "-environment-sustainability-10",
+        "word": "public awareness",
+        "def": "(n/phrase) what people know about an issue",
+        "zh": "公眾意識",
+        "example": "Public awareness can change behaviour.",
+        "exampleZh": "公眾意識能改變行為。"
+      },
+      {
+        "id": "-environment-sustainability-11",
+        "word": "government policy",
+        "def": "(n/phrase) official rules or plans",
+        "zh": "政府政策",
+        "example": "Government policy can encourage green transport.",
+        "exampleZh": "政府政策能鼓勵綠色交通。"
+      },
+      {
+        "id": "-environment-sustainability-12",
+        "word": "waste reduction",
+        "def": "(n/phrase) producing less rubbish",
+        "zh": "減少廢棄物",
+        "example": "Waste reduction begins with buying less.",
+        "exampleZh": "減少廢棄物從少買開始。"
+      },
+      {
+        "id": "-environment-sustainability-13",
+        "word": "green space",
+        "def": "(n/phrase) parks or natural areas in cities",
+        "zh": "綠地",
+        "example": "Green spaces improve city life.",
+        "exampleZh": "綠地改善城市生活。"
+      },
+      {
+        "id": "-environment-sustainability-14",
+        "word": "urban planning",
+        "def": "(n/phrase) designing how cities develop",
+        "zh": "城市規劃",
+        "example": "Urban planning affects transport and housing.",
+        "exampleZh": "城市規劃影響交通和住房。"
+      },
+      {
+        "id": "-environment-sustainability-15",
+        "word": "environmental responsibility",
+        "def": "(n/phrase) duty to protect nature",
+        "zh": "環境責任",
+        "example": "Companies have environmental responsibility.",
+        "exampleZh": "企業有環境責任。"
+      },
+      {
+        "id": "-environment-sustainability-16",
+        "word": "single-use plastic",
+        "def": "(n/phrase) plastic used once and thrown away",
+        "zh": "一次性塑料",
+        "example": "Single-use plastic creates waste problems.",
+        "exampleZh": "一次性塑料造成廢棄物問題。"
+      },
+      {
+        "id": "-environment-sustainability-17",
+        "word": "energy efficiency",
+        "def": "(n/phrase) using less energy for the same result",
+        "zh": "能源效率",
+        "example": "Energy efficiency can lower household bills.",
+        "exampleZh": "能源效率能降低家庭賬單。"
+      },
+      {
+        "id": "-environment-sustainability-18",
+        "word": "sustainable transport",
+        "def": "(n/phrase) transport with lower environmental impact",
+        "zh": "可持續交通",
+        "example": "Cycling is a form of sustainable transport.",
+        "exampleZh": "騎自行車是一種可持續交通方式。"
+      },
+      {
+        "id": "-environment-sustainability-19",
+        "word": "long-term impact",
+        "def": "(n/phrase) effect that continues into the future",
+        "zh": "長期影響",
+        "example": "We must consider the long-term impact of pollution.",
+        "exampleZh": "我們必須考慮污染的長期影響。"
+      }
     ]
   },
   {
-    topic: "🌍 Global Issues",
-    emoji: "🌍",
-    items: [
-      { word: "inequality", def: "(n) difference in wealth, opportunity, or treatment", example: "Economic inequality remains a persistent global challenge." },
-      { word: "migration", def: "(n) movement of people from one place to another", example: "Migration has shaped the cultural landscape of many cities." },
-      { word: "diplomacy", def: "(n) management of international relations", example: "Effective diplomacy is essential for resolving conflicts peacefully." },
-      { word: "humanitarian", def: "(adj) concerned with improving people's welfare", example: "Several NGOs provide humanitarian aid in conflict zones." },
-      { word: "globalisation", def: "(n) the process of worldwide economic integration", example: "Globalisation has created both opportunities and challenges." }
+    "topic": "🏥 Health & Well-being",
+    "emoji": "🏥",
+    "items": [
+      {
+        "id": "-health-well-being-0",
+        "word": "well-being",
+        "def": "(n/phrase) general physical and mental health",
+        "zh": "身心健康",
+        "example": "Exercise supports physical and mental well-being.",
+        "exampleZh": "運動有助於身心健康。"
+      },
+      {
+        "id": "-health-well-being-1",
+        "word": "mental health",
+        "def": "(n/phrase) emotional and psychological condition",
+        "zh": "心理健康",
+        "example": "Students should pay attention to mental health.",
+        "exampleZh": "學生應重視心理健康。"
+      },
+      {
+        "id": "-health-well-being-2",
+        "word": "balanced diet",
+        "def": "(n/phrase) eating different healthy foods",
+        "zh": "均衡飲食",
+        "example": "A balanced diet can improve concentration.",
+        "exampleZh": "均衡飲食能提高注意力。"
+      },
+      {
+        "id": "-health-well-being-3",
+        "word": "sedentary lifestyle",
+        "def": "(n/phrase) a lifestyle with too much sitting",
+        "zh": "久坐生活方式",
+        "example": "A sedentary lifestyle can harm health.",
+        "exampleZh": "久坐生活方式會傷害健康。"
+      },
+      {
+        "id": "-health-well-being-4",
+        "word": "preventive care",
+        "def": "(n/phrase) actions that prevent illness",
+        "zh": "預防性醫療",
+        "example": "Preventive care is cheaper than treatment.",
+        "exampleZh": "預防性醫療比治療成本更低。"
+      },
+      {
+        "id": "-health-well-being-5",
+        "word": "stress management",
+        "def": "(n/phrase) ways to control pressure",
+        "zh": "壓力管理",
+        "example": "Good stress management helps during exams.",
+        "exampleZh": "良好的壓力管理有助於應對考試。"
+      },
+      {
+        "id": "-health-well-being-6",
+        "word": "sleep quality",
+        "def": "(n/phrase) how well someone sleeps",
+        "zh": "睡眠質量",
+        "example": "Sleep quality affects memory and mood.",
+        "exampleZh": "睡眠質量影響記憶和情緒。"
+      },
+      {
+        "id": "-health-well-being-7",
+        "word": "physical activity",
+        "def": "(n/phrase) movement or exercise",
+        "zh": "身體活動",
+        "example": "Regular physical activity improves energy.",
+        "exampleZh": "定期身體活動能提高精力。"
+      },
+      {
+        "id": "-health-well-being-8",
+        "word": "healthcare system",
+        "def": "(n/phrase) services that provide medical care",
+        "zh": "醫療系統",
+        "example": "A strong healthcare system supports society.",
+        "exampleZh": "強大的醫療系統支持社會。"
+      },
+      {
+        "id": "-health-well-being-9",
+        "word": "public health",
+        "def": "(n/phrase) health of the whole community",
+        "zh": "公共衛生",
+        "example": "Public health campaigns can change behaviour.",
+        "exampleZh": "公共衛生活動能改變行為。"
+      },
+      {
+        "id": "-health-well-being-10",
+        "word": "nutrition",
+        "def": "(n/phrase) food and how it affects health",
+        "zh": "營養",
+        "example": "Nutrition is important for young people.",
+        "exampleZh": "營養對年輕人很重要。"
+      },
+      {
+        "id": "-health-well-being-11",
+        "word": "immunity",
+        "def": "(n/phrase) the body’s ability to fight illness",
+        "zh": "免疫力",
+        "example": "Good sleep can support immunity.",
+        "exampleZh": "良好睡眠能支持免疫力。"
+      },
+      {
+        "id": "-health-well-being-12",
+        "word": "workout routine",
+        "def": "(n/phrase) regular exercise plan",
+        "zh": "鍛煉計劃",
+        "example": "A simple workout routine keeps me active.",
+        "exampleZh": "簡單的鍛煉計劃讓我保持活力。"
+      },
+      {
+        "id": "-health-well-being-13",
+        "word": "burnout",
+        "def": "(n/phrase) extreme tiredness from long stress",
+        "zh": "倦怠",
+        "example": "Students may experience burnout before exams.",
+        "exampleZh": "學生考前可能會感到倦怠。"
+      },
+      {
+        "id": "-health-well-being-14",
+        "word": "healthy habit",
+        "def": "(n/phrase) a repeated behaviour that supports health",
+        "zh": "健康習慣",
+        "example": "Walking daily is a healthy habit.",
+        "exampleZh": "每天散步是健康習慣。"
+      },
+      {
+        "id": "-health-well-being-15",
+        "word": "medical advice",
+        "def": "(n/phrase) professional health guidance",
+        "zh": "醫療建議",
+        "example": "People should follow reliable medical advice.",
+        "exampleZh": "人們應遵循可靠醫療建議。"
+      },
+      {
+        "id": "-health-well-being-16",
+        "word": "emotional support",
+        "def": "(n/phrase) help for feelings and stress",
+        "zh": "情感支持",
+        "example": "Friends can provide emotional support.",
+        "exampleZh": "朋友能提供情感支持。"
+      },
+      {
+        "id": "-health-well-being-17",
+        "word": "health risk",
+        "def": "(n/phrase) something that may harm health",
+        "zh": "健康風險",
+        "example": "Smoking is a major health risk.",
+        "exampleZh": "吸煙是重大健康風險。"
+      },
+      {
+        "id": "-health-well-being-18",
+        "word": "lifestyle choice",
+        "def": "(n/phrase) a decision about daily living",
+        "zh": "生活方式選擇",
+        "example": "Lifestyle choices affect long-term health.",
+        "exampleZh": "生活方式選擇影響長期健康。"
+      },
+      {
+        "id": "-health-well-being-19",
+        "word": "resilience",
+        "def": "(n/phrase) ability to recover from difficulty",
+        "zh": "韌性、抗壓能力",
+        "example": "Resilience helps students handle pressure.",
+        "exampleZh": "韌性能幫學生應對壓力。"
+      }
     ]
   },
   {
-    topic: "💼 Work & Career",
-    emoji: "💼",
-    items: [
-      { word: "entrepreneurship", def: "(n) starting and running a business", example: "Entrepreneurship requires both creativity and resilience." },
-      { word: "employability", def: "(n) having the skills needed to get a job", example: "Universities focus on developing students' employability skills." },
-      { word: "work-life balance", def: "(n) balancing professional and personal time", example: "Many employees prioritise work-life balance when choosing jobs." },
-      { word: "internship", def: "(n) a temporary work placement", example: "An internship gave me valuable experience in the finance sector." },
-      { word: "remote working", def: "(n) working from a location other than the office", example: "Remote working has become normalised since the pandemic." }
+    "topic": "💼 Work, Career & Business",
+    "emoji": "💼",
+    "items": [
+      {
+        "id": "-work-career-business-0",
+        "word": "employability",
+        "def": "(n/phrase) skills that help someone get work",
+        "zh": "就業能力",
+        "example": "Communication improves employability.",
+        "exampleZh": "溝通能力提升就業能力。"
+      },
+      {
+        "id": "-work-career-business-1",
+        "word": "entrepreneurship",
+        "def": "(n/phrase) starting and running a business",
+        "zh": "創業精神",
+        "example": "Entrepreneurship requires creativity and risk-taking.",
+        "exampleZh": "創業精神需要創造力和冒險精神。"
+      },
+      {
+        "id": "-work-career-business-2",
+        "word": "work-life balance",
+        "def": "(n/phrase) balance between job and personal life",
+        "zh": "工作生活平衡",
+        "example": "Many employees value work-life balance.",
+        "exampleZh": "很多員工重視工作生活平衡。"
+      },
+      {
+        "id": "-work-career-business-3",
+        "word": "internship",
+        "def": "(n/phrase) temporary work experience",
+        "zh": "實習",
+        "example": "An internship can build practical skills.",
+        "exampleZh": "實習能培養實踐技能。"
+      },
+      {
+        "id": "-work-career-business-4",
+        "word": "career path",
+        "def": "(n/phrase) the route of someone’s working life",
+        "zh": "職業道路",
+        "example": "My career path may involve hospitality management.",
+        "exampleZh": "我的職業道路可能涉及酒店管理。"
+      },
+      {
+        "id": "-work-career-business-5",
+        "word": "leadership",
+        "def": "(n/phrase) guiding and motivating others",
+        "zh": "領導力",
+        "example": "Good leadership supports teamwork.",
+        "exampleZh": "良好的領導力支持團隊合作。"
+      },
+      {
+        "id": "-work-career-business-6",
+        "word": "teamwork",
+        "def": "(n/phrase) working effectively with others",
+        "zh": "團隊合作",
+        "example": "Teamwork is necessary in most jobs.",
+        "exampleZh": "大多數工作都需要團隊合作。"
+      },
+      {
+        "id": "-work-career-business-7",
+        "word": "professionalism",
+        "def": "(n/phrase) responsible and appropriate work behaviour",
+        "zh": "職業素養",
+        "example": "Professionalism matters in customer service.",
+        "exampleZh": "職業素養在客戶服務中很重要。"
+      },
+      {
+        "id": "-work-career-business-8",
+        "word": "flexible working",
+        "def": "(n/phrase) working with adaptable hours or locations",
+        "zh": "靈活工作",
+        "example": "Flexible working can reduce stress.",
+        "exampleZh": "靈活工作能減少壓力。"
+      },
+      {
+        "id": "-work-career-business-9",
+        "word": "job market",
+        "def": "(n/phrase) availability of jobs and workers",
+        "zh": "就業市場",
+        "example": "The job market is changing quickly.",
+        "exampleZh": "就業市場正在快速變化。"
+      },
+      {
+        "id": "-work-career-business-10",
+        "word": "promotion",
+        "def": "(n/phrase) moving to a higher job position",
+        "zh": "晉升",
+        "example": "Hard work can lead to promotion.",
+        "exampleZh": "努力工作可能帶來晉升。"
+      },
+      {
+        "id": "-work-career-business-11",
+        "word": "salary expectation",
+        "def": "(n/phrase) what someone hopes to earn",
+        "zh": "薪資期望",
+        "example": "Salary expectation depends on experience.",
+        "exampleZh": "薪資期望取決於經驗。"
+      },
+      {
+        "id": "-work-career-business-12",
+        "word": "customer service",
+        "def": "(n/phrase) helping and supporting customers",
+        "zh": "客戶服務",
+        "example": "Customer service skills are useful in many sectors.",
+        "exampleZh": "客戶服務技能在很多行業都有用。"
+      },
+      {
+        "id": "-work-career-business-13",
+        "word": "decision-making",
+        "def": "(n/phrase) choosing between options",
+        "zh": "決策",
+        "example": "Managers need strong decision-making skills.",
+        "exampleZh": "管理者需要強大的決策能力。"
+      },
+      {
+        "id": "-work-career-business-14",
+        "word": "problem-solving",
+        "def": "(n/phrase) finding answers to difficulties",
+        "zh": "解決問題",
+        "example": "Problem-solving is important in business.",
+        "exampleZh": "解決問題在商業中很重要。"
+      },
+      {
+        "id": "-work-career-business-15",
+        "word": "negotiation",
+        "def": "(n/phrase) discussion to reach agreement",
+        "zh": "談判",
+        "example": "Negotiation skills help in business meetings.",
+        "exampleZh": "談判技巧有助於商務會議。"
+      },
+      {
+        "id": "-work-career-business-16",
+        "word": "responsibility",
+        "def": "(n/phrase) a duty or task someone must handle",
+        "zh": "責任",
+        "example": "A manager has responsibility for the team.",
+        "exampleZh": "管理者對團隊負有責任。"
+      },
+      {
+        "id": "-work-career-business-17",
+        "word": "workplace culture",
+        "def": "(n/phrase) shared values and behaviour at work",
+        "zh": "職場文化",
+        "example": "Workplace culture affects motivation.",
+        "exampleZh": "職場文化影響動力。"
+      },
+      {
+        "id": "-work-career-business-18",
+        "word": "career development",
+        "def": "(n/phrase) improving skills for future work",
+        "zh": "職業發展",
+        "example": "Career development should continue after graduation.",
+        "exampleZh": "畢業後也應繼續職業發展。"
+      },
+      {
+        "id": "-work-career-business-19",
+        "word": "transferable skills",
+        "def": "(n/phrase) skills useful in many jobs",
+        "zh": "可遷移技能",
+        "example": "Communication is a transferable skill.",
+        "exampleZh": "溝通是一項可遷移技能。"
+      }
     ]
   },
   {
-    topic: "🎓 Academic Speaking",
-    emoji: "🎓",
-    items: [
-      { word: "clarify", def: "(v) to make something easier to understand", example: "Could I clarify the question before I answer?" },
-      { word: "perspective", def: "(n) a way of thinking about something", example: "From a student perspective, feedback is extremely useful." },
-      { word: "evidence", def: "(n) facts or examples used to support an idea", example: "I would support my opinion with evidence from my own experience." },
-      { word: "coherent", def: "(adj) logical and easy to follow", example: "A coherent answer has a clear beginning, middle and ending." },
-      { word: "contribute", def: "(v) to add to a discussion or result", example: "I try to contribute actively in seminar discussions." }
+    "topic": "🏙️ City Life & Housing",
+    "emoji": "🏙️",
+    "items": [
+      {
+        "id": "-city-life-housing-0",
+        "word": "affordable housing",
+        "def": "(n/phrase) homes people can pay for",
+        "zh": "可負擔住房",
+        "example": "This word is useful when discussing city life & housing.",
+        "exampleZh": "討論「City Life & Housing」時可以使用這個詞。"
+      },
+      {
+        "id": "-city-life-housing-1",
+        "word": "public transport",
+        "def": "(n/phrase) buses, trains and other shared travel",
+        "zh": "公共交通",
+        "example": "This word is useful when discussing city life & housing.",
+        "exampleZh": "討論「City Life & Housing」時可以使用這個詞。"
+      },
+      {
+        "id": "-city-life-housing-2",
+        "word": "neighbourhood",
+        "def": "(n/phrase) local area where people live",
+        "zh": "社區、街區",
+        "example": "This word is useful when discussing city life & housing.",
+        "exampleZh": "討論「City Life & Housing」時可以使用這個詞。"
+      },
+      {
+        "id": "-city-life-housing-3",
+        "word": "urbanisation",
+        "def": "(n/phrase) growth of cities",
+        "zh": "城市化",
+        "example": "This word is useful when discussing city life & housing.",
+        "exampleZh": "討論「City Life & Housing」時可以使用這個詞。"
+      },
+      {
+        "id": "-city-life-housing-4",
+        "word": "traffic congestion",
+        "def": "(n/phrase) too many vehicles causing delay",
+        "zh": "交通擁堵",
+        "example": "This word is useful when discussing city life & housing.",
+        "exampleZh": "討論「City Life & Housing」時可以使用這個詞。"
+      },
+      {
+        "id": "-city-life-housing-5",
+        "word": "community facilities",
+        "def": "(n/phrase) shared local services",
+        "zh": "社區設施",
+        "example": "This word is useful when discussing city life & housing.",
+        "exampleZh": "討論「City Life & Housing」時可以使用這個詞。"
+      },
+      {
+        "id": "-city-life-housing-6",
+        "word": "living standard",
+        "def": "(n/phrase) quality of life",
+        "zh": "生活水平",
+        "example": "This word is useful when discussing city life & housing.",
+        "exampleZh": "討論「City Life & Housing」時可以使用這個詞。"
+      },
+      {
+        "id": "-city-life-housing-7",
+        "word": "rental cost",
+        "def": "(n/phrase) money paid to rent a home",
+        "zh": "租金成本",
+        "example": "This word is useful when discussing city life & housing.",
+        "exampleZh": "討論「City Life & Housing」時可以使用這個詞。"
+      },
+      {
+        "id": "-city-life-housing-8",
+        "word": "safety concern",
+        "def": "(n/phrase) worry about danger or crime",
+        "zh": "安全擔憂",
+        "example": "This word is useful when discussing city life & housing.",
+        "exampleZh": "討論「City Life & Housing」時可以使用這個詞。"
+      },
+      {
+        "id": "-city-life-housing-9",
+        "word": "local council",
+        "def": "(n/phrase) local government organisation",
+        "zh": "地方議會",
+        "example": "This word is useful when discussing city life & housing.",
+        "exampleZh": "討論「City Life & Housing」時可以使用這個詞。"
+      },
+      {
+        "id": "-city-life-housing-10",
+        "word": "city centre",
+        "def": "(n/phrase) main business area of a city",
+        "zh": "市中心",
+        "example": "This word is useful when discussing city life & housing.",
+        "exampleZh": "討論「City Life & Housing」時可以使用這個詞。"
+      },
+      {
+        "id": "-city-life-housing-11",
+        "word": "suburb",
+        "def": "(n/phrase) residential area outside city centre",
+        "zh": "郊區",
+        "example": "This word is useful when discussing city life & housing.",
+        "exampleZh": "討論「City Life & Housing」時可以使用這個詞。"
+      },
+      {
+        "id": "-city-life-housing-12",
+        "word": "noise pollution",
+        "def": "(n/phrase) harmful or annoying noise",
+        "zh": "噪音污染",
+        "example": "This word is useful when discussing city life & housing.",
+        "exampleZh": "討論「City Life & Housing」時可以使用這個詞。"
+      },
+      {
+        "id": "-city-life-housing-13",
+        "word": "commuting time",
+        "def": "(n/phrase) time spent travelling to work or study",
+        "zh": "通勤時間",
+        "example": "This word is useful when discussing city life & housing.",
+        "exampleZh": "討論「City Life & Housing」時可以使用這個詞。"
+      },
+      {
+        "id": "-city-life-housing-14",
+        "word": "public space",
+        "def": "(n/phrase) area open to everyone",
+        "zh": "公共空間",
+        "example": "This word is useful when discussing city life & housing.",
+        "exampleZh": "討論「City Life & Housing」時可以使用這個詞。"
+      },
+      {
+        "id": "-city-life-housing-15",
+        "word": "infrastructure",
+        "def": "(n/phrase) basic systems such as roads and transport",
+        "zh": "基礎設施",
+        "example": "This word is useful when discussing city life & housing.",
+        "exampleZh": "討論「City Life & Housing」時可以使用這個詞。"
+      },
+      {
+        "id": "-city-life-housing-16",
+        "word": "housing shortage",
+        "def": "(n/phrase) not enough homes for people",
+        "zh": "住房短缺",
+        "example": "This word is useful when discussing city life & housing.",
+        "exampleZh": "討論「City Life & Housing」時可以使用這個詞。"
+      },
+      {
+        "id": "-city-life-housing-17",
+        "word": "quality of life",
+        "def": "(n/phrase) general comfort and happiness",
+        "zh": "生活質量",
+        "example": "This word is useful when discussing city life & housing.",
+        "exampleZh": "討論「City Life & Housing」時可以使用這個詞。"
+      },
+      {
+        "id": "-city-life-housing-18",
+        "word": "urban pressure",
+        "def": "(n/phrase) stress caused by city growth",
+        "zh": "城市壓力",
+        "example": "This word is useful when discussing city life & housing.",
+        "exampleZh": "討論「City Life & Housing」時可以使用這個詞。"
+      },
+      {
+        "id": "-city-life-housing-19",
+        "word": "local identity",
+        "def": "(n/phrase) features that make an area special",
+        "zh": "地方身份特色",
+        "example": "This word is useful when discussing city life & housing.",
+        "exampleZh": "討論「City Life & Housing」時可以使用這個詞。"
+      }
     ]
   },
   {
-    topic: "🧩 Discussion Functions",
-    emoji: "🧩",
-    items: [
-      { word: "agree partially", def: "(phrase) to agree with part of an idea", example: "I agree partially, but I think cost is also important." },
-      { word: "challenge an idea", def: "(phrase) to question or test an opinion", example: "I would challenge the idea that technology always improves learning." },
-      { word: "summarise", def: "(v) to give the main points briefly", example: "To summarise, the main issue is responsibility." },
-      { word: "compare", def: "(v) to discuss similarities and differences", example: "We can compare city life with rural life." },
-      { word: "justify", def: "(v) to give reasons for a view", example: "Students should justify their opinions with examples." }
+    "topic": "🌍 Global Issues & Society",
+    "emoji": "🌍",
+    "items": [
+      {
+        "id": "-global-issues-society-0",
+        "word": "inequality",
+        "def": "(n/phrase) unfair difference in wealth or opportunity",
+        "zh": "不平等",
+        "example": "This word is useful when discussing global issues & society.",
+        "exampleZh": "討論「Global Issues & Society」時可以使用這個詞。"
+      },
+      {
+        "id": "-global-issues-society-1",
+        "word": "migration",
+        "def": "(n/phrase) movement of people between places",
+        "zh": "移民、遷移",
+        "example": "This word is useful when discussing global issues & society.",
+        "exampleZh": "討論「Global Issues & Society」時可以使用這個詞。"
+      },
+      {
+        "id": "-global-issues-society-2",
+        "word": "globalisation",
+        "def": "(n/phrase) increasing connection between countries",
+        "zh": "全球化",
+        "example": "This word is useful when discussing global issues & society.",
+        "exampleZh": "討論「Global Issues & Society」時可以使用這個詞。"
+      },
+      {
+        "id": "-global-issues-society-3",
+        "word": "poverty",
+        "def": "(n/phrase) lack of basic money and resources",
+        "zh": "貧困",
+        "example": "This word is useful when discussing global issues & society.",
+        "exampleZh": "討論「Global Issues & Society」時可以使用這個詞。"
+      },
+      {
+        "id": "-global-issues-society-4",
+        "word": "human rights",
+        "def": "(n/phrase) basic rights all people should have",
+        "zh": "人權",
+        "example": "This word is useful when discussing global issues & society.",
+        "exampleZh": "討論「Global Issues & Society」時可以使用這個詞。"
+      },
+      {
+        "id": "-global-issues-society-5",
+        "word": "international cooperation",
+        "def": "(n/phrase) countries working together",
+        "zh": "國際合作",
+        "example": "This word is useful when discussing global issues & society.",
+        "exampleZh": "討論「Global Issues & Society」時可以使用這個詞。"
+      },
+      {
+        "id": "-global-issues-society-6",
+        "word": "cultural diversity",
+        "def": "(n/phrase) variety of cultures",
+        "zh": "文化多樣性",
+        "example": "This word is useful when discussing global issues & society.",
+        "exampleZh": "討論「Global Issues & Society」時可以使用這個詞。"
+      },
+      {
+        "id": "-global-issues-society-7",
+        "word": "social responsibility",
+        "def": "(n/phrase) duty to help society",
+        "zh": "社會責任",
+        "example": "This word is useful when discussing global issues & society.",
+        "exampleZh": "討論「Global Issues & Society」時可以使用這個詞。"
+      },
+      {
+        "id": "-global-issues-society-8",
+        "word": "economic gap",
+        "def": "(n/phrase) difference between rich and poor",
+        "zh": "經濟差距",
+        "example": "This word is useful when discussing global issues & society.",
+        "exampleZh": "討論「Global Issues & Society」時可以使用這個詞。"
+      },
+      {
+        "id": "-global-issues-society-9",
+        "word": "humanitarian aid",
+        "def": "(n/phrase) help for people in crisis",
+        "zh": "人道援助",
+        "example": "This word is useful when discussing global issues & society.",
+        "exampleZh": "討論「Global Issues & Society」時可以使用這個詞。"
+      },
+      {
+        "id": "-global-issues-society-10",
+        "word": "conflict",
+        "def": "(n/phrase) serious disagreement or fighting",
+        "zh": "衝突",
+        "example": "This word is useful when discussing global issues & society.",
+        "exampleZh": "討論「Global Issues & Society」時可以使用這個詞。"
+      },
+      {
+        "id": "-global-issues-society-11",
+        "word": "peaceful solution",
+        "def": "(n/phrase) non-violent answer to a problem",
+        "zh": "和平解決方案",
+        "example": "This word is useful when discussing global issues & society.",
+        "exampleZh": "討論「Global Issues & Society」時可以使用這個詞。"
+      },
+      {
+        "id": "-global-issues-society-12",
+        "word": "social mobility",
+        "def": "(n/phrase) ability to move to a better social position",
+        "zh": "社會流動",
+        "example": "This word is useful when discussing global issues & society.",
+        "exampleZh": "討論「Global Issues & Society」時可以使用這個詞。"
+      },
+      {
+        "id": "-global-issues-society-13",
+        "word": "equal opportunity",
+        "def": "(n/phrase) fair chance for everyone",
+        "zh": "平等機會",
+        "example": "This word is useful when discussing global issues & society.",
+        "exampleZh": "討論「Global Issues & Society」時可以使用這個詞。"
+      },
+      {
+        "id": "-global-issues-society-14",
+        "word": "international student",
+        "def": "(n/phrase) student studying in another country",
+        "zh": "國際學生",
+        "example": "This word is useful when discussing global issues & society.",
+        "exampleZh": "討論「Global Issues & Society」時可以使用這個詞。"
+      },
+      {
+        "id": "-global-issues-society-15",
+        "word": "cross-cultural communication",
+        "def": "(n/phrase) communication across cultures",
+        "zh": "跨文化溝通",
+        "example": "This word is useful when discussing global issues & society.",
+        "exampleZh": "討論「Global Issues & Society」時可以使用這個詞。"
+      },
+      {
+        "id": "-global-issues-society-16",
+        "word": "global citizen",
+        "def": "(n/phrase) person aware of world responsibilities",
+        "zh": "全球公民",
+        "example": "This word is useful when discussing global issues & society.",
+        "exampleZh": "討論「Global Issues & Society」時可以使用這個詞。"
+      },
+      {
+        "id": "-global-issues-society-17",
+        "word": "developing country",
+        "def": "(n/phrase) country with lower income and development",
+        "zh": "發展中國家",
+        "example": "This word is useful when discussing global issues & society.",
+        "exampleZh": "討論「Global Issues & Society」時可以使用這個詞。"
+      },
+      {
+        "id": "-global-issues-society-18",
+        "word": "wealthier nation",
+        "def": "(n/phrase) country with more economic resources",
+        "zh": "較富裕國家",
+        "example": "This word is useful when discussing global issues & society.",
+        "exampleZh": "討論「Global Issues & Society」時可以使用這個詞。"
+      },
+      {
+        "id": "-global-issues-society-19",
+        "word": "social change",
+        "def": "(n/phrase) change in society over time",
+        "zh": "社會變遷",
+        "example": "This word is useful when discussing global issues & society.",
+        "exampleZh": "討論「Global Issues & Society」時可以使用這個詞。"
+      }
+    ]
+  },
+  {
+    "topic": "🎭 Culture, Travel & Media",
+    "emoji": "🎭",
+    "items": [
+      {
+        "id": "-culture-travel-media-0",
+        "word": "cultural heritage",
+        "def": "(n/phrase) traditions and history passed down",
+        "zh": "文化遺產",
+        "example": "This word is useful when discussing culture, travel & media.",
+        "exampleZh": "討論「Culture, Travel & Media」時可以使用這個詞。"
+      },
+      {
+        "id": "-culture-travel-media-1",
+        "word": "tourist attraction",
+        "def": "(n/phrase) place visitors like to see",
+        "zh": "旅遊景點",
+        "example": "This word is useful when discussing culture, travel & media.",
+        "exampleZh": "討論「Culture, Travel & Media」時可以使用這個詞。"
+      },
+      {
+        "id": "-culture-travel-media-2",
+        "word": "local cuisine",
+        "def": "(n/phrase) food from a local area",
+        "zh": "當地美食",
+        "example": "This word is useful when discussing culture, travel & media.",
+        "exampleZh": "討論「Culture, Travel & Media」時可以使用這個詞。"
+      },
+      {
+        "id": "-culture-travel-media-3",
+        "word": "tradition",
+        "def": "(n/phrase) long-established custom",
+        "zh": "傳統",
+        "example": "This word is useful when discussing culture, travel & media.",
+        "exampleZh": "討論「Culture, Travel & Media」時可以使用這個詞。"
+      },
+      {
+        "id": "-culture-travel-media-4",
+        "word": "custom",
+        "def": "(n/phrase) usual social practice",
+        "zh": "習俗",
+        "example": "This word is useful when discussing culture, travel & media.",
+        "exampleZh": "討論「Culture, Travel & Media」時可以使用這個詞。"
+      },
+      {
+        "id": "-culture-travel-media-5",
+        "word": "adaptation",
+        "def": "(n/phrase) adjusting to a new situation",
+        "zh": "適應",
+        "example": "This word is useful when discussing culture, travel & media.",
+        "exampleZh": "討論「Culture, Travel & Media」時可以使用這個詞。"
+      },
+      {
+        "id": "-culture-travel-media-6",
+        "word": "homesickness",
+        "def": "(n/phrase) sadness from being away from home",
+        "zh": "思鄉",
+        "example": "This word is useful when discussing culture, travel & media.",
+        "exampleZh": "討論「Culture, Travel & Media」時可以使用這個詞。"
+      },
+      {
+        "id": "-culture-travel-media-7",
+        "word": "media influence",
+        "def": "(n/phrase) effect of media on people",
+        "zh": "媒體影響",
+        "example": "This word is useful when discussing culture, travel & media.",
+        "exampleZh": "討論「Culture, Travel & Media」時可以使用這個詞。"
+      },
+      {
+        "id": "-culture-travel-media-8",
+        "word": "fake news",
+        "def": "(n/phrase) false information presented as news",
+        "zh": "假新聞",
+        "example": "This word is useful when discussing culture, travel & media.",
+        "exampleZh": "討論「Culture, Travel & Media」時可以使用這個詞。"
+      },
+      {
+        "id": "-culture-travel-media-9",
+        "word": "reliable source",
+        "def": "(n/phrase) trustworthy place for information",
+        "zh": "可靠來源",
+        "example": "This word is useful when discussing culture, travel & media.",
+        "exampleZh": "討論「Culture, Travel & Media」時可以使用這個詞。"
+      },
+      {
+        "id": "-culture-travel-media-10",
+        "word": "social media platform",
+        "def": "(n/phrase) website or app for sharing content",
+        "zh": "社交媒體平台",
+        "example": "This word is useful when discussing culture, travel & media.",
+        "exampleZh": "討論「Culture, Travel & Media」時可以使用這個詞。"
+      },
+      {
+        "id": "-culture-travel-media-11",
+        "word": "online identity",
+        "def": "(n/phrase) how someone appears online",
+        "zh": "網絡身份",
+        "example": "This word is useful when discussing culture, travel & media.",
+        "exampleZh": "討論「Culture, Travel & Media」時可以使用這個詞。"
+      },
+      {
+        "id": "-culture-travel-media-12",
+        "word": "privacy setting",
+        "def": "(n/phrase) control over who sees online information",
+        "zh": "隱私設置",
+        "example": "This word is useful when discussing culture, travel & media.",
+        "exampleZh": "討論「Culture, Travel & Media」時可以使用這個詞。"
+      },
+      {
+        "id": "-culture-travel-media-13",
+        "word": "documentary",
+        "def": "(n/phrase) factual film or programme",
+        "zh": "紀錄片",
+        "example": "This word is useful when discussing culture, travel & media.",
+        "exampleZh": "討論「Culture, Travel & Media」時可以使用這個詞。"
+      },
+      {
+        "id": "-culture-travel-media-14",
+        "word": "entertainment industry",
+        "def": "(n/phrase) business of films, music and media",
+        "zh": "娛樂產業",
+        "example": "This word is useful when discussing culture, travel & media.",
+        "exampleZh": "討論「Culture, Travel & Media」時可以使用這個詞。"
+      },
+      {
+        "id": "-culture-travel-media-15",
+        "word": "cultural exchange",
+        "def": "(n/phrase) sharing cultures between groups",
+        "zh": "文化交流",
+        "example": "This word is useful when discussing culture, travel & media.",
+        "exampleZh": "討論「Culture, Travel & Media」時可以使用這個詞。"
+      },
+      {
+        "id": "-culture-travel-media-16",
+        "word": "travel experience",
+        "def": "(n/phrase) what someone learns while travelling",
+        "zh": "旅行經歷",
+        "example": "This word is useful when discussing culture, travel & media.",
+        "exampleZh": "討論「Culture, Travel & Media」時可以使用這個詞。"
+      },
+      {
+        "id": "-culture-travel-media-17",
+        "word": "independent travel",
+        "def": "(n/phrase) travelling without a tour group",
+        "zh": "自由行",
+        "example": "This word is useful when discussing culture, travel & media.",
+        "exampleZh": "討論「Culture, Travel & Media」時可以使用這個詞。"
+      },
+      {
+        "id": "-culture-travel-media-18",
+        "word": "tourism economy",
+        "def": "(n/phrase) money and jobs from tourism",
+        "zh": "旅遊經濟",
+        "example": "This word is useful when discussing culture, travel & media.",
+        "exampleZh": "討論「Culture, Travel & Media」時可以使用這個詞。"
+      },
+      {
+        "id": "-culture-travel-media-19",
+        "word": "media regulation",
+        "def": "(n/phrase) rules controlling media content",
+        "zh": "媒體監管",
+        "example": "This word is useful when discussing culture, travel & media.",
+        "exampleZh": "討論「Culture, Travel & Media」時可以使用這個詞。"
+      }
+    ]
+  },
+  {
+    "topic": "⚽ Leisure, Sport & Personal Life",
+    "emoji": "⚽",
+    "items": [
+      {
+        "id": "-leisure-sport-personal-life-0",
+        "word": "leisure activity",
+        "def": "(n/phrase) activity done for enjoyment",
+        "zh": "休閒活動",
+        "example": "This word is useful when discussing leisure, sport & personal life.",
+        "exampleZh": "討論「Leisure, Sport & Personal Life」時可以使用這個詞。"
+      },
+      {
+        "id": "-leisure-sport-personal-life-1",
+        "word": "hobby",
+        "def": "(n/phrase) activity done regularly for pleasure",
+        "zh": "愛好",
+        "example": "This word is useful when discussing leisure, sport & personal life.",
+        "exampleZh": "討論「Leisure, Sport & Personal Life」時可以使用這個詞。"
+      },
+      {
+        "id": "-leisure-sport-personal-life-2",
+        "word": "physical fitness",
+        "def": "(n/phrase) strength and health of the body",
+        "zh": "體能",
+        "example": "This word is useful when discussing leisure, sport & personal life.",
+        "exampleZh": "討論「Leisure, Sport & Personal Life」時可以使用這個詞。"
+      },
+      {
+        "id": "-leisure-sport-personal-life-3",
+        "word": "competitive sport",
+        "def": "(n/phrase) sport focused on winning",
+        "zh": "競技體育",
+        "example": "This word is useful when discussing leisure, sport & personal life.",
+        "exampleZh": "討論「Leisure, Sport & Personal Life」時可以使用這個詞。"
+      },
+      {
+        "id": "-leisure-sport-personal-life-4",
+        "word": "team spirit",
+        "def": "(n/phrase) positive feeling in a group",
+        "zh": "團隊精神",
+        "example": "This word is useful when discussing leisure, sport & personal life.",
+        "exampleZh": "討論「Leisure, Sport & Personal Life」時可以使用這個詞。"
+      },
+      {
+        "id": "-leisure-sport-personal-life-5",
+        "word": "personal interest",
+        "def": "(n/phrase) something someone enjoys",
+        "zh": "個人興趣",
+        "example": "This word is useful when discussing leisure, sport & personal life.",
+        "exampleZh": "討論「Leisure, Sport & Personal Life」時可以使用這個詞。"
+      },
+      {
+        "id": "-leisure-sport-personal-life-6",
+        "word": "relaxation",
+        "def": "(n/phrase) resting and reducing stress",
+        "zh": "放鬆",
+        "example": "This word is useful when discussing leisure, sport & personal life.",
+        "exampleZh": "討論「Leisure, Sport & Personal Life」時可以使用這個詞。"
+      },
+      {
+        "id": "-leisure-sport-personal-life-7",
+        "word": "recreation",
+        "def": "(n/phrase) activities for enjoyment",
+        "zh": "娛樂休閒",
+        "example": "This word is useful when discussing leisure, sport & personal life.",
+        "exampleZh": "討論「Leisure, Sport & Personal Life」時可以使用這個詞。"
+      },
+      {
+        "id": "-leisure-sport-personal-life-8",
+        "word": "time management",
+        "def": "(n/phrase) planning how to use time",
+        "zh": "時間管理",
+        "example": "This word is useful when discussing leisure, sport & personal life.",
+        "exampleZh": "討論「Leisure, Sport & Personal Life」時可以使用這個詞。"
+      },
+      {
+        "id": "-leisure-sport-personal-life-9",
+        "word": "daily routine",
+        "def": "(n/phrase) usual daily pattern",
+        "zh": "日常安排",
+        "example": "This word is useful when discussing leisure, sport & personal life.",
+        "exampleZh": "討論「Leisure, Sport & Personal Life」時可以使用這個詞。"
+      },
+      {
+        "id": "-leisure-sport-personal-life-10",
+        "word": "family bond",
+        "def": "(n/phrase) close relationship in a family",
+        "zh": "家庭紐帶",
+        "example": "This word is useful when discussing leisure, sport & personal life.",
+        "exampleZh": "討論「Leisure, Sport & Personal Life」時可以使用這個詞。"
+      },
+      {
+        "id": "-leisure-sport-personal-life-11",
+        "word": "friendship",
+        "def": "(n/phrase) relationship between friends",
+        "zh": "友誼",
+        "example": "This word is useful when discussing leisure, sport & personal life.",
+        "exampleZh": "討論「Leisure, Sport & Personal Life」時可以使用這個詞。"
+      },
+      {
+        "id": "-leisure-sport-personal-life-12",
+        "word": "social life",
+        "def": "(n/phrase) activities and relationships outside work/study",
+        "zh": "社交生活",
+        "example": "This word is useful when discussing leisure, sport & personal life.",
+        "exampleZh": "討論「Leisure, Sport & Personal Life」時可以使用這個詞。"
+      },
+      {
+        "id": "-leisure-sport-personal-life-13",
+        "word": "confidence",
+        "def": "(n/phrase) belief in your own ability",
+        "zh": "自信",
+        "example": "This word is useful when discussing leisure, sport & personal life.",
+        "exampleZh": "討論「Leisure, Sport & Personal Life」時可以使用這個詞。"
+      },
+      {
+        "id": "-leisure-sport-personal-life-14",
+        "word": "self-improvement",
+        "def": "(n/phrase) making yourself better",
+        "zh": "自我提升",
+        "example": "This word is useful when discussing leisure, sport & personal life.",
+        "exampleZh": "討論「Leisure, Sport & Personal Life」時可以使用這個詞。"
+      },
+      {
+        "id": "-leisure-sport-personal-life-15",
+        "word": "creative activity",
+        "def": "(n/phrase) activity involving imagination",
+        "zh": "創意活動",
+        "example": "This word is useful when discussing leisure, sport & personal life.",
+        "exampleZh": "討論「Leisure, Sport & Personal Life」時可以使用這個詞。"
+      },
+      {
+        "id": "-leisure-sport-personal-life-16",
+        "word": "healthy competition",
+        "def": "(n/phrase) competition that motivates positively",
+        "zh": "健康競爭",
+        "example": "This word is useful when discussing leisure, sport & personal life.",
+        "exampleZh": "討論「Leisure, Sport & Personal Life」時可以使用這個詞。"
+      },
+      {
+        "id": "-leisure-sport-personal-life-17",
+        "word": "team member",
+        "def": "(n/phrase) person in a team",
+        "zh": "團隊成員",
+        "example": "This word is useful when discussing leisure, sport & personal life.",
+        "exampleZh": "討論「Leisure, Sport & Personal Life」時可以使用這個詞。"
+      },
+      {
+        "id": "-leisure-sport-personal-life-18",
+        "word": "personal achievement",
+        "def": "(n/phrase) something successful someone has done",
+        "zh": "個人成就",
+        "example": "This word is useful when discussing leisure, sport & personal life.",
+        "exampleZh": "討論「Leisure, Sport & Personal Life」時可以使用這個詞。"
+      },
+      {
+        "id": "-leisure-sport-personal-life-19",
+        "word": "motivate others",
+        "def": "(n/phrase) encourage other people",
+        "zh": "激勵他人",
+        "example": "This word is useful when discussing leisure, sport & personal life.",
+        "exampleZh": "討論「Leisure, Sport & Personal Life」時可以使用這個詞。"
+      }
+    ]
+  },
+  {
+    "topic": "🔗 Academic Linkers & Sentence Starters",
+    "emoji": "🔗",
+    "items": [
+      {
+        "id": "-academic-linkers-sentence-starters-0",
+        "word": "firstly",
+        "def": "(n/phrase) used to introduce the first point",
+        "zh": "首先",
+        "example": "This word is useful when discussing academic linkers & sentence starters.",
+        "exampleZh": "討論「Academic Linkers & Sentence Starters」時可以使用這個詞。"
+      },
+      {
+        "id": "-academic-linkers-sentence-starters-1",
+        "word": "in addition",
+        "def": "(n/phrase) used to add another point",
+        "zh": "此外",
+        "example": "This word is useful when discussing academic linkers & sentence starters.",
+        "exampleZh": "討論「Academic Linkers & Sentence Starters」時可以使用這個詞。"
+      },
+      {
+        "id": "-academic-linkers-sentence-starters-2",
+        "word": "however",
+        "def": "(n/phrase) used to show contrast",
+        "zh": "然而",
+        "example": "This word is useful when discussing academic linkers & sentence starters.",
+        "exampleZh": "討論「Academic Linkers & Sentence Starters」時可以使用這個詞。"
+      },
+      {
+        "id": "-academic-linkers-sentence-starters-3",
+        "word": "therefore",
+        "def": "(n/phrase) used to show result",
+        "zh": "因此",
+        "example": "This word is useful when discussing academic linkers & sentence starters.",
+        "exampleZh": "討論「Academic Linkers & Sentence Starters」時可以使用這個詞。"
+      },
+      {
+        "id": "-academic-linkers-sentence-starters-4",
+        "word": "as a result",
+        "def": "(n/phrase) because of this",
+        "zh": "結果是",
+        "example": "This word is useful when discussing academic linkers & sentence starters.",
+        "exampleZh": "討論「Academic Linkers & Sentence Starters」時可以使用這個詞。"
+      },
+      {
+        "id": "-academic-linkers-sentence-starters-5",
+        "word": "for instance",
+        "def": "(n/phrase) for example",
+        "zh": "例如",
+        "example": "This word is useful when discussing academic linkers & sentence starters.",
+        "exampleZh": "討論「Academic Linkers & Sentence Starters」時可以使用這個詞。"
+      },
+      {
+        "id": "-academic-linkers-sentence-starters-6",
+        "word": "in contrast",
+        "def": "(n/phrase) showing a clear difference",
+        "zh": "相比之下",
+        "example": "This word is useful when discussing academic linkers & sentence starters.",
+        "exampleZh": "討論「Academic Linkers & Sentence Starters」時可以使用這個詞。"
+      },
+      {
+        "id": "-academic-linkers-sentence-starters-7",
+        "word": "from my perspective",
+        "def": "(n/phrase) in my opinion",
+        "zh": "從我的角度看",
+        "example": "This word is useful when discussing academic linkers & sentence starters.",
+        "exampleZh": "討論「Academic Linkers & Sentence Starters」時可以使用這個詞。"
+      },
+      {
+        "id": "-academic-linkers-sentence-starters-8",
+        "word": "to some extent",
+        "def": "(n/phrase) partly",
+        "zh": "在某種程度上",
+        "example": "This word is useful when discussing academic linkers & sentence starters.",
+        "exampleZh": "討論「Academic Linkers & Sentence Starters」時可以使用這個詞。"
+      },
+      {
+        "id": "-academic-linkers-sentence-starters-9",
+        "word": "on the one hand",
+        "def": "(n/phrase) one side of an argument",
+        "zh": "一方面",
+        "example": "This word is useful when discussing academic linkers & sentence starters.",
+        "exampleZh": "討論「Academic Linkers & Sentence Starters」時可以使用這個詞。"
+      },
+      {
+        "id": "-academic-linkers-sentence-starters-10",
+        "word": "on the other hand",
+        "def": "(n/phrase) the opposite side",
+        "zh": "另一方面",
+        "example": "This word is useful when discussing academic linkers & sentence starters.",
+        "exampleZh": "討論「Academic Linkers & Sentence Starters」時可以使用這個詞。"
+      },
+      {
+        "id": "-academic-linkers-sentence-starters-11",
+        "word": "in the long term",
+        "def": "(n/phrase) over a long period",
+        "zh": "從長期來看",
+        "example": "This word is useful when discussing academic linkers & sentence starters.",
+        "exampleZh": "討論「Academic Linkers & Sentence Starters」時可以使用這個詞。"
+      },
+      {
+        "id": "-academic-linkers-sentence-starters-12",
+        "word": "in practical terms",
+        "def": "(n/phrase) in real-life use",
+        "zh": "從實際角度看",
+        "example": "This word is useful when discussing academic linkers & sentence starters.",
+        "exampleZh": "討論「Academic Linkers & Sentence Starters」時可以使用這個詞。"
+      },
+      {
+        "id": "-academic-linkers-sentence-starters-13",
+        "word": "this suggests that",
+        "def": "(n/phrase) this shows or implies",
+        "zh": "這表明",
+        "example": "This word is useful when discussing academic linkers & sentence starters.",
+        "exampleZh": "討論「Academic Linkers & Sentence Starters」時可以使用這個詞。"
+      },
+      {
+        "id": "-academic-linkers-sentence-starters-14",
+        "word": "a possible solution is",
+        "def": "(n/phrase) one answer could be",
+        "zh": "一個可能的解決方法是",
+        "example": "This word is useful when discussing academic linkers & sentence starters.",
+        "exampleZh": "討論「Academic Linkers & Sentence Starters」時可以使用這個詞。"
+      },
+      {
+        "id": "-academic-linkers-sentence-starters-15",
+        "word": "the main reason is",
+        "def": "(n/phrase) the most important cause is",
+        "zh": "主要原因是",
+        "example": "This word is useful when discussing academic linkers & sentence starters.",
+        "exampleZh": "討論「Academic Linkers & Sentence Starters」時可以使用這個詞。"
+      },
+      {
+        "id": "-academic-linkers-sentence-starters-16",
+        "word": "it depends on",
+        "def": "(n/phrase) it is affected by",
+        "zh": "這取決於",
+        "example": "This word is useful when discussing academic linkers & sentence starters.",
+        "exampleZh": "討論「Academic Linkers & Sentence Starters」時可以使用這個詞。"
+      },
+      {
+        "id": "-academic-linkers-sentence-starters-17",
+        "word": "compared with",
+        "def": "(n/phrase) when considered against",
+        "zh": "與……相比",
+        "example": "This word is useful when discussing academic linkers & sentence starters.",
+        "exampleZh": "討論「Academic Linkers & Sentence Starters」時可以使用這個詞。"
+      },
+      {
+        "id": "-academic-linkers-sentence-starters-18",
+        "word": "overall",
+        "def": "(n/phrase) considering everything",
+        "zh": "總體而言",
+        "example": "This word is useful when discussing academic linkers & sentence starters.",
+        "exampleZh": "討論「Academic Linkers & Sentence Starters」時可以使用這個詞。"
+      },
+      {
+        "id": "-academic-linkers-sentence-starters-19",
+        "word": "to conclude",
+        "def": "(n/phrase) to finish the answer",
+        "zh": "總結來說",
+        "example": "This word is useful when discussing academic linkers & sentence starters.",
+        "exampleZh": "討論「Academic Linkers & Sentence Starters」時可以使用這個詞。"
+      }
+    ]
+  },
+  {
+    "topic": "📈 Cause, Effect & Problem Solving",
+    "emoji": "📈",
+    "items": [
+      {
+        "id": "-cause-effect-problem-solving-0",
+        "word": "cause",
+        "def": "(n/phrase) reason something happens",
+        "zh": "原因",
+        "example": "This word is useful when discussing cause, effect & problem solving.",
+        "exampleZh": "討論「Cause, Effect & Problem Solving」時可以使用這個詞。"
+      },
+      {
+        "id": "-cause-effect-problem-solving-1",
+        "word": "effect",
+        "def": "(n/phrase) result of something",
+        "zh": "影響、結果",
+        "example": "This word is useful when discussing cause, effect & problem solving.",
+        "exampleZh": "討論「Cause, Effect & Problem Solving」時可以使用這個詞。"
+      },
+      {
+        "id": "-cause-effect-problem-solving-2",
+        "word": "consequence",
+        "def": "(n/phrase) important result",
+        "zh": "後果",
+        "example": "This word is useful when discussing cause, effect & problem solving.",
+        "exampleZh": "討論「Cause, Effect & Problem Solving」時可以使用這個詞。"
+      },
+      {
+        "id": "-cause-effect-problem-solving-3",
+        "word": "solution",
+        "def": "(n/phrase) answer to a problem",
+        "zh": "解決方案",
+        "example": "This word is useful when discussing cause, effect & problem solving.",
+        "exampleZh": "討論「Cause, Effect & Problem Solving」時可以使用這個詞。"
+      },
+      {
+        "id": "-cause-effect-problem-solving-4",
+        "word": "challenge",
+        "def": "(n/phrase) difficult problem",
+        "zh": "挑戰",
+        "example": "This word is useful when discussing cause, effect & problem solving.",
+        "exampleZh": "討論「Cause, Effect & Problem Solving」時可以使用這個詞。"
+      },
+      {
+        "id": "-cause-effect-problem-solving-5",
+        "word": "benefit",
+        "def": "(n/phrase) positive result",
+        "zh": "好處",
+        "example": "This word is useful when discussing cause, effect & problem solving.",
+        "exampleZh": "討論「Cause, Effect & Problem Solving」時可以使用這個詞。"
+      },
+      {
+        "id": "-cause-effect-problem-solving-6",
+        "word": "drawback",
+        "def": "(n/phrase) disadvantage",
+        "zh": "缺點",
+        "example": "This word is useful when discussing cause, effect & problem solving.",
+        "exampleZh": "討論「Cause, Effect & Problem Solving」時可以使用這個詞。"
+      },
+      {
+        "id": "-cause-effect-problem-solving-7",
+        "word": "risk",
+        "def": "(n/phrase) possibility of harm",
+        "zh": "風險",
+        "example": "This word is useful when discussing cause, effect & problem solving.",
+        "exampleZh": "討論「Cause, Effect & Problem Solving」時可以使用這個詞。"
+      },
+      {
+        "id": "-cause-effect-problem-solving-8",
+        "word": "opportunity",
+        "def": "(n/phrase) good chance for progress",
+        "zh": "機會",
+        "example": "This word is useful when discussing cause, effect & problem solving.",
+        "exampleZh": "討論「Cause, Effect & Problem Solving」時可以使用這個詞。"
+      },
+      {
+        "id": "-cause-effect-problem-solving-9",
+        "word": "pressure",
+        "def": "(n/phrase) stress or demand",
+        "zh": "壓力",
+        "example": "This word is useful when discussing cause, effect & problem solving.",
+        "exampleZh": "討論「Cause, Effect & Problem Solving」時可以使用這個詞。"
+      },
+      {
+        "id": "-cause-effect-problem-solving-10",
+        "word": "priority",
+        "def": "(n/phrase) something more important than others",
+        "zh": "優先事項",
+        "example": "This word is useful when discussing cause, effect & problem solving.",
+        "exampleZh": "討論「Cause, Effect & Problem Solving」時可以使用這個詞。"
+      },
+      {
+        "id": "-cause-effect-problem-solving-11",
+        "word": "barrier",
+        "def": "(n/phrase) something that blocks progress",
+        "zh": "障礙",
+        "example": "This word is useful when discussing cause, effect & problem solving.",
+        "exampleZh": "討論「Cause, Effect & Problem Solving」時可以使用這個詞。"
+      },
+      {
+        "id": "-cause-effect-problem-solving-12",
+        "word": "resource",
+        "def": "(n/phrase) something useful for achieving a goal",
+        "zh": "資源",
+        "example": "This word is useful when discussing cause, effect & problem solving.",
+        "exampleZh": "討論「Cause, Effect & Problem Solving」時可以使用這個詞。"
+      },
+      {
+        "id": "-cause-effect-problem-solving-13",
+        "word": "strategy",
+        "def": "(n/phrase) planned way to achieve something",
+        "zh": "策略",
+        "example": "This word is useful when discussing cause, effect & problem solving.",
+        "exampleZh": "討論「Cause, Effect & Problem Solving」時可以使用這個詞。"
+      },
+      {
+        "id": "-cause-effect-problem-solving-14",
+        "word": "approach",
+        "def": "(n/phrase) way of doing something",
+        "zh": "方法",
+        "example": "This word is useful when discussing cause, effect & problem solving.",
+        "exampleZh": "討論「Cause, Effect & Problem Solving」時可以使用這個詞。"
+      },
+      {
+        "id": "-cause-effect-problem-solving-15",
+        "word": "impact",
+        "def": "(n/phrase) strong effect",
+        "zh": "影響",
+        "example": "This word is useful when discussing cause, effect & problem solving.",
+        "exampleZh": "討論「Cause, Effect & Problem Solving」時可以使用這個詞。"
+      },
+      {
+        "id": "-cause-effect-problem-solving-16",
+        "word": "improvement",
+        "def": "(n/phrase) positive change",
+        "zh": "改善",
+        "example": "This word is useful when discussing cause, effect & problem solving.",
+        "exampleZh": "討論「Cause, Effect & Problem Solving」時可以使用這個詞。"
+      },
+      {
+        "id": "-cause-effect-problem-solving-17",
+        "word": "limitation",
+        "def": "(n/phrase) weakness or restriction",
+        "zh": "限制",
+        "example": "This word is useful when discussing cause, effect & problem solving.",
+        "exampleZh": "討論「Cause, Effect & Problem Solving」時可以使用這個詞。"
+      },
+      {
+        "id": "-cause-effect-problem-solving-18",
+        "word": "trade-off",
+        "def": "(n/phrase) balance between two competing things",
+        "zh": "取捨",
+        "example": "This word is useful when discussing cause, effect & problem solving.",
+        "exampleZh": "討論「Cause, Effect & Problem Solving」時可以使用這個詞。"
+      },
+      {
+        "id": "-cause-effect-problem-solving-19",
+        "word": "long-term solution",
+        "def": "(n/phrase) answer that works over time",
+        "zh": "長期解決方案",
+        "example": "This word is useful when discussing cause, effect & problem solving.",
+        "exampleZh": "討論「Cause, Effect & Problem Solving」時可以使用這個詞。"
+      }
+    ]
+  },
+  {
+    "topic": "🧑‍🎓 University Life & UK Study",
+    "emoji": "🧑‍🎓",
+    "items": [
+      {
+        "id": "-university-life-uk-study-0",
+        "word": "campus",
+        "def": "(n/phrase) university buildings and area",
+        "zh": "校園",
+        "example": "This word is useful when discussing university life & uk study.",
+        "exampleZh": "討論「University Life & UK Study」時可以使用這個詞。"
+      },
+      {
+        "id": "-university-life-uk-study-1",
+        "word": "student support",
+        "def": "(n/phrase) services that help students",
+        "zh": "學生支持",
+        "example": "This word is useful when discussing university life & uk study.",
+        "exampleZh": "討論「University Life & UK Study」時可以使用這個詞。"
+      },
+      {
+        "id": "-university-life-uk-study-2",
+        "word": "accommodation",
+        "def": "(n/phrase) place to live",
+        "zh": "住宿",
+        "example": "This word is useful when discussing university life & uk study.",
+        "exampleZh": "討論「University Life & UK Study」時可以使用這個詞。"
+      },
+      {
+        "id": "-university-life-uk-study-3",
+        "word": "enrolment",
+        "def": "(n/phrase) official joining of a course",
+        "zh": "註冊入學",
+        "example": "This word is useful when discussing university life & uk study.",
+        "exampleZh": "討論「University Life & UK Study」時可以使用這個詞。"
+      },
+      {
+        "id": "-university-life-uk-study-4",
+        "word": "orientation",
+        "def": "(n/phrase) introduction for new students",
+        "zh": "新生導向",
+        "example": "This word is useful when discussing university life & uk study.",
+        "exampleZh": "討論「University Life & UK Study」時可以使用這個詞。"
+      },
+      {
+        "id": "-university-life-uk-study-5",
+        "word": "library resource",
+        "def": "(n/phrase) study material from the library",
+        "zh": "圖書館資源",
+        "example": "This word is useful when discussing university life & uk study.",
+        "exampleZh": "討論「University Life & UK Study」時可以使用這個詞。"
+      },
+      {
+        "id": "-university-life-uk-study-6",
+        "word": "academic advisor",
+        "def": "(n/phrase) person who gives study guidance",
+        "zh": "學業導師",
+        "example": "This word is useful when discussing university life & uk study.",
+        "exampleZh": "討論「University Life & UK Study」時可以使用這個詞。"
+      },
+      {
+        "id": "-university-life-uk-study-7",
+        "word": "student union",
+        "def": "(n/phrase) student organisation",
+        "zh": "學生會",
+        "example": "This word is useful when discussing university life & uk study.",
+        "exampleZh": "討論「University Life & UK Study」時可以使用這個詞。"
+      },
+      {
+        "id": "-university-life-uk-study-8",
+        "word": "course module",
+        "def": "(n/phrase) one unit of study",
+        "zh": "課程單元",
+        "example": "This word is useful when discussing university life & uk study.",
+        "exampleZh": "討論「University Life & UK Study」時可以使用這個詞。"
+      },
+      {
+        "id": "-university-life-uk-study-9",
+        "word": "entry requirement",
+        "def": "(n/phrase) condition for joining a course",
+        "zh": "入學要求",
+        "example": "This word is useful when discussing university life & uk study.",
+        "exampleZh": "討論「University Life & UK Study」時可以使用這個詞。"
+      },
+      {
+        "id": "-university-life-uk-study-10",
+        "word": "progression route",
+        "def": "(n/phrase) path to next study stage",
+        "zh": "升學路徑",
+        "example": "This word is useful when discussing university life & uk study.",
+        "exampleZh": "討論「University Life & UK Study」時可以使用這個詞。"
+      },
+      {
+        "id": "-university-life-uk-study-11",
+        "word": "tuition fee",
+        "def": "(n/phrase) money paid for study",
+        "zh": "學費",
+        "example": "This word is useful when discussing university life & uk study.",
+        "exampleZh": "討論「University Life & UK Study」時可以使用這個詞。"
+      },
+      {
+        "id": "-university-life-uk-study-12",
+        "word": "attendance",
+        "def": "(n/phrase) being present at class",
+        "zh": "出勤",
+        "example": "This word is useful when discussing university life & uk study.",
+        "exampleZh": "討論「University Life & UK Study」時可以使用這個詞。"
+      },
+      {
+        "id": "-university-life-uk-study-13",
+        "word": "study visa",
+        "def": "(n/phrase) visa for studying abroad",
+        "zh": "學生簽證",
+        "example": "This word is useful when discussing university life & uk study.",
+        "exampleZh": "討論「University Life & UK Study」時可以使用這個詞。"
+      },
+      {
+        "id": "-university-life-uk-study-14",
+        "word": "international office",
+        "def": "(n/phrase) department supporting international students",
+        "zh": "國際學生辦公室",
+        "example": "This word is useful when discussing university life & uk study.",
+        "exampleZh": "討論「University Life & UK Study」時可以使用這個詞。"
+      },
+      {
+        "id": "-university-life-uk-study-15",
+        "word": "academic calendar",
+        "def": "(n/phrase) university yearly timetable",
+        "zh": "學年日曆",
+        "example": "This word is useful when discussing university life & uk study.",
+        "exampleZh": "討論「University Life & UK Study」時可以使用這個詞。"
+      },
+      {
+        "id": "-university-life-uk-study-16",
+        "word": "submission portal",
+        "def": "(n/phrase) online place to submit work",
+        "zh": "提交平台",
+        "example": "This word is useful when discussing university life & uk study.",
+        "exampleZh": "討論「University Life & UK Study」時可以使用這個詞。"
+      },
+      {
+        "id": "-university-life-uk-study-17",
+        "word": "group project",
+        "def": "(n/phrase) assignment completed with others",
+        "zh": "小組項目",
+        "example": "This word is useful when discussing university life & uk study.",
+        "exampleZh": "討論「University Life & UK Study」時可以使用這個詞。"
+      },
+      {
+        "id": "-university-life-uk-study-18",
+        "word": "presentation skill",
+        "def": "(n/phrase) ability to present ideas",
+        "zh": "展示技能",
+        "example": "This word is useful when discussing university life & uk study.",
+        "exampleZh": "討論「University Life & UK Study」時可以使用這個詞。"
+      },
+      {
+        "id": "-university-life-uk-study-19",
+        "word": "seminar discussion",
+        "def": "(n/phrase) class discussion activity",
+        "zh": "研討課討論",
+        "example": "This word is useful when discussing university life & uk study.",
+        "exampleZh": "討論「University Life & UK Study」時可以使用這個詞。"
+      }
+    ]
+  },
+  {
+    "topic": "🧩 Grammar for Speaking",
+    "emoji": "🧩",
+    "items": [
+      {
+        "id": "-grammar-for-speaking-0",
+        "word": "past tense",
+        "def": "(n/phrase) verb form for completed actions",
+        "zh": "過去時",
+        "example": "This word is useful when discussing grammar for speaking.",
+        "exampleZh": "討論「Grammar for Speaking」時可以使用這個詞。"
+      },
+      {
+        "id": "-grammar-for-speaking-1",
+        "word": "present perfect",
+        "def": "(n/phrase) form linking past and present",
+        "zh": "現在完成時",
+        "example": "This word is useful when discussing grammar for speaking.",
+        "exampleZh": "討論「Grammar for Speaking」時可以使用這個詞。"
+      },
+      {
+        "id": "-grammar-for-speaking-2",
+        "word": "future plan",
+        "def": "(n/phrase) language for future intention",
+        "zh": "未來計劃",
+        "example": "This word is useful when discussing grammar for speaking.",
+        "exampleZh": "討論「Grammar for Speaking」時可以使用這個詞。"
+      },
+      {
+        "id": "-grammar-for-speaking-3",
+        "word": "conditional",
+        "def": "(n/phrase) if-based sentence form",
+        "zh": "條件句",
+        "example": "This word is useful when discussing grammar for speaking.",
+        "exampleZh": "討論「Grammar for Speaking」時可以使用這個詞。"
+      },
+      {
+        "id": "-grammar-for-speaking-4",
+        "word": "passive voice",
+        "def": "(n/phrase) form focusing on action not actor",
+        "zh": "被動語態",
+        "example": "This word is useful when discussing grammar for speaking.",
+        "exampleZh": "討論「Grammar for Speaking」時可以使用這個詞。"
+      },
+      {
+        "id": "-grammar-for-speaking-5",
+        "word": "comparative",
+        "def": "(n/phrase) form used to compare two things",
+        "zh": "比較級",
+        "example": "This word is useful when discussing grammar for speaking.",
+        "exampleZh": "討論「Grammar for Speaking」時可以使用這個詞。"
+      },
+      {
+        "id": "-grammar-for-speaking-6",
+        "word": "superlative",
+        "def": "(n/phrase) form for the highest degree",
+        "zh": "最高級",
+        "example": "This word is useful when discussing grammar for speaking.",
+        "exampleZh": "討論「Grammar for Speaking」時可以使用這個詞。"
+      },
+      {
+        "id": "-grammar-for-speaking-7",
+        "word": "modal verb",
+        "def": "(n/phrase) verbs like can, should, might",
+        "zh": "情態動詞",
+        "example": "This word is useful when discussing grammar for speaking.",
+        "exampleZh": "討論「Grammar for Speaking」時可以使用這個詞。"
+      },
+      {
+        "id": "-grammar-for-speaking-8",
+        "word": "relative clause",
+        "def": "(n/phrase) clause adding information about a noun",
+        "zh": "定語從句",
+        "example": "This word is useful when discussing grammar for speaking.",
+        "exampleZh": "討論「Grammar for Speaking」時可以使用這個詞。"
+      },
+      {
+        "id": "-grammar-for-speaking-9",
+        "word": "complex sentence",
+        "def": "(n/phrase) sentence with more than one clause",
+        "zh": "複合句",
+        "example": "This word is useful when discussing grammar for speaking.",
+        "exampleZh": "討論「Grammar for Speaking」時可以使用這個詞。"
+      },
+      {
+        "id": "-grammar-for-speaking-10",
+        "word": "accuracy",
+        "def": "(n/phrase) correct use of language",
+        "zh": "準確性",
+        "example": "This word is useful when discussing grammar for speaking.",
+        "exampleZh": "討論「Grammar for Speaking」時可以使用這個詞。"
+      },
+      {
+        "id": "-grammar-for-speaking-11",
+        "word": "range",
+        "def": "(n/phrase) variety of language used",
+        "zh": "語言範圍",
+        "example": "This word is useful when discussing grammar for speaking.",
+        "exampleZh": "討論「Grammar for Speaking」時可以使用這個詞。"
+      },
+      {
+        "id": "-grammar-for-speaking-12",
+        "word": "sentence starter",
+        "def": "(n/phrase) phrase used to begin an answer",
+        "zh": "開頭句",
+        "example": "This word is useful when discussing grammar for speaking.",
+        "exampleZh": "討論「Grammar for Speaking」時可以使用這個詞。"
+      },
+      {
+        "id": "-grammar-for-speaking-13",
+        "word": "linking phrase",
+        "def": "(n/phrase) phrase connecting ideas",
+        "zh": "銜接短語",
+        "example": "This word is useful when discussing grammar for speaking.",
+        "exampleZh": "討論「Grammar for Speaking」時可以使用這個詞。"
+      },
+      {
+        "id": "-grammar-for-speaking-14",
+        "word": "pronoun reference",
+        "def": "(n/phrase) using pronouns clearly",
+        "zh": "代詞指代",
+        "example": "This word is useful when discussing grammar for speaking.",
+        "exampleZh": "討論「Grammar for Speaking」時可以使用這個詞。"
+      },
+      {
+        "id": "-grammar-for-speaking-15",
+        "word": "word form",
+        "def": "(n/phrase) noun, verb, adjective or adverb form",
+        "zh": "詞性形式",
+        "example": "This word is useful when discussing grammar for speaking.",
+        "exampleZh": "討論「Grammar for Speaking」時可以使用這個詞。"
+      },
+      {
+        "id": "-grammar-for-speaking-16",
+        "word": "collocation",
+        "def": "(n/phrase) words often used together",
+        "zh": "搭配",
+        "example": "This word is useful when discussing grammar for speaking.",
+        "exampleZh": "討論「Grammar for Speaking」時可以使用這個詞。"
+      },
+      {
+        "id": "-grammar-for-speaking-17",
+        "word": "natural expression",
+        "def": "(n/phrase) phrase that sounds normal",
+        "zh": "自然表達",
+        "example": "This word is useful when discussing grammar for speaking.",
+        "exampleZh": "討論「Grammar for Speaking」時可以使用這個詞。"
+      },
+      {
+        "id": "-grammar-for-speaking-18",
+        "word": "self-correction",
+        "def": "(n/phrase) fixing your own mistake",
+        "zh": "自我修正",
+        "example": "This word is useful when discussing grammar for speaking.",
+        "exampleZh": "討論「Grammar for Speaking」時可以使用這個詞。"
+      },
+      {
+        "id": "-grammar-for-speaking-19",
+        "word": "hesitation device",
+        "def": "(n/phrase) phrase used while thinking",
+        "zh": "停頓緩衝語",
+        "example": "This word is useful when discussing grammar for speaking.",
+        "exampleZh": "討論「Grammar for Speaking」時可以使用這個詞。"
+      }
+    ]
+  },
+  {
+    "topic": "🔊 Pronunciation & Fluency",
+    "emoji": "🔊",
+    "items": [
+      {
+        "id": "-pronunciation-fluency-0",
+        "word": "word stress",
+        "def": "(n/phrase) stronger sound in a word",
+        "zh": "單詞重音",
+        "example": "This word is useful when discussing pronunciation & fluency.",
+        "exampleZh": "討論「Pronunciation & Fluency」時可以使用這個詞。"
+      },
+      {
+        "id": "-pronunciation-fluency-1",
+        "word": "sentence stress",
+        "def": "(n/phrase) emphasis in a sentence",
+        "zh": "句子重音",
+        "example": "This word is useful when discussing pronunciation & fluency.",
+        "exampleZh": "討論「Pronunciation & Fluency」時可以使用這個詞。"
+      },
+      {
+        "id": "-pronunciation-fluency-2",
+        "word": "intonation",
+        "def": "(n/phrase) rise and fall of voice",
+        "zh": "語調",
+        "example": "This word is useful when discussing pronunciation & fluency.",
+        "exampleZh": "討論「Pronunciation & Fluency」時可以使用這個詞。"
+      },
+      {
+        "id": "-pronunciation-fluency-3",
+        "word": "pace",
+        "def": "(n/phrase) speed of speaking",
+        "zh": "語速",
+        "example": "This word is useful when discussing pronunciation & fluency.",
+        "exampleZh": "討論「Pronunciation & Fluency」時可以使用這個詞。"
+      },
+      {
+        "id": "-pronunciation-fluency-4",
+        "word": "pause",
+        "def": "(n/phrase) short stop while speaking",
+        "zh": "停頓",
+        "example": "This word is useful when discussing pronunciation & fluency.",
+        "exampleZh": "討論「Pronunciation & Fluency」時可以使用這個詞。"
+      },
+      {
+        "id": "-pronunciation-fluency-5",
+        "word": "clarity",
+        "def": "(n/phrase) being easy to understand",
+        "zh": "清晰度",
+        "example": "This word is useful when discussing pronunciation & fluency.",
+        "exampleZh": "討論「Pronunciation & Fluency」時可以使用這個詞。"
+      },
+      {
+        "id": "-pronunciation-fluency-6",
+        "word": "final consonant",
+        "def": "(n/phrase) last consonant sound in a word",
+        "zh": "詞尾輔音",
+        "example": "This word is useful when discussing pronunciation & fluency.",
+        "exampleZh": "討論「Pronunciation & Fluency」時可以使用這個詞。"
+      },
+      {
+        "id": "-pronunciation-fluency-7",
+        "word": "connected speech",
+        "def": "(n/phrase) words linking together naturally",
+        "zh": "連讀",
+        "example": "This word is useful when discussing pronunciation & fluency.",
+        "exampleZh": "討論「Pronunciation & Fluency」時可以使用這個詞。"
+      },
+      {
+        "id": "-pronunciation-fluency-8",
+        "word": "rhythm",
+        "def": "(n/phrase) pattern of strong and weak sounds",
+        "zh": "節奏",
+        "example": "This word is useful when discussing pronunciation & fluency.",
+        "exampleZh": "討論「Pronunciation & Fluency」時可以使用這個詞。"
+      },
+      {
+        "id": "-pronunciation-fluency-9",
+        "word": "pronunciation target",
+        "def": "(n/phrase) sound to improve",
+        "zh": "發音目標",
+        "example": "This word is useful when discussing pronunciation & fluency.",
+        "exampleZh": "討論「Pronunciation & Fluency」時可以使用這個詞。"
+      },
+      {
+        "id": "-pronunciation-fluency-10",
+        "word": "filler phrase",
+        "def": "(n/phrase) phrase used while thinking",
+        "zh": "填充短語",
+        "example": "This word is useful when discussing pronunciation & fluency.",
+        "exampleZh": "討論「Pronunciation & Fluency」時可以使用這個詞。"
+      },
+      {
+        "id": "-pronunciation-fluency-11",
+        "word": "natural flow",
+        "def": "(n/phrase) smooth speaking movement",
+        "zh": "自然流暢度",
+        "example": "This word is useful when discussing pronunciation & fluency.",
+        "exampleZh": "討論「Pronunciation & Fluency」時可以使用這個詞。"
+      },
+      {
+        "id": "-pronunciation-fluency-12",
+        "word": "self-monitoring",
+        "def": "(n/phrase) noticing your own speaking",
+        "zh": "自我監控",
+        "example": "This word is useful when discussing pronunciation & fluency.",
+        "exampleZh": "討論「Pronunciation & Fluency」時可以使用這個詞。"
+      },
+      {
+        "id": "-pronunciation-fluency-13",
+        "word": "recording practice",
+        "def": "(n/phrase) practising by recording yourself",
+        "zh": "錄音練習",
+        "example": "This word is useful when discussing pronunciation & fluency.",
+        "exampleZh": "討論「Pronunciation & Fluency」時可以使用這個詞。"
+      },
+      {
+        "id": "-pronunciation-fluency-14",
+        "word": "shadowing",
+        "def": "(n/phrase) copying speech immediately after hearing it",
+        "zh": "跟讀",
+        "example": "This word is useful when discussing pronunciation & fluency.",
+        "exampleZh": "討論「Pronunciation & Fluency」時可以使用這個詞。"
+      },
+      {
+        "id": "-pronunciation-fluency-15",
+        "word": "chunking",
+        "def": "(n/phrase) speaking in meaning groups",
+        "zh": "分塊表達",
+        "example": "This word is useful when discussing pronunciation & fluency.",
+        "exampleZh": "討論「Pronunciation & Fluency」時可以使用這個詞。"
+      },
+      {
+        "id": "-pronunciation-fluency-16",
+        "word": "emphasis",
+        "def": "(n/phrase) extra force on important words",
+        "zh": "強調",
+        "example": "This word is useful when discussing pronunciation & fluency.",
+        "exampleZh": "討論「Pronunciation & Fluency」時可以使用這個詞。"
+      },
+      {
+        "id": "-pronunciation-fluency-17",
+        "word": "articulation",
+        "def": "(n/phrase) clear production of sounds",
+        "zh": "咬字",
+        "example": "This word is useful when discussing pronunciation & fluency.",
+        "exampleZh": "討論「Pronunciation & Fluency」時可以使用這個詞。"
+      },
+      {
+        "id": "-pronunciation-fluency-18",
+        "word": "confidence marker",
+        "def": "(n/phrase) phrase showing confidence",
+        "zh": "自信標記語",
+        "example": "This word is useful when discussing pronunciation & fluency.",
+        "exampleZh": "討論「Pronunciation & Fluency」時可以使用這個詞。"
+      },
+      {
+        "id": "-pronunciation-fluency-19",
+        "word": "repair pause",
+        "def": "(n/phrase) controlled pause before correcting",
+        "zh": "修正停頓",
+        "example": "This word is useful when discussing pronunciation & fluency.",
+        "exampleZh": "討論「Pronunciation & Fluency」時可以使用這個詞。"
+      }
+    ]
+  },
+  {
+    "topic": "🧠 Opinion & Critical Thinking",
+    "emoji": "🧠",
+    "items": [
+      {
+        "id": "-opinion-critical-thinking-0",
+        "word": "perspective",
+        "def": "(n/phrase) way of seeing an issue",
+        "zh": "角度、觀點",
+        "example": "This word is useful when discussing opinion & critical thinking.",
+        "exampleZh": "討論「Opinion & Critical Thinking」時可以使用這個詞。"
+      },
+      {
+        "id": "-opinion-critical-thinking-1",
+        "word": "argument",
+        "def": "(n/phrase) reasoned opinion",
+        "zh": "論點",
+        "example": "This word is useful when discussing opinion & critical thinking.",
+        "exampleZh": "討論「Opinion & Critical Thinking」時可以使用這個詞。"
+      },
+      {
+        "id": "-opinion-critical-thinking-2",
+        "word": "evidence",
+        "def": "(n/phrase) facts or examples supporting an idea",
+        "zh": "證據",
+        "example": "This word is useful when discussing opinion & critical thinking.",
+        "exampleZh": "討論「Opinion & Critical Thinking」時可以使用這個詞。"
+      },
+      {
+        "id": "-opinion-critical-thinking-3",
+        "word": "assumption",
+        "def": "(n/phrase) idea accepted without proof",
+        "zh": "假設",
+        "example": "This word is useful when discussing opinion & critical thinking.",
+        "exampleZh": "討論「Opinion & Critical Thinking」時可以使用這個詞。"
+      },
+      {
+        "id": "-opinion-critical-thinking-4",
+        "word": "bias",
+        "def": "(n/phrase) unfair preference or influence",
+        "zh": "偏見",
+        "example": "This word is useful when discussing opinion & critical thinking.",
+        "exampleZh": "討論「Opinion & Critical Thinking」時可以使用這個詞。"
+      },
+      {
+        "id": "-opinion-critical-thinking-5",
+        "word": "balanced view",
+        "def": "(n/phrase) opinion considering both sides",
+        "zh": "平衡觀點",
+        "example": "This word is useful when discussing opinion & critical thinking.",
+        "exampleZh": "討論「Opinion & Critical Thinking」時可以使用這個詞。"
+      },
+      {
+        "id": "-opinion-critical-thinking-6",
+        "word": "alternative view",
+        "def": "(n/phrase) different opinion",
+        "zh": "另一種觀點",
+        "example": "This word is useful when discussing opinion & critical thinking.",
+        "exampleZh": "討論「Opinion & Critical Thinking」時可以使用這個詞。"
+      },
+      {
+        "id": "-opinion-critical-thinking-7",
+        "word": "logical reason",
+        "def": "(n/phrase) reason that makes sense",
+        "zh": "合乎邏輯的原因",
+        "example": "This word is useful when discussing opinion & critical thinking.",
+        "exampleZh": "討論「Opinion & Critical Thinking」時可以使用這個詞。"
+      },
+      {
+        "id": "-opinion-critical-thinking-8",
+        "word": "practical example",
+        "def": "(n/phrase) real-life example",
+        "zh": "實際例子",
+        "example": "This word is useful when discussing opinion & critical thinking.",
+        "exampleZh": "討論「Opinion & Critical Thinking」時可以使用這個詞。"
+      },
+      {
+        "id": "-opinion-critical-thinking-9",
+        "word": "social perspective",
+        "def": "(n/phrase) view related to society",
+        "zh": "社會角度",
+        "example": "This word is useful when discussing opinion & critical thinking.",
+        "exampleZh": "討論「Opinion & Critical Thinking」時可以使用這個詞。"
+      },
+      {
+        "id": "-opinion-critical-thinking-10",
+        "word": "economic perspective",
+        "def": "(n/phrase) view related to money or business",
+        "zh": "經濟角度",
+        "example": "This word is useful when discussing opinion & critical thinking.",
+        "exampleZh": "討論「Opinion & Critical Thinking」時可以使用這個詞。"
+      },
+      {
+        "id": "-opinion-critical-thinking-11",
+        "word": "ethical issue",
+        "def": "(n/phrase) question about right and wrong",
+        "zh": "倫理問題",
+        "example": "This word is useful when discussing opinion & critical thinking.",
+        "exampleZh": "討論「Opinion & Critical Thinking」時可以使用這個詞。"
+      },
+      {
+        "id": "-opinion-critical-thinking-12",
+        "word": "relevance",
+        "def": "(n/phrase) connection to the topic",
+        "zh": "相關性",
+        "example": "This word is useful when discussing opinion & critical thinking.",
+        "exampleZh": "討論「Opinion & Critical Thinking」時可以使用這個詞。"
+      },
+      {
+        "id": "-opinion-critical-thinking-13",
+        "word": "depth",
+        "def": "(n/phrase) level of detail and thought",
+        "zh": "深度",
+        "example": "This word is useful when discussing opinion & critical thinking.",
+        "exampleZh": "討論「Opinion & Critical Thinking」時可以使用這個詞。"
+      },
+      {
+        "id": "-opinion-critical-thinking-14",
+        "word": "generalisation",
+        "def": "(n/phrase) broad statement that may not always be true",
+        "zh": "概括",
+        "example": "This word is useful when discussing opinion & critical thinking.",
+        "exampleZh": "討論「Opinion & Critical Thinking」時可以使用這個詞。"
+      },
+      {
+        "id": "-opinion-critical-thinking-15",
+        "word": "specific case",
+        "def": "(n/phrase) particular example",
+        "zh": "具體案例",
+        "example": "This word is useful when discussing opinion & critical thinking.",
+        "exampleZh": "討論「Opinion & Critical Thinking」時可以使用這個詞。"
+      },
+      {
+        "id": "-opinion-critical-thinking-16",
+        "word": "counterargument",
+        "def": "(n/phrase) argument against a view",
+        "zh": "反方論點",
+        "example": "This word is useful when discussing opinion & critical thinking.",
+        "exampleZh": "討論「Opinion & Critical Thinking」時可以使用這個詞。"
+      },
+      {
+        "id": "-opinion-critical-thinking-17",
+        "word": "reasonable conclusion",
+        "def": "(n/phrase) sensible final idea",
+        "zh": "合理結論",
+        "example": "This word is useful when discussing opinion & critical thinking.",
+        "exampleZh": "討論「Opinion & Critical Thinking」時可以使用這個詞。"
+      },
+      {
+        "id": "-opinion-critical-thinking-18",
+        "word": "complex issue",
+        "def": "(n/phrase) problem with many sides",
+        "zh": "複雜問題",
+        "example": "This word is useful when discussing opinion & critical thinking.",
+        "exampleZh": "討論「Opinion & Critical Thinking」時可以使用這個詞。"
+      },
+      {
+        "id": "-opinion-critical-thinking-19",
+        "word": "personal stance",
+        "def": "(n/phrase) your own position",
+        "zh": "個人立場",
+        "example": "This word is useful when discussing opinion & critical thinking.",
+        "exampleZh": "討論「Opinion & Critical Thinking」時可以使用這個詞。"
+      }
+    ]
+  },
+  {
+    "topic": "🧾 Test Day & Online Exam",
+    "emoji": "🧾",
+    "items": [
+      {
+        "id": "-test-day-online-exam-0",
+        "word": "identification",
+        "def": "(n/phrase) proof of who you are",
+        "zh": "身份證明",
+        "example": "This word is useful when discussing test day & online exam.",
+        "exampleZh": "討論「Test Day & Online Exam」時可以使用這個詞。"
+      },
+      {
+        "id": "-test-day-online-exam-1",
+        "word": "microphone check",
+        "def": "(n/phrase) testing the microphone",
+        "zh": "麥克風檢查",
+        "example": "This word is useful when discussing test day & online exam.",
+        "exampleZh": "討論「Test Day & Online Exam」時可以使用這個詞。"
+      },
+      {
+        "id": "-test-day-online-exam-2",
+        "word": "camera position",
+        "def": "(n/phrase) where the camera is placed",
+        "zh": "攝像頭位置",
+        "example": "This word is useful when discussing test day & online exam.",
+        "exampleZh": "討論「Test Day & Online Exam」時可以使用這個詞。"
+      },
+      {
+        "id": "-test-day-online-exam-3",
+        "word": "quiet environment",
+        "def": "(n/phrase) place without noise",
+        "zh": "安靜環境",
+        "example": "This word is useful when discussing test day & online exam.",
+        "exampleZh": "討論「Test Day & Online Exam」時可以使用這個詞。"
+      },
+      {
+        "id": "-test-day-online-exam-4",
+        "word": "stable internet",
+        "def": "(n/phrase) reliable online connection",
+        "zh": "穩定網絡",
+        "example": "This word is useful when discussing test day & online exam.",
+        "exampleZh": "討論「Test Day & Online Exam」時可以使用這個詞。"
+      },
+      {
+        "id": "-test-day-online-exam-5",
+        "word": "examiner",
+        "def": "(n/phrase) person asking test questions",
+        "zh": "考官",
+        "example": "This word is useful when discussing test day & online exam.",
+        "exampleZh": "討論「Test Day & Online Exam」時可以使用這個詞。"
+      },
+      {
+        "id": "-test-day-online-exam-6",
+        "word": "candidate",
+        "def": "(n/phrase) person taking the test",
+        "zh": "考生",
+        "example": "This word is useful when discussing test day & online exam.",
+        "exampleZh": "討論「Test Day & Online Exam」時可以使用這個詞。"
+      },
+      {
+        "id": "-test-day-online-exam-7",
+        "word": "instruction",
+        "def": "(n/phrase) information about what to do",
+        "zh": "指令",
+        "example": "This word is useful when discussing test day & online exam.",
+        "exampleZh": "討論「Test Day & Online Exam」時可以使用這個詞。"
+      },
+      {
+        "id": "-test-day-online-exam-8",
+        "word": "preparation time",
+        "def": "(n/phrase) time before speaking to plan",
+        "zh": "準備時間",
+        "example": "This word is useful when discussing test day & online exam.",
+        "exampleZh": "討論「Test Day & Online Exam」時可以使用這個詞。"
+      },
+      {
+        "id": "-test-day-online-exam-9",
+        "word": "time limit",
+        "def": "(n/phrase) maximum allowed time",
+        "zh": "時間限制",
+        "example": "This word is useful when discussing test day & online exam.",
+        "exampleZh": "討論「Test Day & Online Exam」時可以使用這個詞。"
+      },
+      {
+        "id": "-test-day-online-exam-10",
+        "word": "test anxiety",
+        "def": "(n/phrase) nervousness before or during a test",
+        "zh": "考試焦慮",
+        "example": "This word is useful when discussing test day & online exam.",
+        "exampleZh": "討論「Test Day & Online Exam」時可以使用這個詞。"
+      },
+      {
+        "id": "-test-day-online-exam-11",
+        "word": "confidence boost",
+        "def": "(n/phrase) something that increases confidence",
+        "zh": "信心提升",
+        "example": "This word is useful when discussing test day & online exam.",
+        "exampleZh": "討論「Test Day & Online Exam」時可以使用這個詞。"
+      },
+      {
+        "id": "-test-day-online-exam-12",
+        "word": "answer structure",
+        "def": "(n/phrase) organisation of an answer",
+        "zh": "回答結構",
+        "example": "This word is useful when discussing test day & online exam.",
+        "exampleZh": "討論「Test Day & Online Exam」時可以使用這個詞。"
+      },
+      {
+        "id": "-test-day-online-exam-13",
+        "word": "backup plan",
+        "def": "(n/phrase) plan used if something goes wrong",
+        "zh": "備用方案",
+        "example": "This word is useful when discussing test day & online exam.",
+        "exampleZh": "討論「Test Day & Online Exam」時可以使用這個詞。"
+      },
+      {
+        "id": "-test-day-online-exam-14",
+        "word": "technical support",
+        "def": "(n/phrase) help with technology problems",
+        "zh": "技術支持",
+        "example": "This word is useful when discussing test day & online exam.",
+        "exampleZh": "討論「Test Day & Online Exam」時可以使用這個詞。"
+      },
+      {
+        "id": "-test-day-online-exam-15",
+        "word": "login details",
+        "def": "(n/phrase) information used to enter a system",
+        "zh": "登錄信息",
+        "example": "This word is useful when discussing test day & online exam.",
+        "exampleZh": "討論「Test Day & Online Exam」時可以使用這個詞。"
+      },
+      {
+        "id": "-test-day-online-exam-16",
+        "word": "test schedule",
+        "def": "(n/phrase) planned test time",
+        "zh": "考試安排",
+        "example": "This word is useful when discussing test day & online exam.",
+        "exampleZh": "討論「Test Day & Online Exam」時可以使用這個詞。"
+      },
+      {
+        "id": "-test-day-online-exam-17",
+        "word": "speaking prompt",
+        "def": "(n/phrase) question or topic for speaking",
+        "zh": "口語題目",
+        "example": "This word is useful when discussing test day & online exam.",
+        "exampleZh": "討論「Test Day & Online Exam」時可以使用這個詞。"
+      },
+      {
+        "id": "-test-day-online-exam-18",
+        "word": "follow-up discussion",
+        "def": "(n/phrase) extra discussion after main answer",
+        "zh": "後續討論",
+        "example": "This word is useful when discussing test day & online exam.",
+        "exampleZh": "討論「Test Day & Online Exam」時可以使用這個詞。"
+      },
+      {
+        "id": "-test-day-online-exam-19",
+        "word": "final check",
+        "def": "(n/phrase) last review before starting",
+        "zh": "最後檢查",
+        "example": "This word is useful when discussing test day & online exam.",
+        "exampleZh": "討論「Test Day & Online Exam」時可以使用這個詞。"
+      }
+    ]
+  },
+  {
+    "topic": "🍽️ Food, Hospitality & Service",
+    "emoji": "🍽️",
+    "items": [
+      {
+        "id": "-food-hospitality-service-0",
+        "word": "hospitality",
+        "def": "(n/phrase) friendly service for guests or customers",
+        "zh": "酒店與接待服務",
+        "example": "Hospitality skills are useful in international careers.",
+        "exampleZh": "酒店與接待服務技能對國際職業很有用。"
+      },
+      {
+        "id": "-food-hospitality-service-1",
+        "word": "customer expectation",
+        "def": "(n/phrase) what customers believe they should receive",
+        "zh": "顧客期望",
+        "example": "Customer expectations are higher in competitive markets.",
+        "exampleZh": "競爭市場中顧客期望更高。"
+      },
+      {
+        "id": "-food-hospitality-service-2",
+        "word": "service quality",
+        "def": "(n/phrase) how good a service is",
+        "zh": "服務質量",
+        "example": "Service quality affects customer loyalty.",
+        "exampleZh": "服務質量影響顧客忠誠度。"
+      },
+      {
+        "id": "-food-hospitality-service-3",
+        "word": "guest experience",
+        "def": "(n/phrase) how a guest feels during a visit",
+        "zh": "賓客體驗",
+        "example": "A positive guest experience can improve reputation.",
+        "exampleZh": "良好的賓客體驗能提升口碑。"
+      },
+      {
+        "id": "-food-hospitality-service-4",
+        "word": "food safety",
+        "def": "(n/phrase) safe preparation and handling of food",
+        "zh": "食品安全",
+        "example": "Food safety is essential in restaurants.",
+        "exampleZh": "食品安全對餐廳至關重要。"
+      },
+      {
+        "id": "-food-hospitality-service-5",
+        "word": "hygiene standard",
+        "def": "(n/phrase) rules for cleanliness and safety",
+        "zh": "衛生標準",
+        "example": "High hygiene standards protect customers.",
+        "exampleZh": "高衛生標準能保護顧客。"
+      },
+      {
+        "id": "-food-hospitality-service-6",
+        "word": "menu choice",
+        "def": "(n/phrase) range of food options",
+        "zh": "菜單選擇",
+        "example": "Menu choice should reflect customer needs.",
+        "exampleZh": "菜單選擇應反映顧客需求。"
+      },
+      {
+        "id": "-food-hospitality-service-7",
+        "word": "catering service",
+        "def": "(n/phrase) providing food for events",
+        "zh": "餐飲服務",
+        "example": "Catering service requires planning and teamwork.",
+        "exampleZh": "餐飲服務需要計劃和團隊合作。"
+      },
+      {
+        "id": "-food-hospitality-service-8",
+        "word": "consumer preference",
+        "def": "(n/phrase) what buyers like or choose",
+        "zh": "消費者偏好",
+        "example": "Consumer preferences change over time.",
+        "exampleZh": "消費者偏好會隨時間變化。"
+      },
+      {
+        "id": "-food-hospitality-service-9",
+        "word": "brand reputation",
+        "def": "(n/phrase) public opinion about a brand",
+        "zh": "品牌聲譽",
+        "example": "Brand reputation can influence customer decisions.",
+        "exampleZh": "品牌聲譽會影響顧客決策。"
+      },
+      {
+        "id": "-food-hospitality-service-10",
+        "word": "front-line staff",
+        "def": "(n/phrase) employees who deal directly with customers",
+        "zh": "一線員工",
+        "example": "Front-line staff shape the customer experience.",
+        "exampleZh": "一線員工塑造顧客體驗。"
+      },
+      {
+        "id": "-food-hospitality-service-11",
+        "word": "complaint handling",
+        "def": "(n/phrase) dealing with customer problems",
+        "zh": "投訴處理",
+        "example": "Complaint handling should be polite and efficient.",
+        "exampleZh": "投訴處理應禮貌且高效。"
+      },
+      {
+        "id": "-food-hospitality-service-12",
+        "word": "booking system",
+        "def": "(n/phrase) system used to reserve services",
+        "zh": "預訂系統",
+        "example": "A booking system reduces confusion.",
+        "exampleZh": "預訂系統能減少混亂。"
+      },
+      {
+        "id": "-food-hospitality-service-13",
+        "word": "peak time",
+        "def": "(n/phrase) the busiest period",
+        "zh": "高峰時段",
+        "example": "Restaurants need more staff at peak time.",
+        "exampleZh": "餐廳高峰時段需要更多員工。"
+      },
+      {
+        "id": "-food-hospitality-service-14",
+        "word": "customer loyalty",
+        "def": "(n/phrase) customers continuing to use a business",
+        "zh": "顧客忠誠度",
+        "example": "Good service builds customer loyalty.",
+        "exampleZh": "良好服務能建立顧客忠誠度。"
+      },
+      {
+        "id": "-food-hospitality-service-15",
+        "word": "personalised service",
+        "def": "(n/phrase) service adapted to individual needs",
+        "zh": "個性化服務",
+        "example": "Personalised service makes guests feel valued.",
+        "exampleZh": "個性化服務讓客人感到被重視。"
+      },
+      {
+        "id": "-food-hospitality-service-16",
+        "word": "food culture",
+        "def": "(n/phrase) traditions and habits around food",
+        "zh": "飲食文化",
+        "example": "Food culture is part of national identity.",
+        "exampleZh": "飲食文化是國家身份的一部分。"
+      },
+      {
+        "id": "-food-hospitality-service-17",
+        "word": "dietary requirement",
+        "def": "(n/phrase) special food need for health or belief",
+        "zh": "飲食要求",
+        "example": "Staff should ask about dietary requirements.",
+        "exampleZh": "員工應詢問客人的飲食要求。"
+      },
+      {
+        "id": "-food-hospitality-service-18",
+        "word": "service recovery",
+        "def": "(n/phrase) fixing a poor customer experience",
+        "zh": "服務補救",
+        "example": "Service recovery can rebuild trust.",
+        "exampleZh": "服務補救能重建信任。"
+      },
+      {
+        "id": "-food-hospitality-service-19",
+        "word": "professional manner",
+        "def": "(n/phrase) polite and appropriate behaviour",
+        "zh": "職業化態度",
+        "example": "A professional manner is important in hospitality.",
+        "exampleZh": "職業化態度在酒店服務中很重要。"
+      }
+    ]
+  },
+  {
+    "topic": "💷 Money, Cost & Economy",
+    "emoji": "💷",
+    "items": [
+      {
+        "id": "-money-cost-economy-0",
+        "word": "living cost",
+        "def": "(n/phrase) money needed for daily life",
+        "zh": "生活成本",
+        "example": "Living cost is a major issue for students.",
+        "exampleZh": "生活成本是學生面臨的主要問題。"
+      },
+      {
+        "id": "-money-cost-economy-1",
+        "word": "budget",
+        "def": "(n/phrase) plan for spending money",
+        "zh": "預算",
+        "example": "A budget helps students control spending.",
+        "exampleZh": "預算能幫學生控制開支。"
+      },
+      {
+        "id": "-money-cost-economy-2",
+        "word": "saving",
+        "def": "(n/phrase) money kept for future use",
+        "zh": "儲蓄",
+        "example": "Saving is difficult when prices rise.",
+        "exampleZh": "物價上漲時儲蓄很困難。"
+      },
+      {
+        "id": "-money-cost-economy-3",
+        "word": "expense",
+        "def": "(n/phrase) money spent on something",
+        "zh": "開支",
+        "example": "Rent is usually the biggest expense.",
+        "exampleZh": "房租通常是最大的開支。"
+      },
+      {
+        "id": "-money-cost-economy-4",
+        "word": "financial pressure",
+        "def": "(n/phrase) stress caused by money problems",
+        "zh": "財務壓力",
+        "example": "Financial pressure can affect student well-being.",
+        "exampleZh": "財務壓力會影響學生身心健康。"
+      },
+      {
+        "id": "-money-cost-economy-5",
+        "word": "income",
+        "def": "(n/phrase) money received from work or other sources",
+        "zh": "收入",
+        "example": "Part-time work can provide extra income.",
+        "exampleZh": "兼職能提供額外收入。"
+      },
+      {
+        "id": "-money-cost-economy-6",
+        "word": "affordability",
+        "def": "(n/phrase) whether people can pay for something",
+        "zh": "可負擔性",
+        "example": "Affordability is important in housing policy.",
+        "exampleZh": "可負擔性在住房政策中很重要。"
+      },
+      {
+        "id": "-money-cost-economy-7",
+        "word": "economic growth",
+        "def": "(n/phrase) increase in a country’s production and income",
+        "zh": "經濟增長",
+        "example": "Economic growth can create more jobs.",
+        "exampleZh": "經濟增長能創造更多工作。"
+      },
+      {
+        "id": "-money-cost-economy-8",
+        "word": "inflation",
+        "def": "(n/phrase) general increase in prices",
+        "zh": "通貨膨脹",
+        "example": "Inflation makes everyday goods more expensive.",
+        "exampleZh": "通貨膨脹讓日用品更貴。"
+      },
+      {
+        "id": "-money-cost-economy-9",
+        "word": "investment",
+        "def": "(n/phrase) money used to create future benefit",
+        "zh": "投資",
+        "example": "Investment in education benefits society.",
+        "exampleZh": "教育投資有益於社會。"
+      },
+      {
+        "id": "-money-cost-economy-10",
+        "word": "consumer spending",
+        "def": "(n/phrase) money people spend on goods and services",
+        "zh": "消費支出",
+        "example": "Consumer spending affects the economy.",
+        "exampleZh": "消費支出影響經濟。"
+      },
+      {
+        "id": "-money-cost-economy-11",
+        "word": "financial literacy",
+        "def": "(n/phrase) ability to understand money management",
+        "zh": "財商、金融素養",
+        "example": "Financial literacy should be taught at school.",
+        "exampleZh": "學校應教授金融素養。"
+      },
+      {
+        "id": "-money-cost-economy-12",
+        "word": "student discount",
+        "def": "(n/phrase) lower price for students",
+        "zh": "學生折扣",
+        "example": "Student discounts help reduce costs.",
+        "exampleZh": "學生折扣能降低成本。"
+      },
+      {
+        "id": "-money-cost-economy-13",
+        "word": "part-time income",
+        "def": "(n/phrase) money earned from part-time work",
+        "zh": "兼職收入",
+        "example": "Part-time income helps cover living costs.",
+        "exampleZh": "兼職收入有助於支付生活費。"
+      },
+      {
+        "id": "-money-cost-economy-14",
+        "word": "value for money",
+        "def": "(n/phrase) worth the price paid",
+        "zh": "物有所值",
+        "example": "Online courses can offer value for money.",
+        "exampleZh": "線上課程可能很物有所值。"
+      },
+      {
+        "id": "-money-cost-economy-15",
+        "word": "economic opportunity",
+        "def": "(n/phrase) chance to improve income or work",
+        "zh": "經濟機會",
+        "example": "Education creates economic opportunity.",
+        "exampleZh": "教育創造經濟機會。"
+      },
+      {
+        "id": "-money-cost-economy-16",
+        "word": "cost-effective",
+        "def": "(n/phrase) giving good result for the cost",
+        "zh": "具成本效益的",
+        "example": "Preventive healthcare is cost-effective.",
+        "exampleZh": "預防性醫療具有成本效益。"
+      },
+      {
+        "id": "-money-cost-economy-17",
+        "word": "financial planning",
+        "def": "(n/phrase) organising money for future needs",
+        "zh": "財務規劃",
+        "example": "Financial planning is important before studying abroad.",
+        "exampleZh": "留學前財務規劃很重要。"
+      },
+      {
+        "id": "-money-cost-economy-18",
+        "word": "scholarship",
+        "def": "(n/phrase) money given to support study",
+        "zh": "獎學金",
+        "example": "A scholarship can reduce tuition pressure.",
+        "exampleZh": "獎學金能減少學費壓力。"
+      },
+      {
+        "id": "-money-cost-economy-19",
+        "word": "economic stability",
+        "def": "(n/phrase) steady and secure economic condition",
+        "zh": "經濟穩定",
+        "example": "Economic stability helps families plan ahead.",
+        "exampleZh": "經濟穩定能幫助家庭做長遠計劃。"
+      }
+    ]
+  },
+  {
+    "topic": "🤝 Relationships, Values & Communication",
+    "emoji": "🤝",
+    "items": [
+      {
+        "id": "-relationships-values-communication-0",
+        "word": "respect",
+        "def": "(n/phrase) polite consideration for others",
+        "zh": "尊重",
+        "example": "Respect is important in multicultural classrooms.",
+        "exampleZh": "尊重在多元文化課堂中很重要。"
+      },
+      {
+        "id": "-relationships-values-communication-1",
+        "word": "responsibility",
+        "def": "(n/phrase) duty to do something properly",
+        "zh": "責任",
+        "example": "Students have responsibility for their own learning.",
+        "exampleZh": "學生對自己的學習負有責任。"
+      },
+      {
+        "id": "-relationships-values-communication-2",
+        "word": "trust",
+        "def": "(n/phrase) belief that someone is reliable",
+        "zh": "信任",
+        "example": "Trust is necessary in teamwork.",
+        "exampleZh": "信任在團隊合作中很必要。"
+      },
+      {
+        "id": "-relationships-values-communication-3",
+        "word": "empathy",
+        "def": "(n/phrase) ability to understand others’ feelings",
+        "zh": "同理心",
+        "example": "Empathy improves communication.",
+        "exampleZh": "同理心能改善溝通。"
+      },
+      {
+        "id": "-relationships-values-communication-4",
+        "word": "cooperation",
+        "def": "(n/phrase) working together for a shared goal",
+        "zh": "合作",
+        "example": "Cooperation helps solve complex problems.",
+        "exampleZh": "合作有助於解決複雜問題。"
+      },
+      {
+        "id": "-relationships-values-communication-5",
+        "word": "conflict resolution",
+        "def": "(n/phrase) finding a peaceful answer to disagreement",
+        "zh": "衝突解決",
+        "example": "Conflict resolution is useful at work.",
+        "exampleZh": "衝突解決在工作中很有用。"
+      },
+      {
+        "id": "-relationships-values-communication-6",
+        "word": "communication style",
+        "def": "(n/phrase) way of expressing ideas",
+        "zh": "溝通風格",
+        "example": "Communication style can differ between cultures.",
+        "exampleZh": "不同文化的溝通風格可能不同。"
+      },
+      {
+        "id": "-relationships-values-communication-7",
+        "word": "active listening",
+        "def": "(n/phrase) listening carefully and responding well",
+        "zh": "積極聆聽",
+        "example": "Active listening makes discussions more effective.",
+        "exampleZh": "積極聆聽讓討論更有效。"
+      },
+      {
+        "id": "-relationships-values-communication-8",
+        "word": "body language",
+        "def": "(n/phrase) communication through movement or expression",
+        "zh": "肢體語言",
+        "example": "Body language affects first impressions.",
+        "exampleZh": "肢體語言影響第一印象。"
+      },
+      {
+        "id": "-relationships-values-communication-9",
+        "word": "eye contact",
+        "def": "(n/phrase) looking at someone while speaking",
+        "zh": "眼神交流",
+        "example": "Eye contact can show confidence.",
+        "exampleZh": "眼神交流能展示自信。"
+      },
+      {
+        "id": "-relationships-values-communication-10",
+        "word": "politeness",
+        "def": "(n/phrase) respectful and appropriate behaviour",
+        "zh": "禮貌",
+        "example": "Politeness is important in interviews.",
+        "exampleZh": "禮貌在面試中很重要。"
+      },
+      {
+        "id": "-relationships-values-communication-11",
+        "word": "social norm",
+        "def": "(n/phrase) usual behaviour in a society",
+        "zh": "社會規範",
+        "example": "Social norms vary between countries.",
+        "exampleZh": "社會規範因國家而異。"
+      },
+      {
+        "id": "-relationships-values-communication-12",
+        "word": "family value",
+        "def": "(n/phrase) belief about family importance",
+        "zh": "家庭價值觀",
+        "example": "Family values influence young people.",
+        "exampleZh": "家庭價值觀影響年輕人。"
+      },
+      {
+        "id": "-relationships-values-communication-13",
+        "word": "personal value",
+        "def": "(n/phrase) belief that guides behaviour",
+        "zh": "個人價值觀",
+        "example": "My personal values affect my career plans.",
+        "exampleZh": "我的個人價值觀影響職業規劃。"
+      },
+      {
+        "id": "-relationships-values-communication-14",
+        "word": "role model",
+        "def": "(n/phrase) person others admire and copy",
+        "zh": "榜樣",
+        "example": "A good role model can motivate students.",
+        "exampleZh": "好的榜樣能激勵學生。"
+      },
+      {
+        "id": "-relationships-values-communication-15",
+        "word": "peer influence",
+        "def": "(n/phrase) effect of people of the same age group",
+        "zh": "同伴影響",
+        "example": "Peer influence can be positive or negative.",
+        "exampleZh": "同伴影響可能是正面也可能是負面。"
+      },
+      {
+        "id": "-relationships-values-communication-16",
+        "word": "open-minded",
+        "def": "(n/phrase) willing to consider new ideas",
+        "zh": "思想開放的",
+        "example": "International study makes students more open-minded.",
+        "exampleZh": "國際學習讓學生思想更開放。"
+      },
+      {
+        "id": "-relationships-values-communication-17",
+        "word": "misunderstanding",
+        "def": "(n/phrase) failure to understand correctly",
+        "zh": "誤解",
+        "example": "Clear language can reduce misunderstanding.",
+        "exampleZh": "清楚的語言能減少誤解。"
+      },
+      {
+        "id": "-relationships-values-communication-18",
+        "word": "collaboration",
+        "def": "(n/phrase) working with others to create something",
+        "zh": "協作",
+        "example": "Collaboration is essential in group projects.",
+        "exampleZh": "協作對小組項目至關重要。"
+      },
+      {
+        "id": "-relationships-values-communication-19",
+        "word": "personal boundary",
+        "def": "(n/phrase) limit about acceptable behaviour",
+        "zh": "個人界限",
+        "example": "Healthy relationships require personal boundaries.",
+        "exampleZh": "健康關係需要個人界限。"
+      }
     ]
   }
 ];
+
+const VOCAB_FLAT = VOCAB.flatMap(topic => topic.items.map(item => ({ ...item, topic: topic.topic })));
 
 // ============================================================
 // TIPS DATA
@@ -1608,12 +5065,12 @@ function makeQuestionTip(question) {
     phrase = "Technology is useful when...";
   }
 
-  return `**AI-style speaking tip**\n\nUseful vocabulary: ${vocab}.\n\nStructure: ${structure}\n\nSentence starter: "${phrase}"\n\nTry to speak for 20-30 seconds, avoid memorising full answers, and add one personal detail so the answer sounds natural.`;
+  return `**AI-style speaking tip / 離線口語提示**\n\nUseful vocabulary / 可用詞彙: ${vocab}.\n\nStructure / 回答結構: ${structure}\n\nSentence starter / 開頭句: "${phrase}"\n\n中文提示：回答 20-30 秒即可，不要背全文；加一個個人細節，讓答案更自然。`;
 }
 
 function makePart2Feedback(prompt) {
   const topic = (prompt.match(/topic is: "([^"]+)"/) || [,"this topic"])[1];
-  return `**AI-style examiner feedback**\n\nTopic: ${topic}\n\nFluency: Aim for a steady 1-2 minute answer. Use simple linking phrases such as "firstly", "another important point is", and "because of this".\n\nVocabulary: Include 3-4 topic-specific words, but keep pronunciation clear.\n\nGrammar: Mix past, present and future forms where relevant. Short accurate sentences are better than long confused ones.\n\nCoherence: Follow the cue card order, then finish with a clear reason why the topic is important.\n\nTarget score practice: Record yourself once, listen back, then improve one point only.`;
+  return `**AI-style examiner feedback / 離線考官式反饋**\n\nTopic / 題目: ${topic}\n\nFluency / 流利度: Aim for a steady 1-2 minute answer. 使用 firstly, another important point is, because of this 這類銜接語，讓回答有節奏。\n\nVocabulary / 詞彙: Include 3-4 topic-specific words, but keep pronunciation clear. 加入 3-4 個主題詞，但發音清楚比硬用難詞更重要。\n\nGrammar / 語法: Mix past, present and future forms where relevant. 短而準確的句子比很長但混亂的句子更好。\n\nCoherence / 連貫性: Follow the cue card order, then finish with a clear reason why the topic is important. 按提示卡順序說，最後用一句話總結重要性。\n\nTarget score practice / 提分練習: Record yourself once, listen back, then improve one point only. 錄音一次，回聽後只集中改一個問題。`;
 }
 
 async function getAIFeedback(containerId, prompt) {
@@ -1662,23 +5119,179 @@ function formatFeedback(text) {
 // ============================================================
 // VOCAB TAB
 // ============================================================
+function getVocabProgress() {
+  try { return JSON.parse(localStorage.getItem('ucbelt_vocab_progress') || '{}'); }
+  catch { return {}; }
+}
+
+function saveVocabProgress(progress) {
+  localStorage.setItem('ucbelt_vocab_progress', JSON.stringify(progress));
+}
+
+function markVocab(id, result) {
+  const progress = getVocabProgress();
+  const item = progress[id] || { seen: 0, known: 0, weak: 0 };
+  item.seen += 1;
+  if (result === 'known') item.known += 1;
+  if (result === 'weak') item.weak += 1;
+  item.last = new Date().toISOString();
+  progress[id] = item;
+  saveVocabProgress(progress);
+  updateVocabStats();
+  renderVocabCards();
+}
+
+function vocabMasteryTag(item) {
+  const p = getVocabProgress()[item.id];
+  if (!p) return '<span class="mastery-tag">new</span>';
+  if (p.weak > p.known) return '<span class="mastery-tag weak">review</span>';
+  if (p.known >= 2) return '<span class="mastery-tag strong">strong</span>';
+  return '<span class="mastery-tag">seen</span>';
+}
+
 function buildVocab() {
+  const filter = document.getElementById('vocab-topic-filter');
+  if (filter) {
+    filter.innerHTML = '<option value="all">All topics / 全部主題</option>' + VOCAB.map(t => `<option value="${t.topic}">${t.topic}</option>`).join('');
+  }
+  renderVocabCards();
+  updateVocabStats();
+}
+
+function renderVocabCards() {
   const grid = document.getElementById('vocab-grid');
+  if (!grid) return;
+  const search = (document.getElementById('vocab-search')?.value || '').toLowerCase().trim();
+  const topicFilter = document.getElementById('vocab-topic-filter')?.value || 'all';
+  grid.innerHTML = '';
+
   VOCAB.forEach(topic => {
+    if (topicFilter !== 'all' && topic.topic !== topicFilter) return;
+    const items = topic.items.filter(item => {
+      if (!search) return true;
+      return [item.word, item.def, item.zh, item.example, item.exampleZh, topic.topic].join(' ').toLowerCase().includes(search);
+    });
+    if (!items.length) return;
     const card = document.createElement('div');
     card.className = 'vocab-card';
     card.innerHTML = `
-      <div class="vocab-card-topic">${topic.topic}</div>
-      ${topic.items.map(item => `
+      <div class="vocab-card-topic">${topic.topic} · ${items.length} words</div>
+      ${items.map(item => `
         <div class="vocab-item">
-          <div class="vocab-word">${item.word}</div>
+          <div class="vocab-word"><span>${item.word}</span>${vocabMasteryTag(item)}</div>
+          <div class="vocab-zh">${item.zh}</div>
           <div class="vocab-def">${item.def}</div>
           <div class="vocab-example">"${item.example}"</div>
+          <div class="bilingual-note">${item.exampleZh}</div>
         </div>
       `).join('')}
     `;
     grid.appendChild(card);
   });
+
+  if (!grid.children.length) {
+    grid.innerHTML = '<div class="vocab-card"><div class="vocab-card-topic">No result / 沒有結果</div><div class="bilingual-note">Try a shorter keyword or choose All topics.</div></div>';
+  }
+}
+
+function getActiveVocabPool(weakOnly = false) {
+  const topicFilter = document.getElementById('vocab-topic-filter')?.value || 'all';
+  const progress = getVocabProgress();
+  let pool = VOCAB_FLAT.filter(item => topicFilter === 'all' || item.topic === topicFilter);
+  if (weakOnly) pool = pool.filter(item => progress[item.id]?.weak > progress[item.id]?.known);
+  return pool.length ? pool : VOCAB_FLAT;
+}
+
+function pickRandom(arr) {
+  return arr[Math.floor(Math.random() * arr.length)];
+}
+
+function startFlashcard(poolOverride) {
+  const item = pickRandom(poolOverride || getActiveVocabPool());
+  const box = document.getElementById('vocab-practice-box');
+  box.innerHTML = `
+    <div class="flash-topic">${item.topic}</div>
+    <div class="flash-word">${item.word}</div>
+    <div class="bilingual-note">先不要看答案：請用中文說意思，再用英文造句。Do not reveal first: explain it in Chinese, then make one spoken English sentence.</div>
+    <div class="vocab-actions" style="margin-top:12px">
+      <button class="btn btn-outline" onclick="document.getElementById('flash-answer').classList.toggle('show')">Show / Hide Answer 顯示答案</button>
+      <button class="btn btn-green" onclick="markVocab('${item.id}', 'known'); startFlashcard()">I know it / 已掌握</button>
+      <button class="btn btn-gold" onclick="markVocab('${item.id}', 'weak'); startFlashcard()">Review again / 需復習</button>
+    </div>
+    <div class="flash-answer" id="flash-answer">
+      <div class="vocab-zh">${item.zh}</div>
+      <div class="vocab-def">${item.def}</div>
+      <div class="vocab-example">"${item.example}"</div>
+      <div class="bilingual-note">${item.exampleZh}</div>
+    </div>
+  `;
+}
+
+function startQuiz() {
+  const pool = getActiveVocabPool();
+  const correct = pickRandom(pool);
+  const distractors = VOCAB_FLAT.filter(item => item.id !== correct.id).sort(() => Math.random() - 0.5).slice(0, 3);
+  const options = [correct, ...distractors].sort(() => Math.random() - 0.5);
+  const box = document.getElementById('vocab-practice-box');
+  box.innerHTML = `
+    <div class="flash-topic">Quick Quiz / 選擇題</div>
+    <div class="flash-word">${correct.word}</div>
+    <div class="bilingual-note">Choose the best Chinese meaning. 選出最合適的中文意思。</div>
+    <div class="quiz-options">
+      ${options.map(opt => `<button class="quiz-option" data-id="${opt.id}" onclick="answerQuiz(this, '${correct.id}', '${opt.id}')">${opt.zh}</button>`).join('')}
+    </div>
+  `;
+}
+
+function answerQuiz(btn, correctId, chosenId) {
+  const buttons = btn.parentElement.querySelectorAll('.quiz-option');
+  buttons.forEach(b => b.disabled = true);
+  const ok = correctId === chosenId;
+  btn.classList.add(ok ? 'correct' : 'wrong');
+  if (!ok) {
+    buttons.forEach(b => {
+      if (b.dataset.id === correctId) b.classList.add('correct');
+    });
+  }
+  markVocab(correctId, ok ? 'known' : 'weak');
+  const item = VOCAB_FLAT.find(v => v.id === correctId);
+  document.getElementById('vocab-practice-box').insertAdjacentHTML('beforeend', `
+    <div class="flash-answer show">
+      <strong>${ok ? 'Correct / 正確' : 'Review this word / 需要復習'}</strong>
+      <div class="vocab-def">${item.def}</div>
+      <div class="vocab-example">"${item.example}"</div>
+      <div class="bilingual-note">${item.exampleZh}</div>
+      <div class="vocab-actions" style="margin-top:10px"><button class="btn btn-gold" onclick="startQuiz()">Next Quiz / 下一題</button></div>
+    </div>
+  `);
+}
+
+function reviewWeakWords() {
+  const weak = getActiveVocabPool(true);
+  startFlashcard(weak);
+}
+
+function resetVocabProgress() {
+  if (!confirm('Reset vocabulary progress? / 確定重置詞彙記錄？')) return;
+  localStorage.removeItem('ucbelt_vocab_progress');
+  updateVocabStats();
+  renderVocabCards();
+  document.getElementById('vocab-practice-box').innerHTML = '<strong>Progress reset / 已重置</strong><div class="bilingual-note">Start flashcards or quizzes again to rebuild your review list.</div>';
+}
+
+function updateVocabStats() {
+  const stats = document.getElementById('vocab-stats');
+  if (!stats) return;
+  const progress = getVocabProgress();
+  const seen = Object.keys(progress).length;
+  const known = Object.values(progress).filter(p => p.known >= 2 && p.known >= p.weak).length;
+  const weak = Object.values(progress).filter(p => p.weak > p.known).length;
+  stats.innerHTML = `
+    <span class="vocab-stat">Total / 詞彙總數: ${VOCAB_FLAT.length}</span>
+    <span class="vocab-stat">Seen / 已練: ${seen}</span>
+    <span class="vocab-stat">Strong / 掌握: ${known}</span>
+    <span class="vocab-stat">Weak / 弱詞: ${weak}</span>
+  `;
 }
 
 // ============================================================
@@ -1705,10 +5318,41 @@ function buildTips() {
 // TABS
 // ============================================================
 function switchTab(tab) {
-  ['practice','guide','builder','vocab','plan','tips'].forEach(t => {
+  ['practice','guide','builder','mock','fluency','score','teacher','vocab','plan','tips'].forEach(t => {
     document.getElementById(`panel-${t}`).style.display = t === tab ? 'block' : 'none';
     document.getElementById(`tab-${t}`).classList.toggle('active', t === tab);
   });
+}
+
+// ============================================================
+// MOCK TEST AND SELF-SCORE HELPERS
+// ============================================================
+function chooseRandomSet() {
+  const id = Math.floor(Math.random() * SETS.length) + 1;
+  switchTab('practice');
+  selectSet(id);
+  const set = SETS.find(s => s.id === id);
+  const result = document.getElementById('mock-result');
+  if (result) result.textContent = `Selected Set ${String(id).padStart(2,'0')}: ${set.title}. Complete Part 1, Part 2 and Part 3 without pausing.`;
+}
+
+function updateScore() {
+  const keys = ['fluency','vocab','grammar','coherence','interaction'];
+  const vals = keys.map(k => {
+    const el = document.getElementById(`score-${k}`);
+    const val = Number(el.value);
+    const label = document.getElementById(`val-${k}`);
+    if (label) label.textContent = val;
+    return val;
+  });
+  const avg = vals.reduce((a,b)=>a+b,0) / vals.length;
+  let advice = 'Build longer answers with clearer examples.';
+  if (avg < 2.5) advice = 'Focus first on direct answers, basic grammar and speaking without long silence.';
+  else if (avg < 3.5) advice = 'Add reasons, examples and topic vocabulary to move towards B2-style communication.';
+  else if (avg < 4.3) advice = 'Work on balanced discussion, smoother linking and more precise vocabulary.';
+  else advice = 'Strong practice level. Maintain fluency and polish pronunciation, interaction and academic discussion depth.';
+  const box = document.getElementById('score-result');
+  if (box) box.textContent = `Average: ${avg.toFixed(1)} / 5. Target: ${advice}`;
 }
 
 // ============================================================
@@ -1736,10 +5380,61 @@ function updateCountdown() {
 // ============================================================
 // INIT
 // ============================================================
+function addBilingualExplanations() {
+  const notes = {
+    "Target level": "目標水平：公開資料以 CEFR 等級描述英語能力，例如 B1、B1+、B2-、B2。學生練習時應以清楚交流、能展開理由和例子為核心。",
+    "Speaking expectation": "口語要求：練習不應只背答案，而應能進行研討式回答、展示觀點、解釋原因並自然回應追問。",
+    "What examiners listen for": "考官關注：是否答題直接、表達清楚、能用理由和例子拓展、語言連貫並有足夠主題詞彙。",
+    "Important note": "重要說明：本工具是 OTC 根據公開資訊製作的獨立練習材料，不是 UCB 官方題庫或保分產品。",
+    "Part 1: PREP": "Part 1 可用 PREP：直接回答、說理由、加例子、自然收尾。不要只回答 yes/no。",
+    "Part 2: 4 blocks": "Part 2 用四段：簡短開頭、背景、兩個細節、最後反思。準備時只寫關鍵詞，不寫全文。",
+    "Part 3: balanced discussion": "Part 3 要展示平衡討論：先給觀點，再說另一面，最後給出自己的判斷。",
+    "Repair language": "修正語言：忘詞或卡住時，用這些句子自然恢復，不要沉默太久。",
+    "Examiner opening script": "模考開場：老師可按這段讀，讓學生熟悉正式考試氛圍。",
+    "Candidate rules": "考生規則：全程英文回答，不讀全文稿，必要時可以禮貌要求澄清。",
+    "After-test reflection": "考後反思：每次模考後記錄一個優點、一個常見錯誤、一個發音問題和下一次目標。",
+    "30-second expansion": "30秒拓展：用 because、for example、as a result 把短回答拉長。",
+    "Chunking practice": "分塊練習：按意思小組說話，能顯著改善流利度和清晰度。",
+    "Stress practice": "重音練習：把重要內容詞讀重，答案會更清楚、更有自信。",
+    "Pause control": "停頓控制：允許短暫停頓，但避免大量 um / er。",
+    "Repair drill": "修正練習：卡住時先重述，再換簡單詞解釋。",
+    "Seminar response": "研討回應：學會部分同意、補充觀點、提出另一面。",
+    "Warm-up diagnostic": "熱身診斷：老師先用三個短問題判斷學生流利度、語法和發音問題。",
+    "Part 2 coaching": "Part 2 輔導：讓學生完整說完後再反饋，不要中途頻繁打斷。",
+    "Part 3 discussion": "Part 3 討論：追問 why、example、opposite view，訓練學生展開觀點。",
+    "Micro-drill": "微練習：每節課只集中修一個弱點，例如詞彙、語法或發音。",
+    "Homework setting": "課後任務：指定一套完整題、一個詞彙主題和一段錄音回答。",
+    "Diagnostic day": "診斷日：先錄音，不重錄，找出最需要提高的部分。",
+    "Part 1 speed": "Part 1 速度：短題要快速回答，但每題至少有理由或例子。",
+    "Part 2 timing": "Part 2 計時：嚴格 1 分鐘準備、2 分鐘回答，訓練結構感。",
+    "Part 3 seminar thinking": "Part 3 研討思維：回答原因、影響、優缺點和解決方法。",
+    "Vocabulary upgrade": "詞彙升級：選 5 個主題，每個主題學 5 個詞並口頭造句。",
+    "Mock test": "模考：完整做一套，不暫停，結束後寫三個改進目標。",
+    "Light review": "輕複習：考前不要背新大段內容，重溫句型、修正語和高頻例子。",
+    "Part 2: Structure Your Long Turn": "Part 2 長回答要有清楚結構：開頭、兩個細節、例子、總結。",
+    "Fluency Over Perfection": "流利度優先：語法小錯不要停太久，保持自然輸出更重要。",
+    "Expand Every Answer": "每個答案都要拓展：觀點、解釋、例子、回扣問題。",
+    "Part 3: Show Critical Thinking": "Part 3 要展示思考深度：不要只說好或不好，要比較兩面。",
+    "Timing Matters": "時間控制：Part 2 盡量說滿 1-2 分鐘，不要 30 秒就結束。",
+    "Vocabulary Range": "詞彙範圍：準備每個主題的核心詞，但使用時要自然、發音要清楚。"
+  };
+  document.querySelectorAll('.tip-card h4, .micro-card h4').forEach(h => {
+    const text = h.textContent.trim();
+    if (!notes[text]) return;
+    const parent = h.parentElement;
+    if (parent.querySelector('.auto-bilingual-note')) return;
+    const note = document.createElement('div');
+    note.className = 'bilingual-note auto-bilingual-note';
+    note.textContent = notes[text];
+    parent.appendChild(note);
+  });
+}
+
 buildSetGrid();
 buildVocab();
 buildTips();
 updateCountdown();
+addBilingualExplanations();
 setInterval(updateCountdown, 1000);
 
 // Open first parts by default
