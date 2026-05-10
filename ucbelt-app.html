@@ -854,21 +854,106 @@
   <!-- TABS -->
   <div class="tabs" role="tablist">
     <button class="tab-btn active" onclick="switchTab('practice')" id="tab-practice">Practice Sets</button>
+    <button class="tab-btn" onclick="switchTab('guide')" id="tab-guide">UCB Test Guide</button>
+    <button class="tab-btn" onclick="switchTab('builder')" id="tab-builder">Answer Builder</button>
     <button class="tab-btn" onclick="switchTab('vocab')" id="tab-vocab">Vocabulary</button>
+    <button class="tab-btn" onclick="switchTab('plan')" id="tab-plan">7-Day Plan</button>
     <button class="tab-btn" onclick="switchTab('tips')" id="tab-tips">Exam Tips</button>
   </div>
 
   <!-- PRACTICE TAB -->
   <div id="panel-practice">
+    <div class="tips-box" style="margin-bottom:18px">
+      <h4>How to use this app / 使用方法</h4>
+      <ul>
+        <li>Choose one practice set, answer Part 1 briefly, then practise one Part 2 long turn with the timer.</li>
+        <li>Use the AI-style Tip buttons for vocabulary, structure and sentence starters; these are offline coaching prompts, not official test scoring.</li>
+        <li>For UCB preparation, focus on clear academic discussion, seminar-style answers, reasons, examples and follow-up development.</li>
+      </ul>
+    </div>
     <div class="section-label">Select a Practice Set</div>
     <div class="set-grid" id="set-grid"></div>
     <div id="set-panels"></div>
+  </div>
+
+  <!-- UCB TEST GUIDE TAB -->
+  <div id="panel-guide" style="display:none">
+    <div class="section-label">UCB ELT / English Proficiency Speaking Guide</div>
+    <div class="tips-grid">
+      <div class="tip-card"><div class="tip-icon" style="background:#fff3e0">🎯</div><div><h4>Target level</h4><p>Public UCB information refers to UCB English Language Test / English Proficiency Test outcomes using CEFR-style levels such as B1, B1+, B2- and B2. For many BA and Masters routes, learners should be ready to communicate around B2 level, with component requirements depending on course level.</p></div></div>
+      <div class="tip-card"><div class="tip-icon" style="background:#e8f5e9">🗣️</div><div><h4>Speaking expectation</h4><p>UCB public pre-sessional information highlights seminar skills, discussion, pronunciation, presentations, listening to academic content, and final speaking assessment through tutor-led seminar/discussion style tasks. This app therefore trains personal questions, extended turns and discussion answers.</p></div></div>
+      <div class="tip-card"><div class="tip-icon" style="background:#e3f2fd">📋</div><div><h4>What examiners listen for</h4><p>Speak clearly, answer the question directly, develop ideas with reasons and examples, organise longer turns, interact naturally, and show enough vocabulary range for academic and everyday topics.</p></div></div>
+      <div class="tip-card"><div class="tip-icon" style="background:#f3e5f5">⚖️</div><div><h4>Important note</h4><p>This is an independent OTC practice app based on public UCB language-entry and academic speaking preparation information. It is not an official UCB test paper, official UCB question bank or guaranteed-score product.</p></div></div>
+    </div>
+    <div class="tips-box">
+      <h4>B2 speaking checklist / B2 口語檢查表</h4>
+      <ul>
+        <li>I can give 2-4 sentence answers to personal questions without memorising full scripts.</li>
+        <li>I can speak for 1-2 minutes on a familiar topic using notes, examples and a short conclusion.</li>
+        <li>I can discuss advantages, disadvantages, causes, effects and possible solutions.</li>
+        <li>I can ask for clarification politely and recover if I forget a word.</li>
+        <li>I can use academic linking phrases such as however, therefore, for example, in contrast and as a result.</li>
+      </ul>
+    </div>
+    <div class="tips-box">
+      <h4>Public source notes / 公開來源備註</h4>
+      <ul>
+        <li>UCB English language entry requirements table: https://www.ucb.ac.uk/international/english-language-entry-requirements/english-language-requirements-table/</li>
+        <li>UCB English test booking page: https://admissions.ucb.ac.uk/englishtest</li>
+        <li>UCB Go Pre-sessional English speaking/listening and final assessment information: https://www.ucb.ac.uk/university/undergraduate/courses/ucb-go-pre-sessional-english/</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ANSWER BUILDER TAB -->
+  <div id="panel-builder" style="display:none">
+    <div class="section-label">Answer Builder: Structures You Can Reuse</div>
+    <div class="tips-grid">
+      <div class="tip-card"><div class="tip-icon" style="background:#fff3e0">1</div><div><h4>Part 1: PREP</h4><p><strong>Point</strong>: answer directly. <strong>Reason</strong>: say why. <strong>Example</strong>: add a personal detail. <strong>Polish</strong>: finish naturally.</p><ul><li>Yes, I do, mainly because...</li><li>For example, when I...</li><li>That is why I find it useful / important.</li></ul></div></div>
+      <div class="tip-card"><div class="tip-icon" style="background:#e8f5e9">2</div><div><h4>Part 2: 4 blocks</h4><p>Use: short introduction, background, two developed details, final reflection. Do not write full sentences in prep time; write keywords only.</p><ul><li>I would like to talk about...</li><li>The first thing to mention is...</li><li>What made it memorable was...</li><li>Overall, this matters to me because...</li></ul></div></div>
+      <div class="tip-card"><div class="tip-icon" style="background:#e3f2fd">3</div><div><h4>Part 3: balanced discussion</h4><p>Give a clear opinion, then show another side. This demonstrates discussion skill rather than a memorised answer.</p><ul><li>On the one hand...</li><li>However, it is also true that...</li><li>From a wider social perspective...</li><li>In the long term, I believe...</li></ul></div></div>
+      <div class="tip-card"><div class="tip-icon" style="background:#f3e5f5">↺</div><div><h4>Repair language</h4><p>If you forget a word or lose your place, recover smoothly.</p><ul><li>Let me rephrase that.</li><li>What I mean is...</li><li>I cannot remember the exact word, but it is related to...</li><li>Could I clarify the question, please?</li></ul></div></div>
+    </div>
+    <div class="tips-box">
+      <h4>Academic seminar phrases / 學術討論句型</h4>
+      <ul>
+        <li>Building on that point, I would add that...</li>
+        <li>I partly agree, although I think we should also consider...</li>
+        <li>A possible solution would be...</li>
+        <li>This connects to my future studies because...</li>
+        <li>The main challenge is not only..., but also...</li>
+      </ul>
+    </div>
   </div>
 
   <!-- VOCAB TAB -->
   <div id="panel-vocab" style="display:none">
     <div class="section-label">Key Vocabulary by Topic</div>
     <div class="vocab-grid" id="vocab-grid"></div>
+  </div>
+
+  <!-- 7-DAY PLAN TAB -->
+  <div id="panel-plan" style="display:none">
+    <div class="section-label">7-Day Speaking Practice Plan</div>
+    <div class="tips-grid">
+      <div class="tip-card"><div class="tip-icon" style="background:#fff3e0">D1</div><div><h4>Diagnostic day</h4><p>Record Set 1 Part 1 and Part 2. Do not stop or re-record. Listen once and mark: fluency, vocabulary, grammar, coherence.</p></div></div>
+      <div class="tip-card"><div class="tip-icon" style="background:#e8f5e9">D2</div><div><h4>Part 1 speed</h4><p>Practise 20 short answers. Each answer should be 2-4 sentences with one personal example.</p></div></div>
+      <div class="tip-card"><div class="tip-icon" style="background:#e3f2fd">D3</div><div><h4>Part 2 timing</h4><p>Do three long turns. Use 1 minute planning and 2 minutes speaking. Focus on structure, not perfection.</p></div></div>
+      <div class="tip-card"><div class="tip-icon" style="background:#f3e5f5">D4</div><div><h4>Part 3 seminar thinking</h4><p>Answer eight discussion questions using balanced opinions: cause/effect, advantage/disadvantage, solution/evaluation.</p></div></div>
+      <div class="tip-card"><div class="tip-icon" style="background:#fff8e1">D5</div><div><h4>Vocabulary upgrade</h4><p>Choose 5 topics. Learn 5 words per topic and use each word in one spoken sentence.</p></div></div>
+      <div class="tip-card"><div class="tip-icon" style="background:#e0f7fa">D6</div><div><h4>Mock test</h4><p>Complete one full set from Part 1 to Part 3. Do not pause. Then write three improvement targets.</p></div></div>
+      <div class="tip-card"><div class="tip-icon" style="background:#fce4ec">D7</div><div><h4>Light review</h4><p>Review sentence starters, repair phrases and your best examples. Sleep well; do not memorise full answers.</p></div></div>
+    </div>
+    <div class="tips-box">
+      <h4>Self-scoring grid / 自評表</h4>
+      <ul>
+        <li>Fluency: Did I continue speaking without long silence?</li>
+        <li>Vocabulary: Did I use topic words accurately?</li>
+        <li>Grammar: Did I use simple accurate structures and some complex sentences?</li>
+        <li>Coherence: Did my answer have a beginning, development and ending?</li>
+        <li>Interaction: Could I respond naturally to follow-up questions?</li>
+      </ul>
+    </div>
   </div>
 
   <!-- TIPS TAB -->
@@ -1186,6 +1271,28 @@ const VOCAB = [
       { word: "internship", def: "(n) a temporary work placement", example: "An internship gave me valuable experience in the finance sector." },
       { word: "remote working", def: "(n) working from a location other than the office", example: "Remote working has become normalised since the pandemic." }
     ]
+  },
+  {
+    topic: "🎓 Academic Speaking",
+    emoji: "🎓",
+    items: [
+      { word: "clarify", def: "(v) to make something easier to understand", example: "Could I clarify the question before I answer?" },
+      { word: "perspective", def: "(n) a way of thinking about something", example: "From a student perspective, feedback is extremely useful." },
+      { word: "evidence", def: "(n) facts or examples used to support an idea", example: "I would support my opinion with evidence from my own experience." },
+      { word: "coherent", def: "(adj) logical and easy to follow", example: "A coherent answer has a clear beginning, middle and ending." },
+      { word: "contribute", def: "(v) to add to a discussion or result", example: "I try to contribute actively in seminar discussions." }
+    ]
+  },
+  {
+    topic: "🧩 Discussion Functions",
+    emoji: "🧩",
+    items: [
+      { word: "agree partially", def: "(phrase) to agree with part of an idea", example: "I agree partially, but I think cost is also important." },
+      { word: "challenge an idea", def: "(phrase) to question or test an opinion", example: "I would challenge the idea that technology always improves learning." },
+      { word: "summarise", def: "(v) to give the main points briefly", example: "To summarise, the main issue is responsibility." },
+      { word: "compare", def: "(v) to discuss similarities and differences", example: "We can compare city life with rural life." },
+      { word: "justify", def: "(v) to give reasons for a view", example: "Students should justify their opinions with examples." }
+    ]
   }
 ];
 
@@ -1357,8 +1464,22 @@ function buildSetPanel(set) {
   `;
 }
 
+function makeSampleAnswer(q) {
+  const lower = q.toLowerCase();
+  if (lower.includes("why") || lower.includes("important")) {
+    return "I think this is important because it affects people's daily lives and future opportunities. For example, in my own experience, a small change in this area can make study or work much easier. However, I also think it depends on the situation, because different people may have different priorities.";
+  }
+  if (lower.includes("do you think") || lower.includes("should")) {
+    return "In my opinion, there are two sides to this question. On the one hand, it can bring clear benefits, especially for students and young people. On the other hand, there may be practical problems such as cost, time or fairness. Overall, I would say it is useful if it is managed carefully.";
+  }
+  if (lower.includes("describe") || lower.includes("tell me")) {
+    return "I would describe it as something meaningful in my personal experience. The main reason is that it helped me learn something new and become more confident. One specific example is that I had to communicate with different people, solve a problem and reflect on what I could improve next time.";
+  }
+  return "A good answer would start with a direct response, then add one reason and one personal example. For instance, I could say that this topic matters to me because it connects with my studies, my future plans and my daily life. I would also try to use one clear linking phrase, such as 'for example' or 'as a result'.";
+}
+
 function buildQuestion(q, num, part, setId) {
-  const hasModel = MODEL_ANSWERS[q];
+  const model = MODEL_ANSWERS[q] || makeSampleAnswer(q);
   const qId = `q-${setId}-${part}-${num}`;
   return `
     <li class="question-item">
@@ -1367,9 +1488,9 @@ function buildQuestion(q, num, part, setId) {
         <div class="q-text">${q}</div>
         <div class="q-actions">
           <button class="btn btn-blue" onclick="getAIFeedbackForQ('${qId}', \`${q.replace(/`/g,"'")}\`)">🤖 AI Tip</button>
-          ${hasModel ? `<button class="btn btn-outline toggle-answer-btn" onclick="toggleModel('model-${qId}')">💬 Sample Answer</button>` : ''}
+          <button class="btn btn-outline toggle-answer-btn" onclick="toggleModel('model-${qId}')">💬 Sample Answer</button>
         </div>
-        <div class="model-answer" id="model-${qId}">${hasModel || ''}</div>
+        <div class="model-answer" id="model-${qId}">${model}</div>
         <div id="ai-q-${qId}"></div>
       </div>
     </li>
@@ -1584,7 +1705,7 @@ function buildTips() {
 // TABS
 // ============================================================
 function switchTab(tab) {
-  ['practice','vocab','tips'].forEach(t => {
+  ['practice','guide','builder','vocab','plan','tips'].forEach(t => {
     document.getElementById(`panel-${t}`).style.display = t === tab ? 'block' : 'none';
     document.getElementById(`tab-${t}`).classList.toggle('active', t === tab);
   });
